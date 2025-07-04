@@ -1,103 +1,122 @@
-import Image from "next/image";
+'use client'
+import React, { useRef, useEffect } from 'react'
+import gsap from 'gsap'
+import About from './About';
 
-export default function Home() {
+// RollingText (used for side and footer text)
+const RollingText = ({ text, className = '' }) => {
+  const containerRef = useRef(null);
+
+  const roll = () => {
+    const spans = containerRef.current.querySelectorAll('.rolling-char');
+    spans.forEach((span, i) => {
+      gsap.to(span, {
+        rotationY: 360,
+        duration: 0.6,
+        ease: "power2.inOut",
+        delay: i * 0.05,
+                
+        onComplete: () => {
+          gsap.set(span, { rotationY: 0 });
+        }
+      });
+    });
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    <span
+      ref={containerRef}
+      className={className}
+      onMouseEnter={roll}
+    >
+      {text.split('').map((char, i) => (
+        <span className="rolling-char" key={i}>{char}</span>
+      ))}
+    </span>
   );
-}
+};
+
+// MainRollingText (used for "sanket" and "chougule" with load animation)
+const MainRollingText = ({ text, className = '' }) => {
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const spans = containerRef.current.querySelectorAll('.main-char');
+    const tl = gsap.timeline();
+    tl.fromTo(
+      spans,
+      { y: 80, opacity: 0, scale: 0.9 },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.8,
+        ease: "power4.out",
+        stagger: 0.07,
+      }
+    );
+  }, []);
+
+  return (
+    <span ref={containerRef} className={className}>
+      {text.split('').map((char, i) => (
+        <span className="main-char inline-block" key={i}>{char}</span>
+      ))}
+    </span>
+  );
+};
+
+const Page = () => {
+  return (
+    <>
+      <div className='h-screen bg-[#1D1D1D] text-[#D9D9D9] relative'>
+        <img className='h-[100vh] w-full object-cover' src="herobg.png" alt="" />
+        <div id='hero-center' className='h-[80vh] lg:px-16 flex justify-between items-center w-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-center'>
+          <div id='left-text'>
+            <h3 className='body-font cursor-pointer'>
+              <RollingText text="LINKEDIN" />
+            </h3>
+          </div>
+          <div id='center-text'>
+            <h1 className='text-[12vw] lg:leading-[15vh] title uppercase font-extrabold'>
+              <MainRollingText text="sanket," />
+            </h1>
+            <h1 className='title-font2 text-[5vw] pl-[35vw]'>
+              <MainRollingText text="Chougule" />
+            </h1>
+          </div>
+          <div>
+            <h3 className='body-font cursor-pointer'>
+              <RollingText text="INSTAGRAM" />
+            </h3>
+          </div>
+        </div>
+        <div id='hero-end' className='absolute body-font flex justify-start items-center flex-col bottom-0 h-[15vh] w-full'>
+          <h3 className='cursor-pointer' >
+            <RollingText text="WEBDESIGNER" />
+          </h3>
+          <h3 className='cursor-pointer'>
+            <RollingText text="& DEVELOPER" />
+          </h3>
+        </div>
+      </div>
+      <style>{`
+        .rolling-char {
+          display: inline-block;
+          will-change: transform;
+          transition: color 0.2s;
+        }
+        .main-char {
+          display: inline-block;
+          will-change: transform;
+        }
+      `}</style>
+
+        <About />
+
+
+    </>
+  );
+};
+
+export default Page;
