@@ -27,11 +27,35 @@
   }
 }
 
+
+
+
+@layer base {
+  @font-face {
+  font-family: "title";
+  src: url("/SchibstedGrotesk-VariableFont_wght.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "title2";
+  src: url("/FleurDeLeah-Regular.ttf") format("truetype");
+}
+
+
+}
+
 @theme {
+  --font-title:  "title", sans-serif; 
+ --font-title2: "title2", sans-serif;
+     
+    
+}
+
+/* @theme {
   --font-title:  "Schibsted Grotesk", sans-serif; 
   --font-title2: "Fleur De Leah", cursive; 
   --font-body: "Schibsted Grotesk", sans-serif; 
-}
+} */
 
 
 /* .title {
