@@ -70,8 +70,16 @@ const MainRollingText = ({ text, className = '' }) => {
 const Page = () => {
   return (
     <>
-      <div className='h-screen bg-[#1D1D1D] text-[#D9D9D9] relative'>
-        <img className='h-[100vh] w-full object-cover' src="herobg.png" alt="" />
+      <div className='h-screen bg-black  text-[#D9D9D9] relative'>
+          <video
+          playsInline
+          autoPlay
+          loop
+          muted
+          className="pointer-events-none w-full  object-cover"
+          src="/herobgvid.webm"
+        ></video>
+        
         <div id='hero-center' className='h-[80vh] lg:px-16 flex justify-between items-center w-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-center'>
           <div id='left-text'>
             <h3 className='font-title cursor-pointer'>
@@ -82,7 +90,7 @@ const Page = () => {
             <h1 className='text-[12vw] lg:leading-[15vh] font-title uppercase font-extrabold'>
               <MainRollingText text="sanket," />
             </h1>
-            <h1 className='font-title2  text-[5vw] pl-[35vw]'>
+            <h1 className='font-title2  text-[5vw] pl-[30vw]'>
               <MainRollingText text="Chougule" />
             </h1>
           </div>
@@ -93,10 +101,10 @@ const Page = () => {
           </div>
         </div>
         <div id='hero-end' className='absolute font-title flex justify-start items-center flex-col bottom-0 h-[15vh] w-full'>
-          <h3 className='cursor-pointer' >
+          <h3 className='cursor-pointer text-[1.5vw]' >
             <RollingText text="WEBDESIGNER" />
           </h3>
-          <h3 className='cursor-pointer'>
+          <h3 className='cursor-pointer text-[1.5vw]'>
             <RollingText text="& DEVELOPER" />
           </h3>
         </div>

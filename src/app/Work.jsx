@@ -93,7 +93,7 @@ const Work = () => {
   }, [])
 
   return (
-    <div className="min-h-screen bg-[#D9D9D9] w-full">
+    <div id='work' className="min-h-screen bg-[#D9D9D9] w-full">
       <div className="leading-[8vw] pt-20 pb-20 w-full flex flex-col items-center">
         <h1 className="font-title2 text-[10vw] pr-[10vw]">Selected</h1>
         <h1 className="font-title font-extrabold text-[10vw] pl-[10vw]">Work</h1>

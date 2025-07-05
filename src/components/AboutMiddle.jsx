@@ -34,7 +34,7 @@ const AboutMiddle = () => {
     <section ref={containerRef} className="min-h-[120vh] bg-[#D9D9D9] w-full lg:px-32 py-32">
       <div className="flex flex-col lg:flex-row gap-16 items-end">
         <div ref={imgRef} className="">
-          <img src="/myimg.png" alt="about-img" className="w-full h-auto" />
+          <img src="/myimg.png" alt="about-img" className="w-full h-[35vw]" />
         </div>
         <div ref={textRef} className="w-full lg:w-[30vw]">
           <h3 className="font-bold font-title pb-5 text-[#1D1D1D] text-[1.2vw]">

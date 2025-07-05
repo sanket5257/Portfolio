@@ -1,7 +1,24 @@
 import React from 'react'
 
 const Skills = () => {
-  const skills = ["HTML", "CSS", "JavaScript", "React", "Next.js", "Tailwind", "GSAP", "Figma"]
+ const skills = [
+  "HTML",
+  "CSS",
+  "JavaScript",
+  "React.js",
+  "Next.js",
+  "Tailwind",
+  "Bootstrap",
+  "GSAP",
+  "Figma",
+  "UI/UX",
+  "Git",
+  "GitHub",
+  "C",
+  "C++",
+  "Java"
+];
+
 
   return (
     <div className='bg-[#D9D9D9] w-full py-32'>
