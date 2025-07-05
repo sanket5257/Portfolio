@@ -43,11 +43,11 @@ const About = () => {
   return (
     <div className='min-h-screen bg-[#D9D9D9] w-full'>
       <div id='heading' className='lg:leading-[15vh] pt-20 flex flex-col items-center h-[100vh] text-center text-black'>
-        <h1 ref={el => (headingsRef.current[0] = el)} className='title text-[8vw] pr-[30vw]'>WEBSITES</h1>
-        <h1 ref={el => (headingsRef.current[1] = el)} className='title-font2 text-[10vw] pl-[10vw]'>That Work</h1>
-        <h1 ref={el => (headingsRef.current[2] = el)} className='title text-[8vw] pl-[30vw]'>HARDER</h1>
-        <h1 ref={el => (headingsRef.current[3] = el)} className='title text-[8vw]'>THAN YOUR</h1>
-        <h1 ref={el => (headingsRef.current[4] = el)} className='title-font2 text-[10vw] pl-[30vw]'>Competition</h1>
+        <h1 ref={el => (headingsRef.current[0] = el)} className='font-title font-extrabold text-[8vw] pr-[30vw]'>WEBSITES</h1>
+        <h1 ref={el => (headingsRef.current[1] = el)} className='font-title2 text-[10vw] pl-[10vw]'>That Work</h1>
+        <h1 ref={el => (headingsRef.current[2] = el)} className='font-title font-extrabold text-[8vw] pl-[30vw]'>HARDER</h1>
+        <h1 ref={el => (headingsRef.current[3] = el)} className='font-title font-extrabold text-[8vw]'>THAN YOUR</h1>
+        <h1 ref={el => (headingsRef.current[4] = el)} className='font-title2 text-[10vw] pl-[30vw]'>Competition</h1>
       </div>
       <AboutMiddle/>
       <AboutBottom/>

@@ -37,10 +37,10 @@ const AboutMiddle = () => {
           <img src="/myimg.png" alt="about-img" className="w-full h-auto" />
         </div>
         <div ref={textRef} className="w-full lg:w-[30vw]">
-          <h3 className="font-bold pb-5 text-[#1D1D1D] text-[1.2vw]">
+          <h3 className="font-bold font-body pb-5 text-[#1D1D1D] text-[1.2vw]">
             Designed to impress. Built to convert.
           </h3>
-          <p className="text-[#666666] leading-relaxed body-font">
+          <p className="text-[#666666] leading-relaxed font-body">
             I specialize in web design and development for clients who care about details. 
             Building upon my experiences in digital design across various industry sectors and 
             numerous projects, my goal is to create high-end web experiences that make your brand 

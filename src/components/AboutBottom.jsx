@@ -35,8 +35,8 @@ const AboutBottom = () => {
     <div ref={containerRef} className="min-h-screen bg-[#D9D9D9] w-full lg:px-32 overflow-x-hidden">
       <div id="aboutme">
         <div className="flex">
-          <h3 className="title w-[20vw] reveal text-xl">WHO I AM ?</h3>
-          <h3 className="w-[45vw] body-font text-[#666666] reveal">
+          <h3 className="font-title font-extrabold w-[20vw] reveal text-xl">WHO I AM ?</h3>
+          <h3 className="w-[45vw] font-body text-[#666666] reveal">
             Hi I'm Aimane, a creative web developer based in Belgium. Currently
             focusing on frontend development and digital experiences. Passion
             for development/design fuels my drive to create immersive and
@@ -47,15 +47,15 @@ const AboutBottom = () => {
 
         <div id="experience" className="flex mt-25">
           <div>
-            <h3 className="title w-[20vw] reveal text-xl pt-15">MY EXPERIENCE</h3>
+            <h3 className="font-title font-extrabold w-[20vw] reveal text-xl pt-15">MY EXPERIENCE</h3>
           </div>
           <div className="flex flex-col">
             {[1, 2, 3].map((i) => (
               <div key={i}>
                 <div className="flex justify-between mt-15">
                   <div>
-                    <h3 className="title w-[45vw] pb-4 reveal text-xl">FRONTEND DEVELOPER</h3>
-                    <p className="text-[#666666] leading-relaxed body-font reveal">
+                    <h3 className="font-title font-extrabold w-[45vw] pb-4 reveal text-xl">FRONTEND DEVELOPER</h3>
+                    <p className="text-[#666666] leading-relaxed font-body reveal">
                       I specialize in web design and development for clients who
                       care about details. Building upon my experiences in digital
                       design across various industry sectors and numerous
@@ -64,7 +64,7 @@ const AboutBottom = () => {
                     </p>
                   </div>
                   <div className="pl-20">
-                    <h3 className="title w-[20vw] reveal text-xl">2025-PRESENT</h3>
+                    <h3 className="font-title font-extrabold w-[20vw] reveal text-xl">2025-PRESENT</h3>
                   </div>
                 </div>
                 <div className="w-[60vw] mt-15 h-[1px] bg-black"></div>

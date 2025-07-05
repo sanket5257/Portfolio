@@ -70,8 +70,8 @@ const AboutContact = () => {
       className='w-full lg:px-32 bg-[#D9D9D9] overflow-x-hidden pb-20'
     >
       <div>
-        <h1 className='title-font2 text-[5vw] contact-reveal'>Still Have Some</h1>
-        <h1 className='title text-[4.5vw] contact-reveal'>QUESTIONS ABOUT ME</h1>
+        <h1 className='font-title2 text-[5vw] contact-reveal'>Still Have Some</h1>
+        <h1 className='font-title font-extrabold text-[4.5vw] contact-reveal'>QUESTIONS ABOUT ME</h1>
       </div>
 
       <a
@@ -90,7 +90,7 @@ const AboutContact = () => {
         {/* Button text */}
         <div className='relative z-10 flex justify-center items-center'>
                     <img src="contacticon.png" className='p-4' alt="" />
-        <h3 className='relative z-10'>open contact form</h3>
+        <h3 className='relative font-body z-10'>open contact form</h3>
 
         </div>
       </a>

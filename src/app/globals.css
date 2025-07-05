@@ -1,8 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Mea+Culpa&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fleur+De+Leah&display=swap');
+
 @import url('https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap');
 
 
 @import "tailwindcss";
+
 
 
 
@@ -25,21 +27,27 @@
   }
 }
 
+@theme {
+  --font-title:  "Schibsted Grotesk", sans-serif; 
+  --font-title2: "Fleur De Leah", cursive; 
+  --font-body: "Schibsted Grotesk", sans-serif; 
+}
 
-.title {
+
+/* .title {
   font-family: "Schibsted Grotesk", sans-serif;
   font-optical-sizing: auto;
   font-weight: 800;
   font-style: normal;
-}
-.body-font {
+} */
+/* .body-font {
   font-family: "Schibsted Grotesk", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
-}
-.title-font2 {
-  font-family: "Mea Culpa", cursive;
+} */
+/* .title-font2 {
+  font-family: "Fleur De Leah", cursive;
   font-weight: 400;
   font-style: normal;
-}
+} */
