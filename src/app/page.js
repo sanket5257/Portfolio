@@ -2,6 +2,7 @@
 import React, { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import About from './About';
+import Work from './Work';
 
 // RollingText (used for side and footer text)
 const RollingText = ({ text, className = '' }) => {
@@ -73,7 +74,7 @@ const Page = () => {
         <img className='h-[100vh] w-full object-cover' src="herobg.png" alt="" />
         <div id='hero-center' className='h-[80vh] lg:px-16 flex justify-between items-center w-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-center'>
           <div id='left-text'>
-            <h3 className='font-body cursor-pointer'>
+            <h3 className='font-title cursor-pointer'>
               <RollingText text="LINKEDIN" />
             </h3>
           </div>
@@ -86,12 +87,12 @@ const Page = () => {
             </h1>
           </div>
           <div>
-            <h3 className='font-body cursor-pointer'>
+            <h3 className='font-title cursor-pointer'>
               <RollingText text="INSTAGRAM" />
             </h3>
           </div>
         </div>
-        <div id='hero-end' className='absolute font-body flex justify-start items-center flex-col bottom-0 h-[15vh] w-full'>
+        <div id='hero-end' className='absolute font-title flex justify-start items-center flex-col bottom-0 h-[15vh] w-full'>
           <h3 className='cursor-pointer' >
             <RollingText text="WEBDESIGNER" />
           </h3>
@@ -113,6 +114,7 @@ const Page = () => {
       `}</style>
 
         <About />
+        <Work/>
 
 
     </>

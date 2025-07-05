@@ -5,7 +5,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="font-body absolute z-999 w-full top-0 ">
+    <nav className="font-title absolute z-999 w-full top-0 ">
       <div className="w-full px-4 sm:px-6 lg:px-16">
         <div className="flex justify-between h-16 text-[D9D9D9] items-center">
           {/* Logo */}
@@ -20,7 +20,7 @@ const Navbar = () => {
             <a href="#" className="text-[#D9D9D9]">Contact</a>
           </div>
           {/* Mobile Hamburger */}
-          <div className="flex font-body items-center md:hidden">
+          <div className="flex font-title items-center md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"

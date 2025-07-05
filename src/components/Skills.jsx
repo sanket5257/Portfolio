@@ -7,7 +7,7 @@ const Skills = () => {
     <div className='bg-[#D9D9D9] w-full py-32'>
       <div className="flex">
         <h3 className="font-title font-extrabold w-[20vw] text-xl">WHAT I CAN</h3>
-        <div className="pl-5 font-body text-[#1D1D1D] flex flex-wrap gap-4">
+        <div className="pl-5 font-title text-[#1D1D1D] flex flex-wrap gap-4">
           {skills.map((skill, index) => (
             <div
               key={index}

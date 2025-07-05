@@ -90,7 +90,7 @@ const AboutContact = () => {
         {/* Button text */}
         <div className='relative z-10 flex justify-center items-center'>
                     <img src="contacticon.png" className='p-4' alt="" />
-        <h3 className='relative font-body z-10'>open contact form</h3>
+        <h3 className='relative font-title z-10'>open contact form</h3>
 
         </div>
       </a>
