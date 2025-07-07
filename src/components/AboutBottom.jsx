@@ -11,25 +11,25 @@ const AboutBottom = () => {
   const containerRef = useRef(null);
 
   const experiences = [
-  {
-    position: "FRONTEND DEVELOPER",
-    details:
-      "Currently working at Shivneri Systems, where I contribute to frontend projects using WordPress, React.js, Tailwind CSS, and UI/UX principles. Focused on creating responsive and functional interfaces that align with business goals.",
-    year: "JUNE 2025 – PRESENT",
-  },
-  {
-    position: "FRONTEND DEVELOPER",
-    details:
-      "Worked at RS Soft Tech, building modern, responsive websites using React.js, Next.js, and Tailwind CSS. Gained valuable experience in building component-based UI systems and collaborating with agile teams.",
-    year: "MARCH 2025 – MAY 2025",
-  },
-  {
-    position: "FRONTEND DEVELOPER",
-    details:
-      "Interned at Stormsofts Technology, where I contributed to the design and development of web interfaces using HTML, CSS, JavaScript, Bootstrap, and React.js. Learned the fundamentals of responsive design and frontend performance.",
-    year: "JUNE 2024 – AUGUST 2024",
-  },
-];
+    {
+      position: "FRONTEND DEVELOPER",
+      details:
+        "Currently working at Shivneri Systems, where I contribute to frontend projects using WordPress, React.js, Tailwind CSS, and UI/UX principles. Focused on creating responsive and functional interfaces that align with business goals.",
+      year: "JUNE 2025 – PRESENT",
+    },
+    {
+      position: "FRONTEND DEVELOPER",
+      details:
+        "Worked at RS Soft Tech, building modern, responsive websites using React.js, Next.js, and Tailwind CSS. Gained valuable experience in building component-based UI systems and collaborating with agile teams.",
+      year: "MARCH 2025 – MAY 2025",
+    },
+    {
+      position: "FRONTEND DEVELOPER",
+      details:
+        "Interned at Stormsofts Technology, where I contributed to the design and development of web interfaces using HTML, CSS, JavaScript, Bootstrap, and React.js. Learned the fundamentals of responsive design and frontend performance.",
+      year: "JUNE 2024 – AUGUST 2024",
+    },
+  ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -42,8 +42,7 @@ const AboutBottom = () => {
           scrollTrigger: {
             trigger: el,
             start: "top 85%",
-            toggleActions: "play none none none", // Animate once
-            // markers: true, // Uncomment to debug
+            toggleActions: "play none none none",
           },
         });
       });
@@ -55,14 +54,15 @@ const AboutBottom = () => {
   return (
     <div
       ref={containerRef}
-      className="min-h-screen bg-[#D9D9D9] w-full lg:px-32 overflow-x-hidden"
+      className="min-h-screen bg-[#D9D9D9] w-full px-6 sm:px-10 lg:px-32 overflow-x-hidden py-20"
     >
       <div id="aboutme">
-        <div className="flex">
-          <h3 className="font-title font-extrabold w-[20vw] reveal text-xl">
+        {/* WHO I AM */}
+        <div className="flex flex-col lg:flex-row gap-6">
+          <h3 className="font-title font-extrabold w-full lg:w-[20vw] reveal text-xl">
             WHO I AM ?
           </h3>
-          <h3 className="w-[45vw] font-title text-[#666666] reveal">
+          <h3 className="w-full lg:w-[45vw] font-title text-[#666666] reveal text-base">
             Hi I'm Sanket, a creative web developer based in Maharashtra.
             Currently focusing on frontend development and digital experiences.
             Passion for development/design fuels my drive to create immersive
@@ -71,31 +71,32 @@ const AboutBottom = () => {
           </h3>
         </div>
 
-        <div id="experience" className="flex mt-25">
+        {/* MY EXPERIENCE */}
+        <div id="experience" className="flex flex-col lg:flex-row mt-[60px] gap-6">
           <div>
-            <h3 className="font-title font-extrabold w-[20vw] reveal text-xl pt-15">
+            <h3 className="font-title font-extrabold w-full lg:w-[20vw] reveal text-xl pt-[60px]">
               MY EXPERIENCE
             </h3>
           </div>
           <div className="flex flex-col">
-            {experiences.map((i,index) => (
+            {experiences.map((i, index) => (
               <div key={index}>
-                <div className="flex justify-between mt-15">
-                  <div>
-                    <h3 className="font-title font-extrabold w-[45vw] pb-4 reveal text-xl">
+                <div className="flex flex-col lg:flex-row justify-between mt-[60px] gap-6">
+                  <div className="w-full lg:w-[45vw]">
+                    <h3 className="font-title font-extrabold pb-4 reveal text-xl">
                       {i.position}
                     </h3>
-                    <p className="text-[#666666] leading-relaxed font-title reveal">
-                     {i.details}
+                    <p className="text-[#666666] leading-relaxed font-title reveal text-base">
+                      {i.details}
                     </p>
                   </div>
-                  <div className="pl-20">
-                    <h3 className="font-title font-extrabold w-[20vw] reveal text-xl">
+                  <div className="pl-0 w-full lg:w-[20vw]">
+                    <h3 className="font-title font-extrabold reveal text-xl">
                       {i.year}
                     </h3>
                   </div>
                 </div>
-                <div className="w-[60vw] mt-15 h-[1px] bg-black"></div>
+                <div className="w-full lg:w-[60vw] mt-[60px] h-[1px] bg-black"></div>
               </div>
             ))}
           </div>

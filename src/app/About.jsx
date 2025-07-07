@@ -41,8 +41,8 @@ const About = () => {
   }, []);
 
   return (
-    <div id='about' className='min-h-screen bg-[#D9D9D9] pt-[10vw] w-full'>
-      <div id='heading' className='lg:leading-[15vh] pt-20 flex flex-col items-center h-[100vh] text-center text-black'>
+    <div id='about' className=' bg-[#D9D9D9] pt-[10vw] w-full'>
+      <div id='heading' className='lg:leading-[15vh] leading-10 lg:pt-20 flex flex-col  items-center lg:h-[100vh] text-center text-black'>
         <h1 ref={el => (headingsRef.current[0] = el)} className='font-title font-extrabold text-[8vw] pr-[30vw]'>WEBSITES</h1>
         <h1 ref={el => (headingsRef.current[1] = el)} className='font-title2 text-[10vw] pl-[10vw]'>That Work</h1>
         <h1 ref={el => (headingsRef.current[2] = el)} className='font-title font-extrabold text-[8vw] pl-[30vw]'>HARDER</h1>

@@ -2,6 +2,9 @@
 
 import React, { useEffect, useRef } from 'react'
 import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const Footer = () => {
   const buttonRef = useRef(null)
@@ -9,6 +12,10 @@ const Footer = () => {
   const textRef = useRef(null)
   const iconRef = useRef(null)
   const strokeRef = useRef(null)
+
+  const heading1 = useRef(null)
+  const heading2 = useRef(null)
+  const heading3 = useRef(null)
 
   useEffect(() => {
     const btn = buttonRef.current
@@ -19,14 +26,12 @@ const Footer = () => {
 
     const tl = gsap.timeline({ paused: true })
 
-    // Animate black fill circle
     tl.to(circle, {
       scale: 1,
       duration: 0.5,
       ease: 'power2.out',
     })
 
-    // Animate stroke circle (draw border in circular way)
     tl.to(
       stroke,
       {
@@ -37,9 +42,8 @@ const Footer = () => {
       '<0.1'
     )
 
-    // Animate text and icon to white
     tl.to(
-      [text],
+      text,
       {
         color: '#D9D9D9',
         duration: 0.3,
@@ -49,7 +53,7 @@ const Footer = () => {
     )
 
     tl.to(
-      [icon],
+      icon,
       {
         filter: 'invert(1)',
         duration: 0.3,
@@ -58,35 +62,60 @@ const Footer = () => {
       '<'
     )
 
-    btn.addEventListener('mouseenter', () => tl.play())
-    btn.addEventListener('mouseleave', () => tl.reverse())
+    const handleEnter = () => tl.play()
+    const handleLeave = () => tl.reverse()
+
+    btn.addEventListener('mouseenter', handleEnter)
+    btn.addEventListener('mouseleave', handleLeave)
 
     return () => {
-      btn.removeEventListener('mouseenter', () => tl.play())
-      btn.removeEventListener('mouseleave', () => tl.reverse())
+      btn.removeEventListener('mouseenter', handleEnter)
+      btn.removeEventListener('mouseleave', handleLeave)
     }
   }, [])
 
-  return (
-    <div className='min-h-screen bg-[#D9D9D9] w-full'>
-      <div className='lg:leading-[15vh] pt-20 flex flex-col items-center h-[100vh] text-center text-black'>
-        <h1 className='font-title font-extrabold text-[8vw] pr-[30vw]'>LET’S START</h1>
-        <h1 className='font-title2 text-[10vw] pl-[10vw]'>Something Great</h1>
-        <h1 className='font-title font-extrabold text-[8vw] pl-[30vw]'>TOGETHER</h1>
+  useEffect(() => {
+    gsap.from([heading1.current, heading2.current, heading3.current], {
+      opacity: 0,
+      y: 100,
+      duration: 1,
+      stagger: 0.3,
+      ease: 'power4.out',
+      scrollTrigger: {
+        trigger: heading1.current,
+        start: 'top 80%',
+        end: 'bottom 40%',
+        toggleActions: 'play none none reverse',
+      },
+    })
+  }, [])
 
-        {/* BUTTON */}
+  return (
+    <div className=' bg-[#D9D9D9] w-full'>
+      <div className='lg:leading-[15vh] leading-10 pt-20 flex flex-col items-center pb-20 text-center text-black'>
+        <h1 ref={heading1} className='font-title font-extrabold text-[8vw] pr-[30vw]'>
+          LET’S START
+        </h1>
+        <h1 ref={heading2} className='font-title2 text-[10vw] pl-[10vw]'>
+          Something Great
+        </h1>
+        <h1 ref={heading3} className='font-title font-extrabold text-[8vw] pl-[30vw]'>
+          TOGETHER
+        </h1>
+
+        {/* Button */}
         <div
           ref={buttonRef}
-          className='relative mr-[45vw]  cursor-pointer rounded-full mt-4 w-[20vw] h-[20vw] flex justify-center items-center font-title group'
+          className='relative mr-[45vw] cursor-pointer rounded-full mt-4 w-[20vw] h-[20vw] flex justify-center items-center font-title group'
         >
-          {/* Scaling Black Circle */}
+          {/* Black Circle Fill */}
           <div
             ref={circleRef}
-            className='absolute  top-0 left-0 w-full h-full bg-black rounded-full scale-0 z-0 will-change-transform'
+            className='absolute top-0 left-0 w-full h-full bg-black rounded-full scale-0 z-0 will-change-transform'
             style={{ transformOrigin: 'center center' }}
           ></div>
 
-          {/* SVG Circular Border */}
+          {/* SVG Border Circle */}
           <svg
             className='absolute top-0 left-0 z-10'
             width='100%'
@@ -106,23 +135,22 @@ const Footer = () => {
             />
           </svg>
 
-          {/* Content */}
-          <div className='flex border justify-center items-center h-[19.5vw] w-[19.5vw] overflow-hidden hover:border-[#D9D9D9]  rounded-full flex-col '>
-            
+          {/* Inner Content */}
+          <div className='flex border justify-center items-center h-[19.5vw] w-[19.5vw] overflow-hidden hover:border-[#D9D9D9] rounded-full flex-col'>
             <div className='flex z-99 justify-center items-center relative'>
-                <img
-              ref={iconRef}
-              src='contacticon.png'
-              alt='icon'
-              className='mr-4 w-[2vw] h-[2vw]'
-            />
-            <h3
-              ref={textRef}
-              className='font-title text-black text-[1.2vw] transition-colors'
-            >
-              open contact form
-            </h3>
-                </div>
+              <img
+                ref={iconRef}
+                src='contacticon.png'
+                alt='icon'
+                className='mr-4 w-[2vw] h-[2vw]'
+              />
+              <h3
+                ref={textRef}
+                className='font-title text-black text-[1.2vw] transition-colors'
+              >
+                open contact form
+              </h3>
+            </div>
           </div>
         </div>
       </div>

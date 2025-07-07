@@ -16,7 +16,6 @@ const Work = () => {
     const circle = circleRef.current
     const section = sectionRef.current
 
-    // --- Cursor Movement ---
     const handleMouseMove = (e) => {
       mouse.current.x = e.clientX
       mouse.current.y = e.clientY
@@ -64,9 +63,8 @@ const Work = () => {
 
     requestAnimationFrame(update)
 
-    // --- ScrollTrigger Image Scale Animation ---
+    // ScrollTrigger animations
     const images = section.querySelectorAll('.project-image')
-
     images.forEach((img) => {
       gsap.fromTo(
         img,
@@ -88,40 +86,46 @@ const Work = () => {
       section.removeEventListener('mousemove', handleMouseMove)
       section.removeEventListener('mouseenter', handleMouseEnter)
       section.removeEventListener('mouseleave', handleMouseLeave)
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill()) // cleanup
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
     }
   }, [])
 
   return (
     <div id='work' className="min-h-screen bg-[#D9D9D9] w-full">
-      <div className="leading-[8vw] pt-20 pb-20 w-full flex flex-col items-center">
-        <h1 className="font-title2 text-[10vw] pr-[10vw]">Selected</h1>
-        <h1 className="font-title font-extrabold text-[10vw] pl-[10vw]">Work</h1>
+      {/* Heading */}
+      <div className="leading-[14vw] sm:leading-[10vw] pt-20 pb-20 w-full flex flex-col items-center">
+        <h1 className="font-title2 text-[14vw] sm:text-[10vw] pr-0 sm:pr-[10vw]">Selected</h1>
+        <h1 className="font-title font-extrabold text-[14vw] sm:text-[10vw] pl-0 sm:pl-[10vw]">Work</h1>
       </div>
 
-      <div id="projects" ref={sectionRef} className="relative overflow-hidden cursor-none">
+      {/* Projects */}
+      <div
+        id="projects"
+        ref={sectionRef}
+        className="relative overflow-hidden cursor-none"
+      >
         {/* Project 1 */}
         <div className="relative">
-          <img src="project1.png" className="h-full w-full project-image" alt="project 1" />
-          <div className="absolute top-0 left-0 w-full h-full bg-black/10 flex flex-col justify-center items-center text-[#D9D9D9] leading-[9.5vw]">
-            <h1 className="font-title font-extrabold uppercase text-[10vw]">My</h1>
-            <h1 className="font-title2 text-[10vw]">Portfolio</h1>
+          <img src="project1.png" className="md:h-full h-screen md:w-full project-image object-cover" alt="project 1" />
+          <div className="absolute top-0 left-0 w-full h-full bg-black/10 flex flex-col justify-center items-center text-[#D9D9D9] leading-[15vw] sm:leading-[9.5vw]">
+            <h1 className="font-title font-extrabold uppercase text-[14vw] sm:text-[10vw]">My</h1>
+            <h1 className="font-title2 text-[14vw] sm:text-[10vw]">Portfolio</h1>
           </div>
         </div>
 
         {/* Project 2 */}
         <div className="relative">
-          <img src="project2.png" className="h-full w-full project-image" alt="project 2" />
-          <div className="absolute top-0 left-0 w-full h-full bg-black/10 flex flex-col justify-center items-center text-[#D9D9D9] leading-[9.5vw]">
-            <h1 className="font-title font-extrabold uppercase text-[10vw]">Zentry</h1>
-            <h1 className="font-title2 text-[10vw]">Clone</h1>
+          <img src="project2.png" className="md:h-full h-screen md:w-full project-image object-cover" alt="project 2" />
+          <div className="absolute top-0 left-0 w-full h-full bg-black/10 flex flex-col justify-center items-center text-[#D9D9D9] leading-[15vw] sm:leading-[9.5vw]">
+            <h1 className="font-title font-extrabold uppercase text-[14vw] sm:text-[10vw]">Zentry</h1>
+            <h1 className="font-title2 text-[14vw] sm:text-[10vw]">Clone</h1>
           </div>
         </div>
 
         {/* Custom Cursor */}
         <div
           ref={circleRef}
-          className="pointer-events-none opacity-0 scale-90 absolute top-0 left-0 w-[100px] h-[100px] rounded-full backdrop-blur-md bg-white/10 border border-white/30 flex items-center justify-center text-white font-title text-sm z-50 will-change-transform"
+          className="pointer-events-none opacity-0 scale-90 absolute top-0 left-0 w-[70px] sm:w-[100px] h-[70px] sm:h-[100px] rounded-full backdrop-blur-md bg-white/10 border border-white/30 flex items-center justify-center text-white font-title text-[2vw] sm:text-sm z-50 will-change-transform"
         >
           VIEW
         </div>
