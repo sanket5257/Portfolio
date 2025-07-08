@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Link from 'next/link'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -105,22 +106,22 @@ const Work = () => {
         className="relative overflow-hidden cursor-none"
       >
         {/* Project 1 */}
-        <div className="relative">
+        <Link href='projects/portfolio' className="relative">
           <img src="project1.png" className="md:h-full h-screen md:w-full project-image object-cover" alt="project 1" />
           <div className="absolute top-0 left-0 w-full h-full bg-black/10 flex flex-col justify-center items-center text-[#D9D9D9] leading-[15vw] sm:leading-[9.5vw]">
             <h1 className="font-title font-extrabold uppercase text-[14vw] sm:text-[10vw]">My</h1>
             <h1 className="font-title2 text-[14vw] sm:text-[10vw]">Portfolio</h1>
           </div>
-        </div>
+        </Link>
 
         {/* Project 2 */}
-        <div className="relative">
+        <Link href='/projects/zentry' className="relative">
           <img src="project2.png" className="md:h-full h-screen md:w-full project-image object-cover" alt="project 2" />
           <div className="absolute top-0 left-0 w-full h-full bg-black/10 flex flex-col justify-center items-center text-[#D9D9D9] leading-[15vw] sm:leading-[9.5vw]">
             <h1 className="font-title font-extrabold uppercase text-[14vw] sm:text-[10vw]">Zentry</h1>
             <h1 className="font-title2 text-[14vw] sm:text-[10vw]">Clone</h1>
           </div>
-        </div>
+        </Link>
 
         {/* Custom Cursor */}
         <div

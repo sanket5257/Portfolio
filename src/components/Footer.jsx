@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Link from 'next/link'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -74,25 +75,11 @@ const Footer = () => {
     }
   }, [])
 
-  useEffect(() => {
-    gsap.from([heading1.current, heading2.current, heading3.current], {
-      opacity: 0,
-      y: 100,
-      duration: 1,
-      stagger: 0.3,
-      ease: 'power4.out',
-      scrollTrigger: {
-        trigger: heading1.current,
-        start: 'top 80%',
-        end: 'bottom 40%',
-        toggleActions: 'play none none reverse',
-      },
-    })
-  }, [])
+  
 
   return (
     <div className=' bg-[#D9D9D9] w-full'>
-      <div className='lg:leading-[15vh] leading-10 pt-20 flex flex-col items-center pb-20 text-center text-black'>
+      <div className='lg:leading-[15vh] leading- pt-20 flex flex-col items-center pb-20 text-center text-black'>
         <h1 ref={heading1} className='font-title font-extrabold text-[8vw] pr-[30vw]'>
           LET’S START
         </h1>
@@ -104,7 +91,7 @@ const Footer = () => {
         </h1>
 
         {/* Button */}
-        <div
+        <Link href='/contact'
           ref={buttonRef}
           className='relative mr-[45vw] cursor-pointer rounded-full mt-4 w-[20vw] h-[20vw] flex justify-center items-center font-title group'
         >
@@ -152,7 +139,7 @@ const Footer = () => {
               </h3>
             </div>
           </div>
-        </div>
+        </Link>
       </div>
     </div>
   )

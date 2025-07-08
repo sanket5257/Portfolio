@@ -1,13 +1,18 @@
 'use client'
 import React, { useRef, useEffect } from 'react'
-import gsap from 'gsap'
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react'
+
 import About from './About';
 import Work from './Work';
+import Navbar from '@/components/Navbar';
+import { ScrollTrigger } from 'gsap/all';
+import Footer from '@/components/Footer';
 
 // RollingText (used for side and footer text)
 const RollingText = ({ text, className = '' }) => {
   const containerRef = useRef(null);
-
+gsap.registerPlugin(ScrollTrigger)
   const roll = () => {
     const spans = containerRef.current.querySelectorAll('.rolling-char');
     spans.forEach((span, i) => {
@@ -68,19 +73,41 @@ const MainRollingText = ({ text, className = '' }) => {
 };
 
 const Page = () => {
+//   gsap.registerPlugin(ScrollTrigger);
+ 
+// useGSAP(() => {
+//     gsap.set("#video-frame", {
+//       clipPath: "polygon(14% 0, 72% 0, 88% 90%, 0 95%)",
+//       borderRadius: "0% 0% 40% 10%",
+//     });
+//     gsap.from("#video-frame", {
+//       clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+//       borderRadius: "0% 0% 0% 0%",
+//       ease: "power1.inOut",
+//       scrollTrigger: {
+//         trigger: "#video-frame",
+//         start: "center center",
+//         end: "bottom center",
+//         scrub: true,
+//       },
+//     });
+//   });
+  
   return (
     <>
-      <div className='h-screen bg-black  text-[#D9D9D9] relative'>
-          <video
+    <Navbar/>
+      <div id='video-frame' className='h-screen  bg-black text-[#D9D9D9] relative'>
+          <video 
           playsInline
           autoPlay
           loop
           muted
-          className="pointer-events-none h-full md:h-auto w-full  object-cover"
+          className="pointer-events-none  h-full md:h-auto w-full  object-cover"
           src="/herobgvid.webm"
         ></video>
         
-        <div id='hero-center' className='h-[80vh] lg:px-16 flex justify-between items-center w-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-center'>
+        <div id='hero-center' className='h-[80vh] 
+ mask-clip-path lg:px-16 flex justify-between  items-center w-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-center'>
           <div id='left-text'>
             <h3 className='font-title hidden md:block cursor-pointer'>
               <RollingText text="LINKEDIN" />
@@ -124,7 +151,7 @@ const Page = () => {
         <About />
         <Work/>
 
-
+          <Footer/>
     </>
   );
 };

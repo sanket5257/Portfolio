@@ -77,7 +77,7 @@ const AboutContact = () => {
         </h1>
       </div>
 
-      <a
+      <a href='/contact'
         ref={buttonRef}
         className='hover-button relative overflow-hidden contact-reveal cursor-pointer float-none sm:float-right border-2 border-black hover:border-white rounded-lg p-4 mt-6 sm:mt-4 w-full sm:w-[60vw] lg:w-[38vw] h-[20vw] sm:h-[16vw] lg:h-[13vw] flex justify-center items-center body-font'
       >
