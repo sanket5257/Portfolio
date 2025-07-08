@@ -65,7 +65,7 @@ export default function ProjectDetails({ params }) {
       </div>
       <div id="section3" className="py-[20vw] w-full flex justify-center font-title items-center">
         <div className="w-[70vw]  flex items-start gap-10 justify-between text-center">
-        <h1 className="w-[50vw] font-extrabold">About</h1>
+        <h1 className="w-[50vw] text-[1.5vw] font-extrabold">About</h1>
         <p className="text-start text-[#666666] w-[50vw]">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates
           necessitatibus voluptas atque nam aperiam nisi perferendis praesentium
