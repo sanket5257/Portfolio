@@ -1,88 +1,30 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
-import gsap from 'gsap'
+import React, { useState } from 'react'
 import Link from 'next/link'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [isClient, setIsClient] = useState(false)
-  const menuItemsRef = useRef([])
-  const mobileMenuRef = useRef(null)
-
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
-
-  useEffect(() => {
-    if (isClient && menuItemsRef.current.length) {
-      gsap.from(menuItemsRef.current, {
-        y: -20,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.15,
-        ease: 'power3.out',
-      })
-    }
-  }, [isClient])
-
-  useEffect(() => {
-    if (isOpen && isClient && mobileMenuRef.current) {
-      gsap.fromTo(
-        mobileMenuRef.current,
-        { y: -20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' }
-      )
-    }
-  }, [isOpen, isClient])
-
-  const handleHover = (e) => {
-    if (!isClient) return
-    gsap.to(e.currentTarget, {
-      y: -5,
-      scale: 1.05,
-      duration: 0.3,
-      ease: 'power2.out',
-    })
-  }
-
-  const handleLeave = (e) => {
-    if (!isClient) return
-    gsap.to(e.currentTarget, {
-      y: 0,
-      scale: 1,
-      duration: 0.3,
-      ease: 'power2.out',
-    })
-  }
 
   return (
     <nav className="font-title absolute z-50 w-full top-0">
-      <div className="w-full max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-16">
-        <div className="flex justify-between h-16 items-center text-[#D9D9D9]">
-          <div className="flex-shrink-0">
-            <span className="font-bold text-xl">Sanket.Dev</span>
-          </div>
-
+      <div className="w-full py-5 px-4 sm:px-6 lg:px-16">
+        <div className=" h-16 items-center text-[#D9D9D9]">
           {/* Desktop Menu */}
-          <div className="hidden md:flex md:items-center space-x-6">
-            {['About', 'Work'].map((item, index) => (
+          <div className="hidden text-sm md:flex md:items-center justify-between">
+            <h3>Independent Creative Developer <br /><span className='text-[#666666]'>& Designer</span> </h3>
+            {['About', 'Work'].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
-                ref={(el) => (menuItemsRef.current[index] = el)}
-                className="text-[#D9D9D9] will-change-transform cursor-pointer"
-                onMouseEnter={handleHover}
-                onMouseLeave={handleLeave}
+                className="text-[#D9D9D9] cursor-pointer"
               >
                 {item}
               </a>
             ))}
             <Link
               href="/contact"
-              className="text-[#D9D9D9] will-change-transform cursor-pointer"
-              onMouseEnter={handleHover}
-              onMouseLeave={handleLeave}
+              className="text-[#D9D9D9] cursor-pointer"
             >
               Contact
             </Link>
@@ -110,28 +52,21 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div
-          ref={mobileMenuRef}
-          className="md:hidden bg-[#D9D9D9]/90 backdrop-blur-sm"
-          id="mobile-menu"
-        >
+        <div className="md:hidden bg-[#D9D9D9]/90 backdrop-blur-sm" id="mobile-menu">
           <div className="px-4 pt-2 pb-4 space-y-2">
+
             {['Home', 'About', 'Services'].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
-                className="block px-4 py-2 rounded-md text-base font-medium text-black hover:text-white hover:bg-black transition will-change-transform"
-                onMouseEnter={handleHover}
-                onMouseLeave={handleLeave}
+                className="block px-4 py-2 rounded-md text-base font-medium text-black hover:text-white hover:bg-black transition"
               >
                 {item}
               </a>
             ))}
             <Link
               href="/contact"
-              className="block px-4 py-2 rounded-md text-base font-medium text-black hover:text-white hover:bg-black transition will-change-transform"
-              onMouseEnter={handleHover}
-              onMouseLeave={handleLeave}
+              className="block px-4 py-2 rounded-md text-base font-medium text-black hover:text-white hover:bg-black transition"
             >
               Contact
             </Link>

@@ -128,11 +128,11 @@ const Page = () => {
           </div>
         </div>
         <div id='hero-end' className='absolute font-title flex justify-start items-center flex-col bottom-0 h-[15vh] w-full'>
-          <h3 className="cursor-pointer text-[4vw] sm:text-[2vw] md:text-[1.5vw]">
+          <h3 className="cursor-pointer text-[4vw] sm:text-[2vw] md:text-[1vw]">
             <RollingText text="WEBDESIGNER" />
           </h3>
-          <h3 className="cursor-pointer text-[4vw] sm:text-[2vw] md:text-[1.5vw]">
-            <RollingText text="& DEVELOPER" />
+          <h3 className="cursor-pointer text-[4vw] sm:text-[2vw] md:text-[1vw]">
+            <RollingText text="& &nbsp; DEVELOPER" />
           </h3>
         </div>
       </div>
