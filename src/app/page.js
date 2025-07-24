@@ -1,14 +1,17 @@
 'use client'
 import React, { useRef } from 'react'
-import dynamic from 'next/dynamic'
-
+import Spline from '@splinetool/react-spline/next'
 import About from './About'
 import Work from './Work'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
 // Load Spline without SSR
-const Spline = dynamic(() => import('@splinetool/react-spline'), { ssr: false })
+// const Spline = dynamic(
+//   () => import('@splinetool/react-spline').then((mod) => mod.Spline),
+//   { ssr: false }
+// )
+
 
 // RollingText (used for side and footer text)
 const RollingText = ({ text, className = '' }) => {
