@@ -28,13 +28,18 @@ const Page = () => {
 
       {/* 3D Background */}
       <div className="absolute bg-black inset-0 z-0">
-        <Canvas shadows camera={{ position: [0, 0, 2], fov: 45 }}>
-  <ambientLight intensity={1} />
-  <directionalLight position={[2, 2, 2]} intensity={1.5} />
+     <Canvas shadows camera={{ position: [0, 1, 3], fov: 50 }}>
+  <ambientLight intensity={0.5} />
+  <directionalLight
+    intensity={1.2}
+    position={[2, 5, 2]}
+    castShadow
+  />
+  <Environment preset="city" />
+  <OrbitControls />
   <HeadModel />
-  <Environment preset="sunset" />
-  <OrbitControls enableZoom />
 </Canvas>
+
 
 
       </div>
