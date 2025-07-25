@@ -28,7 +28,7 @@ const Page = () => {
 
       {/* 3D Background */}
       <div className="absolute bg-black inset-0 z-0">
-     <Canvas shadows camera={{ position: [0, 1, 3], fov: 50 }}>
+     <Canvas shadows camera={{ position: [0, 1, 3], fov: 45 }}>
   <ambientLight intensity={0.5} />
   <directionalLight
     intensity={1.2}
