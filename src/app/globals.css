@@ -32,11 +32,8 @@
     clip-path: polygon(0 , 100%, 100% 100%, 0 100%) ;
     
   }
-body{
-  /* background-color: #D9D9D9; */
-  pointer-events: none;
-  /* color: #000; */
-}
+/* color: #000; */
+
 @layer base {
   @font-face {
   font-family: "title";

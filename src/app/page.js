@@ -45,7 +45,7 @@ const Page = () => {
       </div>
 
       {/* Hero Section */}
-      <div className="relative w-full h-screen">
+      <div className="relative w-full h-screen pointer-events-none">
         <div className="absolute inset-0 z-10 pointer-events-none text-[#D9D9D9]">
           <div
             id="hero-center"
