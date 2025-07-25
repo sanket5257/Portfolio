@@ -51,14 +51,14 @@ const Page = () => {
                 <RollingText text="LINKEDIN" />
               </h3>
             </div>
-            {/* <div className="text-center">
+            <div className="text-center">
               <h1 className="font-title uppercase font-extrabold text-[15vw] lg:leading-[20vh] sm:text-[8vw] lg:text-[12vw]">
                 <MainRollingText text="sanket," />
               </h1>
               <h1 className="font-title2 text-[9vw] pl-[10vw] sm:pl-[20vw] lg:pl-[30vw] sm:text-[4vw] lg:text-[5vw]">
                 <MainRollingText text="Chougule" />
               </h1>
-            </div> */}
+            </div>
             <div>
               <h3 className="font-title hidden md:block">
                 <RollingText text="INSTAGRAM" />
