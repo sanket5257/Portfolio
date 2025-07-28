@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useGLTF, Center } from '@react-three/drei'
 import { useLoader, useFrame } from '@react-three/fiber'
 import { TextureLoader, MathUtils } from 'three'
@@ -8,6 +8,9 @@ const HeadModel = () => {
   const { scene } = useGLTF('/lieutenantHead/lieutenantHead.gltf')
   const modelRef = useRef()
   const targetRotation = useRef({ x: 0, y: 0 })
+
+  // ✅ Responsive scale state
+  const [modelScale, setModelScale] = useState([0.25, 0.25, 0.25])
 
   // Load textures
   const [
@@ -46,21 +49,43 @@ const HeadModel = () => {
     })
   }, [scene])
 
-  // Mouse move listener
+  // ✅ Responsive scaling logic
   useEffect(() => {
-    const handleMouseMove = (event) => {
-      const x = (event.clientX / window.innerWidth) * 2 - 1
-      const y = (event.clientY / window.innerHeight) * 2 - 1
-      targetRotation.current = {
-        x: y * 0.2 - 0.45,
-        y: x * 0.5 + Math.PI
+    const handleResize = () => {
+      const width = window.innerWidth
+      if (width < 640) {
+        setModelScale([0.18, 0.18, 0.18]) // Mobile
+      } else if (width < 1024) {
+        setModelScale([0.22, 0.22, 0.22]) // Tablet
+      } else {
+        setModelScale([0.25, 0.25, 0.25]) // Desktop
       }
     }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  // Mouse move listener
+  useEffect(() => {
+   const handleMouseMove = (event) => {
+  const x = (event.clientX / window.innerWidth) * 2 - 1
+  const y = (event.clientY / window.innerHeight) * 2 - 1
+
+  const rotX = MathUtils.clamp(y * 0.15 + 0, -0.2, 0.2)
+  const rotY = MathUtils.clamp(x * 0.3 + Math.PI, Math.PI - 0.3, Math.PI + 0.3)
+
+  targetRotation.current = { x: rotX, y: rotY }
+}
+
+
+
     window.addEventListener('mousemove', handleMouseMove)
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
-  // Smoothly rotate model
+  // Smooth rotation
   useFrame(() => {
     if (modelRef.current) {
       modelRef.current.rotation.y = MathUtils.lerp(
@@ -81,7 +106,7 @@ const HeadModel = () => {
       <primitive
         ref={modelRef}
         object={scene}
-        scale={[0.25, 0.25, 0.25]} // ✅ scaled down to fit screen
+        scale={modelScale}
         castShadow
         receiveShadow
       />
