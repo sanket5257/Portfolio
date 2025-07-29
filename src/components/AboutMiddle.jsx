@@ -38,7 +38,7 @@ const AboutMiddle = () => {
         {/* Text Section */}
         <div ref={imgRef} className="w-full lg:w-[25vw]">
           <img
-            src="/myimg.png"
+            src="/my-img.png"
             alt="Sanket Chougule"
             className="w-full h-[60vw] sm:h-[50vw] lg:h-[35vw] object-cover rounded-xl shadow-md"
           />
