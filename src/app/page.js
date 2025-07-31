@@ -10,6 +10,8 @@ import { OrbitControls } from '@react-three/drei'
 import HeadModel from '@/components/HeadModel'
 import ExtraSection from '@/components/ExtraSection'
 
+
+
 const RollingText = ({ text, className = '' }) => <span className={className}>{text}</span>
 const MainRollingText = ({ text, className = '' }) => <span className={className}>{text}</span>
 
@@ -21,22 +23,26 @@ const Page = () => {
       {/* 3D Background */}
       <div className="absolute bg-black inset-0 z-0 pointer-events-none w-full h-screen">
         <Canvas
-          style={{ width: '100%', height: '100%' }}
-          shadows
-          camera={{ position: [0, 0, 3], fov: 45 }}
-          dpr={[1, 1.5]}
-        >
-          {/* Lighting */}
-          <ambientLight intensity={0.7} />
-          <directionalLight intensity={1.5} position={[2, 5, 2]} castShadow />
-          <pointLight position={[0, 0, 5]} intensity={1.2} />
+  style={{ width: '100%', height: '100%' }}
+  camera={{ position: [0, 0, 3], fov: 45 }}
+  dpr={[1, 1.5]}
+  shadows
+>
+  {/* Lights */}
+  <ambientLight intensity={0.8} />
+  <directionalLight position={[5, 5, 5]} intensity={2.5} castShadow />
+  <pointLight position={[0, 2, 5]} intensity={1.5} />
+  {/* <Environment preset="city" /> */}
 
-          <OrbitControls enableRotate={false} enableZoom={false} enablePan={false} />
+  {/* Controls */}
+  <OrbitControls enableRotate={false} enableZoom={false} enablePan={false} />
 
-          <Suspense fallback={null}>
-            <HeadModel />
-          </Suspense>
-        </Canvas>
+  {/* 3D Model */}
+  <Suspense fallback={null}>
+    <HeadModel />
+  </Suspense>
+</Canvas>
+
       </div>
 
       {/* Hero Section */}
