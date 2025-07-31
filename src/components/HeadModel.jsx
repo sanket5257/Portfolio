@@ -1,7 +1,8 @@
 'use client'
+
 import React, { useEffect, useRef, useState } from 'react'
 import { useGLTF, Center } from '@react-three/drei'
-import { useLoader, useFrame } from '@react-three/fiber'
+import { useLoader, useFrame, invalidate } from '@react-three/fiber'
 import { TextureLoader, MathUtils } from 'three'
 
 const HeadModel = () => {
@@ -9,7 +10,6 @@ const HeadModel = () => {
   const modelRef = useRef()
   const targetRotation = useRef({ x: 0, y: 0 })
 
-  // ✅ Responsive scale state
   const [modelScale, setModelScale] = useState([0.25, 0.25, 0.25])
 
   // Load textures
@@ -49,16 +49,16 @@ const HeadModel = () => {
     })
   }, [scene])
 
-  // ✅ Responsive scaling logic
+  // Responsive scale
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth
       if (width < 640) {
-        setModelScale([0.18, 0.18, 0.18]) // Mobile
+        setModelScale([0.18, 0.18, 0.18])
       } else if (width < 1024) {
-        setModelScale([0.22, 0.22, 0.22]) // Tablet
+        setModelScale([0.22, 0.22, 0.22])
       } else {
-        setModelScale([0.25, 0.25, 0.25]) // Desktop
+        setModelScale([0.25, 0.25, 0.25])
       }
     }
 
@@ -69,17 +69,16 @@ const HeadModel = () => {
 
   // Mouse move listener
   useEffect(() => {
-   const handleMouseMove = (event) => {
-  const x = (event.clientX / window.innerWidth) * 2 - 1
-  const y = (event.clientY / window.innerHeight) * 2 - 1
+    const handleMouseMove = (event) => {
+      const x = (event.clientX / window.innerWidth) * 2 - 1
+      const y = (event.clientY / window.innerHeight) * 2 - 1
 
-  const rotX = MathUtils.clamp(y * 0.15 + 0, -0.2, 0.2)
-  const rotY = MathUtils.clamp(x * 0.3 + Math.PI, Math.PI - 0.3, Math.PI + 0.3)
+      const rotX = MathUtils.clamp(y * 0.15 + 0, -0.2, 0.2)
+      const rotY = MathUtils.clamp(x * 0.3 + Math.PI, Math.PI - 0.3, Math.PI + 0.3)
 
-  targetRotation.current = { x: rotX, y: rotY }
-}
-
-
+      targetRotation.current = { x: rotX, y: rotY }
+      invalidate() // manual render trigger for demand mode
+    }
 
     window.addEventListener('mousemove', handleMouseMove)
     return () => window.removeEventListener('mousemove', handleMouseMove)

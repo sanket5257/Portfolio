@@ -66,9 +66,11 @@ const AboutContact = () => {
   return (
     <div
       ref={containerRef}
-      className='w-full px-4 sm:px-10 lg:px-32 bg-[#D9D9D9] overflow-x-hidden pb-20'
+      className='w-full relative px-4 sm:px-10 lg:px-32 bg-[#D9D9D9] overflow-x-hidden '
     >
-      <div>
+
+      <div className='relative'>
+
         <h1 className='font-title2 text-[10vw] sm:text-[7vw] lg:text-[5vw] contact-reveal'>
           Still Have Some
         </h1>
@@ -77,9 +79,11 @@ const AboutContact = () => {
         </h1>
       </div>
 
+
+
       <a href='/contact'
         ref={buttonRef}
-        className='hover-button relative overflow-hidden contact-reveal cursor-pointer float-none sm:float-right border-2 border-black hover:border-white rounded-lg p-4 mt-6 sm:mt-4 w-full sm:w-[60vw] lg:w-[38vw] h-[20vw] sm:h-[16vw] lg:h-[13vw] flex justify-center items-center body-font'
+        className='hover-button relative overflow-hidden  contact-reveal cursor-pointer float-none sm:float-right border-2 border-black hover:border-white rounded-lg p-4 mt-6 sm:mt-4 w-full sm:w-[60vw] lg:w-[38vw] h-[20vw] sm:h-[16vw] lg:h-[13vw] flex justify-center items-center body-font'
       >
         {/* Expanding white fill */}
         <div
@@ -91,6 +95,9 @@ const AboutContact = () => {
         />
 
         {/* Button text */}
+
+
+
         <div className='relative z-10 flex justify-center items-center gap-2'>
           <img src="contacticon.png" className='p-4 w-[8vw] sm:w-[5vw] lg:w-[3vw]' alt="" />
           <h3 className='relative font-title z-10 text-[4vw] sm:text-[2.5vw] lg:text-[1.5vw]'>
@@ -98,6 +105,7 @@ const AboutContact = () => {
           </h3>
         </div>
       </a>
+
     </div>
   )
 }

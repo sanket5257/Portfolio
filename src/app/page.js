@@ -1,15 +1,15 @@
 'use client'
-import React from 'react'
+
+import React, { Suspense } from 'react'
 import Navbar from '@/components/Navbar'
 import About from './About'
 import Work from './Work'
 import Footer from '@/components/Footer'
-
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls, Environment } from '@react-three/drei'
+import { OrbitControls } from '@react-three/drei'
 import HeadModel from '@/components/HeadModel'
+import ExtraSection from '@/components/ExtraSection'
 
-// Simple text wrappers
 const RollingText = ({ text, className = '' }) => <span className={className}>{text}</span>
 const MainRollingText = ({ text, className = '' }) => <span className={className}>{text}</span>
 
@@ -19,30 +19,29 @@ const Page = () => {
       <Navbar />
 
       {/* 3D Background */}
-      <div className="absolute bg-black inset-0 z-0 pointer-events-none">
-        <Canvas shadows camera={{ position: [0, 0, 3], fov: 45 }}>
-  {/* Lighting */}
-  <ambientLight intensity={0.5} />
-  <directionalLight intensity={1.2} position={[2, 5, 2]} castShadow />
+      <div className="absolute bg-black inset-0 z-0 pointer-events-none w-full h-screen">
+        <Canvas
+          style={{ width: '100%', height: '100%' }}
+          shadows
+          camera={{ position: [0, 0, 3], fov: 45 }}
+          dpr={[1, 1.5]}
+        >
+          {/* Lighting */}
+          <ambientLight intensity={0.7} />
+          <directionalLight intensity={1.5} position={[2, 5, 2]} castShadow />
+          <pointLight position={[0, 0, 5]} intensity={1.2} />
 
-  {/* Environment */}
-  <Environment preset="city" />
+          <OrbitControls enableRotate={false} enableZoom={false} enablePan={false} />
 
-  {/* Prevent user interaction */}
-  <OrbitControls enableRotate={false} enableZoom={false} enablePan={false} />
-
-  {/* 3D Model */}
-  <HeadModel />
-</Canvas>
-
-
+          <Suspense fallback={null}>
+            <HeadModel />
+          </Suspense>
+        </Canvas>
       </div>
 
       {/* Hero Section */}
       <div className="relative w-full h-screen pointer-events-none">
         <div className="absolute inset-0 z-10 text-[#D9D9D9] flex flex-col justify-between items-center px-4 sm:px-10 py-8">
-          
-          {/* Center Content */}
           <div
             id="hero-center"
             className="flex justify-between items-center w-full max-w-7xl mx-auto h-full"
@@ -53,6 +52,7 @@ const Page = () => {
               </h3>
             </div>
 
+            {/* Optional Center Text */}
             {/* <div className="text-center">
               <h1 className="font-title uppercase font-extrabold text-[clamp(2rem,10vw,10rem)] leading-tight">
                 <MainRollingText text="sanket," />
@@ -69,7 +69,6 @@ const Page = () => {
             </div>
           </div>
 
-          {/* Bottom Text */}
           <div id="hero-end" className="font-title text-center">
             <h3 className="text-[clamp(0.8rem,2vw,1.2rem)]">
               <RollingText text="WEBDESIGNER" />
@@ -81,8 +80,8 @@ const Page = () => {
         </div>
       </div>
 
-      {/* Sections */}
       <About />
+      <ExtraSection />
       <Work />
       <Footer />
     </>
