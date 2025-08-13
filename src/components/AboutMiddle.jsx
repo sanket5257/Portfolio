@@ -40,7 +40,7 @@ const AboutMiddle = () => {
         <div ref={imgRef} className="w-full lg:w-[25vw]">
          
           <img
-            src="/my-img.png"
+            src="/my-img.jpg"
             alt="Sanket Chougule"
             className="w-full h-[60vw] sm:h-[50vw] lg:h-[35vw] object-cover rounded-xl shadow-md"
           />

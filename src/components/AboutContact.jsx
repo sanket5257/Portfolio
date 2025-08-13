@@ -66,7 +66,7 @@ const AboutContact = () => {
   return (
     <div
       ref={containerRef}
-      className='w-full relative px-4 sm:px-10 lg:px-32 bg-[#D9D9D9] overflow-x-hidden '
+      className='w-full relative px-4 sm:px-10 lg:px-32 pb-10 bg-[#D9D9D9] overflow-x-hidden '
     >
 
       <div className='relative'>
