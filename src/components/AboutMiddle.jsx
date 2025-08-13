@@ -34,9 +34,11 @@ const AboutMiddle = () => {
       ref={containerRef}
       className="min-h-screen pb-[20vh] bg-[#D9D9D9] w-full px-6 sm:px-10 lg:px-32 py-24"
     >
+
       <div className="flex flex-col-reverse lg:flex-row items-end gap-12 lg:gap-16">
         {/* Text Section */}
         <div ref={imgRef} className="w-full lg:w-[25vw]">
+         
           <img
             src="/my-img.png"
             alt="Sanket Chougule"
