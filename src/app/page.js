@@ -5,15 +5,10 @@ import Navbar from '@/components/Navbar'
 import About from './About'
 import Work from './Work'
 import Footer from '@/components/Footer'
-import { Canvas } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
-import HeadModel from '@/components/HeadModel'
-import ExtraSection from '@/components/ExtraSection'
 
 
 
 const RollingText = ({ text, className = '' }) => <span className={className}>{text}</span>
-const MainRollingText = ({ text, className = '' }) => <span className={className}>{text}</span>
 
 const Page = () => {
   return (
