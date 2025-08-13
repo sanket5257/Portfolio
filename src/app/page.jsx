@@ -54,34 +54,7 @@ const Page = () => {
         <audio ref={audioRef} src="/track.mp3" loop />
 
         {/* Music Control Floating Button */}
-       <button
-  onClick={toggleMusic}
-  className="absolute bottom-5 right-5 z-50 bg-black/50 rounded-full p-3 pointer-events-auto"
->
-  {isPlaying ? (
-    // Animated Wave Bars
-    <svg
-      className="w-8 h-8 text-white"
-      fill="currentColor"
-      viewBox="0 0 24 24"
-    >
-      <rect className="wave-bar bar1" x="4" y="4" width="3" height="16" rx="1" />
-      <rect className="wave-bar bar2" x="10.5" y="4" width="3" height="16" rx="1" />
-      <rect className="wave-bar bar3" x="17" y="4" width="3" height="16" rx="1" />
-    </svg>
-  ) : (
-    // Play Icon
-    <svg
-      className="w-8 h-8 text-white"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-    >
-      <polygon points="5,3 19,12 5,21" />
-    </svg>
-  )}
-</button>
+       
 
 <style >{`
   .wave-bar {
@@ -107,13 +80,52 @@ const Page = () => {
   }
 `}</style>
 
+<div className='absolute font-title text-sm bottom-5 z-50 px-16 text-white space-y-1 pointer-events-auto'>
+  <h3>
+    <a 
+      href="mailto:chougulesanket30@gmail.com" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="hover:underline cursor-pointer"
+    >
+      Email
+    </a>
+  </h3>
+  <h3>
+    <a 
+      href="https://www.linkedin.com/in/sanket-chougule5257" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="hover:underline cursor-pointer"
+    >
+      LinkedIn
+    </a>
+  </h3>
+  <h3>
+    <a 
+      href="https://github.com/sanket5257" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="hover:underline cursor-pointer"
+    >
+      GitHub
+    </a>
+  </h3>
+  <h3>
+    <a 
+      href="https://www.instagram.com/yourusername" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="hover:underline cursor-pointer"
+    >
+      Instagram
+    </a>
+  </h3>
+</div>
 
 
-        <div className="absolute inset-0 z-10 text-[#D9D9D9] flex flex-col justify-between items-center px-4 sm:px-10 py-8">
-         
-          
-          
-        </div>
+
+        
       </div>
 
       <About />

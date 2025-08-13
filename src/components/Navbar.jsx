@@ -13,6 +13,7 @@ const Navbar = () => {
           {/* Desktop Menu */}
           <div className="hidden text-sm md:flex md:items-center justify-between">
             <h3>Independent Creative Developer <br /><span className='text-[#666666]'>& Designer</span> </h3>
+            <h3>Sanket Chougule <br /><span className='text-[#666666]'>Follower of creativity</span> </h3>
             {['About', 'Work'].map((item) => (
               <a
                 key={item}
