@@ -4,6 +4,7 @@ import { use, useRef, useEffect } from 'react';
 import projects from '@/app/projects/data/projects.js';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Link from 'next/link';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -199,15 +200,24 @@ export default function ProjectDetails(promiseParams) {
       </div>
 
       <div
-        id="mobile-view"
-        className="h-screen w-full flex relative flex-col justify-center items-center"
+        id="projects"
+        className="relative overflow-hidden pt-20 cursor-none"
       >
-        <img src="/project1hero.png" className="h-[30vw] pl-[20vw]" alt="" />
-        <img
-          src="/project1hero.png"
-          className="h-[30vw] absolute -bottom-40 pr-[20vw]"
-          alt=""
-        />
+        
+
+        {/* Project 2 */}
+        <Link href='/projects/zentry' className="relative">
+          <img src="/project2.png" className="md:h-full h-screen md:w-full project-image object-cover" alt="project 2" />
+          <div className="absolute top-0 left-0 w-full h-full bg-black/10 flex flex-col justify-center items-center text-[#D9D9D9] leading-[15vw] sm:leading-[9.5vw]">
+            
+            <h1>Next Project</h1>
+            <h1 className="font-title font-extrabold uppercase text-[14vw] sm:text-[10vw]">Zentry</h1>
+            <h1 className="font-title2 text-[14vw] sm:text-[10vw]">Clone</h1>
+          </div>
+        </Link>
+
+        {/* Custom Cursor */}
+        
       </div>
     </div>
   );
