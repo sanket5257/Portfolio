@@ -174,3 +174,100 @@
     @apply bg-background text-foreground;
   }
 }
+.film-mode {
+  filter: sepia(0.6) contrast(1.4) brightness(1.05) saturate(0.7);
+  background-color: #1a1a1a;
+  position: relative;
+}
+
+/* Grain texture */
+.film-mode::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("/grain.jpg") repeat;
+  opacity: 0.2;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 9998;
+  animation: flicker 0.25s infinite;
+}
+
+/* Vignette effect */
+.film-mode::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9997;
+  background: radial-gradient(circle, rgba(0,0,0,0) 70%, rgba(0,0,0,0.7) 100%);
+}
+
+/* Cinematic black top/bottom bars */
+.cinematic-bars {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: black;
+  z-index: 9999;
+  pointer-events: none;
+}
+.cinematic-bars.top { top: 0; }
+.cinematic-bars.bottom { bottom: 0; }
+
+/* Side vintage bars */
+.side-bars {
+  position: fixed;
+  top: 0;
+  width: 100px; /* Adjust thickness */
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 9999;
+  pointer-events: none;
+}
+.side-bars.left { left: 0; }
+.side-bars.right { right: 0; }
+
+/* Flicker animation */
+@keyframes flicker {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.45; }
+}
+
+/* Subtle shake */
+@keyframes film-shake {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-0.7px, 0.7px); }
+}
+.film-mode {
+  animation: film-shake 0.25s infinite;
+}
+
+/* When Film Mode is active, shrink and center content */
+.film-frame {
+  transform: scale(1); /* shrink to 80% */
+  transform-origin: center;
+  margin: auto;
+  max-width: 80%; /* limit width */
+  background: rgba(0, 0, 0, 0.02);
+  padding: 20px;
+  border-radius: 10px;
+  transition: transform 0.5s ease, max-width 0.5s ease;
+}
+
+/* Dark background outside the frame */
+.film-mode body,
+.film-mode html {
+  background-color: #000;
+}
+
+.film-frame {
+  transform: scale(1);
+  transform-origin: top center;
+  transition: transform 0.5s ease;
+}
+
+.film-mode {
+  background-color: black;
+}

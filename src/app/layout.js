@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import GlobalAudioPlayer from "@/components/GloabalAudioPlayer";
+import Navbar from "@/components/Navbar";
+import FilmModeButton from "@/components/FilmModeButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,12 +21,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <GlobalAudioPlayer/>
-        {children}
-       
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        {/* <GlobalAudioPlayer /> */}
+        <div id="filmContent">
+
+          <Navbar/>
+          {children}
+                  <FilmModeButton />
+
+        </div>
       </body>
     </html>
   );

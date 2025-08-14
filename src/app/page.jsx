@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useRef, useState, useEffect } from 'react'
-import Navbar from '@/components/Navbar'
 import About from './About'
 import Work from './Work'
 import Footer from '@/components/Footer'
@@ -37,7 +36,7 @@ const Page = () => {
 
   return (
     <>
-      <Navbar />
+    
 
       {/* Hero Section */}
       <div className="relative w-full h-screen pointer-events-none">

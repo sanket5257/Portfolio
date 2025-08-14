@@ -3,18 +3,21 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <nav className="font-title absolute z-50 w-full top-0">
+    <nav className="font-title fixed z-50 w-full top-0">
       <div className="w-full py-5 px-4 sm:px-6 lg:px-16">
         <div className=" h-16 items-center text-[#D9D9D9]">
           {/* Desktop Menu */}
           <div className="hidden text-sm md:flex md:items-center justify-between">
             <h3>Independent Creative Developer <br /><span className='text-[#666666]'>& Designer</span> </h3>
             <h3>Sanket Chougule <br /><span className='text-[#666666]'>Follower of creativity</span> </h3>
-            {['About', 'Work'].map((item) => (
+           
+                       
+ {['About', 'Work'].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
