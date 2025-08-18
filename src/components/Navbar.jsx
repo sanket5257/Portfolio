@@ -8,8 +8,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <nav className="font-title fixed z-50 w-full top-0">
-      <div className="w-full py-5 px-4 sm:px-6 lg:px-16">
+    <nav className="font-title   w-full ">
+      <div className="w-full absolute top-0 z-50 py-5 px-4 sm:px-6 lg:px-16">
         <div className=" h-16 items-center text-[#D9D9D9]">
           {/* Desktop Menu */}
           <div className="hidden text-sm md:flex md:items-center justify-between">

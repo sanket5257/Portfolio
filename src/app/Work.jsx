@@ -94,8 +94,8 @@ const Work = () => {
   return (
     <div id='work' className="min-h-screen bg-[#D9D9D9] w-full">
       {/* Heading */}
-      <div className="leading-[14vw] sm:leading-[10vw] pt-20 pb-20 w-full flex flex-col items-center">
-        <h1 className="font-title2 text-[14vw] sm:text-[10vw] pr-0 sm:pr-[10vw]">Selected</h1>
+      <div className="leading-[14vw] sm:leading-[7vw] pt-20 pb-20 w-full flex flex-col items-center">
+        <h1 className="font-title2 text-[14vw] sm:text-[12vw] pr-0 sm:pr-[10vw]">Selected</h1>
         <h1 className="font-title font-extrabold text-[14vw] sm:text-[10vw] pl-0 sm:pl-[10vw]">Work</h1>
       </div>
 

@@ -42,12 +42,12 @@ const About = () => {
 
   return (
     <div id='about' className=' bg-[#D9D9D9] pt-[10vw] w-full'>
-      <div id='heading' className='lg:leading-[15vh] leading-10 lg:pt-20 flex flex-col  items-center lg:h-[100vh] text-center text-black'>
+      <div id='heading' className=' lg:pt-20 flex flex-col  items-center lg:h-[100vh] text-center text-black'>
         <h1 ref={el => (headingsRef.current[0] = el)} className='font-title font-extrabold text-[8vw] pr-[30vw]'>WEBSITES</h1>
-        <h1 ref={el => (headingsRef.current[1] = el)} className='font-title2 text-[10vw] pl-[10vw]'>That Work</h1>
-        <h1 ref={el => (headingsRef.current[2] = el)} className='font-title font-extrabold text-[8vw] pl-[30vw]'>HARDER</h1>
-        <h1 ref={el => (headingsRef.current[3] = el)} className='font-title font-extrabold text-[8vw]'>THAN YOUR</h1>
-        <h1 ref={el => (headingsRef.current[4] = el)} className='font-title2 text-[10vw] pl-[30vw]'>Competition</h1>
+        <h1 ref={el => (headingsRef.current[1] = el)} className='font-title2 text-[10vw] pl-[10vw] lg:leading-20'>That Work</h1>
+        <h1 ref={el => (headingsRef.current[2] = el)} className='font-title font-extrabold text-[8vw] pl-[30vw] lg:leading-20'>HARDER</h1>
+        <h1 ref={el => (headingsRef.current[3] = el)} className='font-title font-extrabold text-[8vw] lg:leading-30'>THAN YOUR</h1>
+        <h1 ref={el => (headingsRef.current[4] = el)} className='font-title2 text-[10vw] pl-[30vw] lg:leading-35'>Competition</h1>
       </div>
       <AboutMiddle/>
       <AboutBottom/>

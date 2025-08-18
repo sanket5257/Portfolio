@@ -71,10 +71,10 @@ const AboutContact = () => {
 
       <div className='relative'>
 
-        <h1 className='font-title2 text-[10vw] sm:text-[7vw] lg:text-[5vw] contact-reveal'>
+        <h1 className='font-title2 text-[10vw] sm:text-[7vw] lg:text-[6vw] contact-reveal'>
           Still Have Some
         </h1>
-        <h1 className='font-title font-extrabold text-[9vw] sm:text-[6vw] lg:text-[4.5vw] contact-reveal'>
+        <h1 className='font-title leading-0 font-extrabold text-[9vw] sm:text-[6vw] lg:text-[4.5vw] contact-reveal'>
           QUESTIONS ABOUT ME
         </h1>
       </div>
@@ -83,7 +83,7 @@ const AboutContact = () => {
 
       <a href='/contact'
         ref={buttonRef}
-        className='hover-button relative overflow-hidden  contact-reveal cursor-pointer float-none sm:float-right border-2 border-black hover:border-white rounded-lg p-4 mt-6 sm:mt-4 w-full sm:w-[60vw] lg:w-[38vw] h-[20vw] sm:h-[16vw] lg:h-[13vw] flex justify-center items-center body-font'
+        className='hover-button relative overflow-hidden  contact-reveal cursor-pointer float-none sm:float-right border-2 border-black hover:border-white rounded-lg p-4 mt-20 sm:mt-20 w-full sm:w-[60vw] lg:w-[38vw] h-[20vw] sm:h-[16vw] lg:h-[13vw] flex justify-center items-center body-font '
       >
         {/* Expanding white fill */}
         <div

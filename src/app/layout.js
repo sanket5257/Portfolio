@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
         {/* <GlobalAudioPlayer /> */}
         <div id="filmContent">
 
-          <Navbar/>
+          {/* <Navbar/> */}
           {children}
                   <FilmModeButton />
 
