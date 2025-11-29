@@ -5,7 +5,7 @@ import About from './About'
 import Work from './Work'
 import Footer from '@/components/Footer'
 import Home from './Hero'
-
+import Model from './Model'
 const Page = () => {
   const [isMobile, setIsMobile] = useState(false)
 
@@ -31,6 +31,7 @@ const Page = () => {
   return (
     <>
       <Home />
+      <Model/>
       <About />
       <Work />
       <Footer />

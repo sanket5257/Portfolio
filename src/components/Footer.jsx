@@ -123,7 +123,7 @@ const Footer = () => {
           </svg>
 
           {/* Inner Content */}
-          <div className='flex border justify-center items-center h-[19.5vw] w-[19.5vw] overflow-hidden hover:border-[#D9D9D9] rounded-full flex-col'>
+          <div className='flex border justify-center items-center h-[19.5vw] w-[19.5vw] overflow-hidden border-black hover:border-[#D9D9D9] rounded-full flex-col'>
             <div className='flex z-99 justify-center items-center relative'>
               <img
                 ref={iconRef}

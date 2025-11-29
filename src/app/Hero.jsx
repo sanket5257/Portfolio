@@ -15,11 +15,11 @@ export default function Home() {
       <nav className="absolute top-6 right-30 z-10 flex flex-col space-y-1 text-right text-md font-normal">
         <a href="https://www.instagram.com/ft.leo_o" className="hover:underline">instagram</a>
         <a href="https://www.linkedin.com/in/sanket-chougule5257" className="hover:underline">linkedin</a>
-        <a href="#" className="hover:underline">dribbble</a>
+        <a href="https://dribbble.com/sanket-chougule" className="hover:underline">dribbble</a>
         <a href="#" className="hover:underline">portfolio_pdf</a>
       </nav>
       <nav className="absolute top-6 right-[30%] z-10 flex flex-col space-y-1 text-right text-md font-normal">
-        <a href="/#Home" className="hover:underline">works</a>
+        <a href="/#work" className="hover:underline">works</a>
         <a href="/#about" className="hover:underline">about me</a>
 <Link
               href="/contact"
@@ -31,10 +31,10 @@ export default function Home() {
       {/* Main heading */}
       <main className="flex flex-col md:flex-row items-start justify-between pt-32 px-50">
         <div>
-          <h1 className="text-6xl font-title font-extrabold md:text-8xl leading-tight mb-6 max-w-3xl">
-            <span className="font-title font-extrabold">YOU’VE GOT </span><br />
-            <span className=''>THE IDEA,</span><br />
-            GREAT
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-title font-extrabold leading-tight mb-6 max-w-3xl">
+            <span className="font-title font-extrabold">YOU'VE GOT </span><br />
+            <span>THE IDEA,</span><br />
+            <span>GREAT</span>
           </h1>
           <div className="w-40 ml-60 mb-20 pb-20 h-28 relative">
             <Image
@@ -47,7 +47,7 @@ export default function Home() {
           {/* Creative designer card */}
           <div className="mt-10">
             <span className="text-xs bg-gray-200 px-3 py-1 rounded text-gray-700 inline-block mb-2 tracking-wide">CREATIVE DESIGNER</span>
-            <p className="text-gray-500 text-base">भारतीय Designer बेहतर मानव अनुभव बनाने में शामिल । डिजाइन के माध्यम से.</p>
+            <p className="text-gray-500 text-sm sm:text-base">भारतीय Designer बेहतर मानव अनुभव बनाने में शामिल । डिजाइन के माध्यम से.</p>
           </div>
         </div>
         
@@ -55,12 +55,13 @@ export default function Home() {
           {/* TV Image */}
           
           {/* "LEAVE THE REST TO ME!" */}
-          <h2 className="text-4xl md:text-7xl  leading-tight mt-12 text-right">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight mt-8 md:mt-12 text-right">
             LEAVE THE<br />REST TO ME!
           </h2>
         </div>
       </main>
       {/* Optionally add background lines/circles with absolute elements or SVG for extra styling */}
     </div>
+    
   );
 }
