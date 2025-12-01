@@ -5,6 +5,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const Skills = () => {
+  console.log('Skills component rendered');
+  console.log('GSAP registered:', gsap);
+  console.log('ScrollTrigger registered:', ScrollTrigger);
   const skills = [
     "HTML",
     "CSS",
@@ -24,8 +27,9 @@ const Skills = () => {
   ];
 
   useEffect(() => {
+    console.log('Skills useEffect triggered');
     // Animate skills on scroll
-    gsap.utils.toArray('.skill-item').forEach((item, i) => {
+    gsap.utils.toArray('.skill').forEach((item, i) => {
       gsap.from(item, {
         opacity: 0,
         y: 20,
