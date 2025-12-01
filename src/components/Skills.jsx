@@ -23,7 +23,8 @@ const Skills = () => {
     "GitHub",
     "C",
     "C++",
-    "Java"
+    "Java",
+    "wordpress"
   ];
 
   useEffect(() => {
