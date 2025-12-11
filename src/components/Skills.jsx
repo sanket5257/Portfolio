@@ -46,7 +46,7 @@ const Skills = () => {
   }, []);
 
   return (
-    <div className='bg-[#D9D9D9] w-full py-20 md:py-32 px-4 sm:px-8 overflow-hidden skills-container'>
+    <div id='skills' className='bg-[#D9D9D9] w-full py-20 md:py-32 px-4 sm:px-8 overflow-hidden skills-container'>
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="w-full lg:w-1/4">

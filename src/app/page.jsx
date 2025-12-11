@@ -8,11 +8,10 @@ import Footer from '@/components/Footer'
 import Home from './Hero'
 import Model from './Model'
 import Skills from '../components/Skills'
+import ScrollNavigation from '../components/ScrollNavigation'
 
 // Dynamically import the Loader component with no SSR
-const Loader = dynamic(() => import('@/components/Loader'), {
-  ssr: false,
-});
+
 const Page = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -31,18 +30,9 @@ const Page = () => {
     return () => window.removeEventListener('resize', checkScreen);
   }, []);
 
-  const handleLoadingComplete = () => {
-    setIsLoading(false);
-    // Add a class to the body to prevent scrolling during loading
-    document.body.style.overflow = 'auto';
-  };
+  
 
   // Prevent scrolling when loading
-  useEffect(() => {
-    if (mounted) {
-      document.body.style.overflow = isLoading ? 'hidden' : 'auto';
-    }
-  }, [isLoading, mounted]);
 
   if (!mounted) {
     return null; // Or a simple loading state
@@ -56,12 +46,10 @@ const Page = () => {
     );
   }
 
-  if (isLoading) {
-    return <Loader onLoaded={handleLoadingComplete} />;
-  }
 
   return (
     <div className="transition-opacity duration-1000">
+      <ScrollNavigation />
       <Home />
       <Model />
       <About />

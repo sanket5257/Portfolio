@@ -175,6 +175,19 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Lenis smooth scrolling styles */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
 .film-mode {
   filter: sepia(0.6) contrast(1.4) brightness(1.05) saturate(0.7);
   background-color: #1a1a1a;

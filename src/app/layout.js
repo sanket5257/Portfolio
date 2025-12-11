@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import LenisProvider from "../components/LenisProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,13 +21,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="h-full">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased h-full`}>
-        {/* Model Viewer as a background */}
+        <LenisProvider>
+          {/* Model Viewer as a background */}
 
-        
-        {/* Content */}
-        <div id="filmContent" className="relative z-10">
-          {children}
-        </div>
+          
+          {/* Content */}
+          <div id="filmContent" className="relative z-10">
+            {children}
+          </div>
+        </LenisProvider>
       </body>
     </html>
   );

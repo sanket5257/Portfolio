@@ -78,7 +78,7 @@ const Footer = () => {
   
 
   return (
-    <div className=' bg-[#D9D9D9] w-full'>
+    <div id='contact' className=' bg-[#D9D9D9] w-full'>
       <div className='lg:leading-[17vh] leading-8.5 pt-20 flex flex-col items-center pb-20 text-center text-black'>
         <h1 ref={heading1} className='font-title font-extrabold text-[8vw] pr-[30vw]'>
           LET’S START
