@@ -55,9 +55,9 @@ const About = () => {
         {/* 1 */}
         <h1
           ref={(el) => (headingsRef.current[0] = el)}
-          className='font-title font-extrabold leading-tight lg:leading-[0.9]
+          className='font-title font-extrabold leading-tight lg:leading-[0.8]
           text-5xl sm:text-6xl md:text-7xl 
-          lg:text-8xl xl:text-9xl mb-3 sm:mb-4 md:mb-6 
+          lg:text-8xl xl:text-9xl mb-1 sm:mb-2 md:mb-2 
           lg:pr-[15vw] xl:pr-[25vw] 2xl:pr-[30vw]'
         >
           WEBSITES
@@ -66,9 +66,9 @@ const About = () => {
         {/* 2 */}
         <h1
           ref={(el) => (headingsRef.current[1] = el)}
-          className='font-title2 leading-tight lg:leading-[0.9]
+          className='font-title2 leading-tight lg:leading-[0.8]
           text-6xl sm:text-7xl md:text-8xl 
-          lg:text-9xl xl:text-[10rem] mb-3 sm:mb-4 md:mb-6 
+          lg:text-9xl xl:text-[10rem] mb-1 sm:mb-2 md:mb-2 
           lg:pl-[10vw] xl:pl-[15vw] 2xl:pl-[20vw]'
         >
           That Work
@@ -77,9 +77,9 @@ const About = () => {
         {/* 3 */}
         <h1
           ref={(el) => (headingsRef.current[2] = el)}
-          className='font-title font-extrabold leading-tight lg:leading-[0.9]
+          className='font-title font-extrabold leading-tight lg:leading-[0.8]
           text-5xl sm:text-6xl md:text-7xl 
-          lg:text-8xl xl:text-9xl mb-3 sm:mb-4 md:mb-6 
+          lg:text-8xl xl:text-9xl mb-1 sm:mb-2 md:mb-2 
           lg:pr-[15vw] xl:pr-[25vw] 2xl:pr-[30vw]'
         >
           HARDER
@@ -88,9 +88,9 @@ const About = () => {
         {/* 4 */}
         <h1
           ref={(el) => (headingsRef.current[3] = el)}
-          className='font-title font-extrabold leading-tight lg:leading-[0.9]
+          className='font-title font-extrabold leading-tight lg:leading-[0.8]
           text-5xl sm:text-6xl md:text-7xl 
-          lg:text-8xl xl:text-9xl mb-3 sm:mb-4 md:mb-6 
+          lg:text-8xl xl:text-9xl mb-1 sm:mb-2 md:mb-2 
           lg:pl-[10vw] xl:pl-[15vw] 2xl:pl-[20vw]'
         >
           THAN YOUR
@@ -99,7 +99,7 @@ const About = () => {
         {/* 5 */}
         <h1
           ref={(el) => (headingsRef.current[4] = el)}
-          className='font-title2 leading-tight lg:leading-[0.9]
+          className='font-title2 leading-tight lg:leading-[0.8]
           text-6xl sm:text-7xl md:text-8xl 
           lg:text-9xl xl:text-[10rem]'
         >

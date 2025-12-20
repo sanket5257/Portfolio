@@ -51,9 +51,8 @@ const Page = () => {
     <div className="transition-opacity duration-1000">
       <ScrollNavigation />
       <Home />
-      <Model />
       <About />
-      <Skills />
+      {/* <Skills /> */}
       <Work />
       <Footer />
     </div>
