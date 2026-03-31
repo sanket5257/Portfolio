@@ -5,13 +5,13 @@ import Image from "next/image";
 import DraggableBlock from "./DraggableBlock";
 
 const photos = [
-  {
-    src: "/images/david-speaking.jpg",
-    alt: "Speaking at a conference",
-    width: 220,
-    height: 220,
-    style: { top: "10%", left: "55%" },
-  },
+  // {
+  //   src: "/images/david-speaking.jpg",
+  //   alt: "Speaking at a conference",
+  //   width: 220,
+  //   height: 220,
+  //   style: { top: "10%", left: "55%" },
+  // },
   {
     src: "/images/teide.png",
     alt: "Teide volcano landscape",
@@ -33,13 +33,13 @@ const photos = [
     height: 140,
     style: { top: "15%", left: "85%" },
   },
-  {
-    src: "/images/food.png",
-    alt: "Enjoying food by the beach",
-    width: 140,
-    height: 140,
-    style: { top: "55%", left: "80%" },
-  },
+  // {
+  //   src: "/images/food.png",
+  //   alt: "Enjoying food by the beach",
+  //   width: 140,
+  //   height: 140,
+  //   style: { top: "55%", left: "80%" },
+  // },
 ];
 
 export default function Footer() {
