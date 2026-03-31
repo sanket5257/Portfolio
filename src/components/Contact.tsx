@@ -70,27 +70,48 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative bg-[#eef2f7] py-20">
+    <section
+      id="contact"
+      className="relative"
+      style={{ background: "#eef2f7", padding: "80px 0" }}
+    >
       <GridOverlay />
-      <div className="max-w-6xl mx-auto px-6">
+      <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 24px" }}>
         {/* Header row */}
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-x-6 mb-3">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-x-6" style={{ marginBottom: 12 }}>
           <div className="md:col-span-2">
-            <span className="uppercase text-xs font-normal text-slate-500 tracking-[1.2px] leading-4">
+            <span
+              className="uppercase"
+              style={{
+                fontSize: 12,
+                fontWeight: 400,
+                color: "#64748b",
+                letterSpacing: "1.2px",
+                lineHeight: "16px",
+              }}
+            >
               PICK MY BRAIN
             </span>
           </div>
         </div>
 
         {/* Separator line */}
-        <div className="border-t border-slate-400/40 mb-12" />
+        <div
+          style={{ borderTop: "1px solid rgba(148, 163, 184, 0.4)", marginBottom: 48 }}
+        />
 
         {/* Centered chat UI */}
-        <div className="max-w-[640px] mx-auto">
-          <h2 className="text-center font-light text-[32px] text-slate-800 mb-3">
+        <div style={{ maxWidth: 640, margin: "0 auto" }}>
+          <h2
+            className="text-center font-light"
+            style={{ fontSize: 32, color: "#1e293b", marginBottom: 12 }}
+          >
             Pick my brain!
           </h2>
-          <p className="text-center text-sm text-slate-500 mb-8">
+          <p
+            className="text-center"
+            style={{ fontSize: 14, color: "#64748b", marginBottom: 32 }}
+          >
             Ask anything about frontend development, React, UI/UX, or creative
             coding. You&apos;ll get an instant answer based on my notes, projects,
             and real work.
@@ -100,19 +121,33 @@ export default function Contact() {
           {messages.length > 0 && (
             <div
               ref={chatRef}
-              className="flex flex-col gap-4 mb-6 max-h-[400px] overflow-y-auto px-1"
+              className="flex flex-col gap-4"
+              style={{
+                marginBottom: 24,
+                maxHeight: 400,
+                overflowY: "auto",
+                padding: "0 4px",
+              }}
             >
               {messages.map((msg, i) => (
                 <div
                   key={i}
-                  className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                  className="flex"
+                  style={{
+                    justifyContent: msg.role === "user" ? "flex-end" : "flex-start",
+                  }}
                 >
                   <div
-                    className={`max-w-[80%] px-4 py-3 text-sm leading-relaxed ${
-                      msg.role === "user"
-                        ? "bg-white text-slate-800 border border-slate-400/30 rounded-2xl rounded-br-sm"
-                        : "bg-blue-500 text-white rounded-2xl rounded-bl-sm"
-                    }`}
+                    style={{
+                      maxWidth: "80%",
+                      padding: "12px 16px",
+                      borderRadius: msg.role === "user" ? "16px 16px 4px 16px" : "16px 16px 16px 4px",
+                      background: msg.role === "user" ? "white" : "#3b82f6",
+                      color: msg.role === "user" ? "#1e293b" : "white",
+                      border: msg.role === "user" ? "1px solid rgba(148, 163, 184, 0.3)" : "none",
+                      fontSize: 14,
+                      lineHeight: 1.6,
+                    }}
                   >
                     {msg.content}
                   </div>
@@ -120,8 +155,16 @@ export default function Contact() {
               ))}
 
               {isTyping && (
-                <div className="flex justify-start">
-                  <div className="px-5 py-3 bg-blue-500 text-white text-sm rounded-2xl rounded-bl-sm">
+                <div className="flex" style={{ justifyContent: "flex-start" }}>
+                  <div
+                    style={{
+                      padding: "12px 20px",
+                      borderRadius: "16px 16px 16px 4px",
+                      background: "#3b82f6",
+                      color: "white",
+                      fontSize: 14,
+                    }}
+                  >
                     <span className="inline-flex gap-1">
                       <span className="animate-bounce" style={{ animationDelay: "0ms" }}>&bull;</span>
                       <span className="animate-bounce" style={{ animationDelay: "150ms" }}>&bull;</span>
@@ -136,7 +179,14 @@ export default function Contact() {
           {/* Input */}
           <div
             data-cursor-target="contact-input"
-            className="flex items-center gap-3 rounded-full bg-white h-[52px] pl-[22px] pr-[10px] border border-slate-400/30 transition-colors focus-within:border-blue-500"
+            className="flex items-center gap-3 rounded-full"
+            style={{
+              border: "1px solid rgba(148, 163, 184, 0.3)",
+              background: "white",
+              height: 52,
+              padding: "0 10px 0 22px",
+              transition: "border-color 0.2s",
+            }}
           >
             <input
               type="text"
@@ -146,14 +196,26 @@ export default function Contact() {
               onKeyDown={(e) => {
                 if (e.key === "Enter") handleSubmit();
               }}
+              onFocus={(e) => {
+                const wrapper = e.target.closest("div");
+                if (wrapper) wrapper.style.borderColor = "#3b82f6";
+              }}
+              onBlur={(e) => {
+                const wrapper = e.target.closest("div");
+                if (wrapper)
+                  wrapper.style.borderColor = "rgba(148, 163, 184, 0.3)";
+              }}
               className="flex-1 text-sm outline-none bg-transparent text-slate-800 placeholder:text-slate-400"
             />
             <button
               onClick={handleSubmit}
               disabled={!input.trim()}
-              className={`rounded-full shrink-0 flex items-center justify-center w-[34px] h-[34px] transition-all ${
-                input.trim() ? "bg-blue-500" : "bg-slate-200"
-              }`}
+              className="rounded-full transition-all shrink-0 flex items-center justify-center"
+              style={{
+                width: 34,
+                height: 34,
+                background: input.trim() ? "#3b82f6" : "#e2e8f0",
+              }}
             >
               <svg
                 width="16"
@@ -168,11 +230,14 @@ export default function Contact() {
             </button>
           </div>
 
-          <div className="flex justify-between items-center mt-2.5 px-2.5">
-            <span className="text-[11px] text-slate-400">
+          <div
+            className="flex justify-between items-center"
+            style={{ marginTop: 10, padding: "0 10px" }}
+          >
+            <span style={{ fontSize: 11, color: "#94a3b8" }}>
               AI powered answers, trained on my knowledge base. It can be wrong sometimes.
             </span>
-            <span className="text-[11px] text-slate-400">
+            <span style={{ fontSize: 11, color: "#94a3b8" }}>
               {input.length}/500
             </span>
           </div>

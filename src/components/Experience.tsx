@@ -25,33 +25,51 @@ const experiences = [
 
 export default function Experience() {
   return (
-    <section id="about" className="relative bg-stone-50 py-20">
+    <section
+      id="about"
+      className="relative"
+      style={{ background: "#fafaf8", padding: "80px 0" }}
+    >
       <GridOverlay />
-      <div className="max-w-6xl mx-auto px-6">
+      <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 24px" }}>
         {/* Header row */}
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-x-6 mb-3">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-x-6" style={{ marginBottom: 12 }}>
           <div className="md:col-span-2">
-            <span className="uppercase text-xs font-normal text-slate-500 tracking-[1.2px] leading-4">
+            <span
+              className="uppercase"
+              style={{
+                fontSize: 12,
+                fontWeight: 400,
+                color: "#64748b",
+                letterSpacing: "1.2px",
+                lineHeight: "16px",
+              }}
+            >
               EXPERIENCE
             </span>
           </div>
           <div className="hidden md:block md:col-start-6 text-right">
-            <span className="text-xs font-normal text-slate-400">
+            <span style={{ fontSize: 12, fontWeight: 400, color: "#94a3b8" }}>
               Selected roles
             </span>
           </div>
         </div>
 
         {/* Separator line */}
-        <div className="border-t border-slate-400/40 mb-12" />
+        <div
+          style={{ borderTop: "1px solid rgba(148, 163, 184, 0.4)", marginBottom: 48 }}
+        />
 
-        {/* Content */}
+        {/* Content: intro (cols 1-2) + rows (cols 3-6) */}
         <div className="grid grid-cols-1 md:grid-cols-6 gap-x-6">
           <div className="md:col-span-2 md:pr-16 mb-8 md:mb-0">
-            <p className="text-sm leading-relaxed text-slate-600 max-w-[280px]">
+            <p
+              className="leading-relaxed"
+              style={{ fontSize: 14, color: "#475569", maxWidth: 280 }}
+            >
               Hi, I&apos;m Sanket — a creative web developer based in
               Maharashtra.{" "}
-              <strong className="font-semibold text-slate-800">
+              <strong style={{ fontWeight: 600, color: "#1e293b" }}>
                 I specialize in frontend development and crafting immersive
                 digital experiences
               </strong>{" "}
@@ -65,16 +83,27 @@ export default function Experience() {
               <div
                 key={i}
                 data-cursor-target="about-row"
-                className={`grid grid-cols-1 md:grid-cols-4 gap-x-6 items-center rounded-sm transition-colors duration-150 hover:bg-white/60 py-3.5 ${
-                  i < experiences.length - 1 ? "border-b border-slate-400/20" : ""
-                }`}
+                className="grid grid-cols-1 md:grid-cols-4 gap-x-6 items-center rounded-sm transition-colors duration-150 hover:bg-white/60"
+                style={{
+                  padding: "14px 0",
+                  borderBottom:
+                    i < experiences.length - 1
+                      ? "1px solid rgba(148, 163, 184, 0.2)"
+                      : "none",
+                }}
               >
                 {exp.url ? (
                   <a
                     href={exp.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 col-span-1 transition-opacity hover:opacity-70 text-sm font-medium text-slate-800 no-underline"
+                    className="flex items-center gap-1 col-span-1 transition-opacity hover:opacity-70"
+                    style={{
+                      fontSize: 14,
+                      fontWeight: 500,
+                      color: "#1e293b",
+                      textDecoration: "none",
+                    }}
                   >
                     {exp.company}
                     <svg
@@ -84,21 +113,34 @@ export default function Experience() {
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="2"
-                      className="opacity-50 shrink-0"
+                      style={{ opacity: 0.5, flexShrink: 0 }}
                     >
                       <path d="M7 7h10v10" />
                       <path d="M7 17L17 7" />
                     </svg>
                   </a>
                 ) : (
-                  <span className="col-span-1 text-sm font-medium text-slate-800">
+                  <span
+                    className="col-span-1"
+                    style={{
+                      fontSize: 14,
+                      fontWeight: 500,
+                      color: "#1e293b",
+                    }}
+                  >
                     {exp.company}
                   </span>
                 )}
-                <span className="col-span-2 text-sm font-normal text-slate-600">
+                <span
+                  className="col-span-2"
+                  style={{ fontSize: 14, fontWeight: 400, color: "#475569" }}
+                >
                   {exp.role}
                 </span>
-                <span className="col-span-1 text-right text-xs font-normal text-slate-400">
+                <span
+                  className="col-span-1 text-right"
+                  style={{ fontSize: 12, fontWeight: 400, color: "#94a3b8" }}
+                >
                   {exp.period}
                 </span>
               </div>

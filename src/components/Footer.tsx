@@ -50,21 +50,34 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative bg-[#0a0a0a] min-h-[70vh]">
+    <footer
+      className="relative"
+      style={{
+        background: "#0a0a0a",
+        minHeight: "70vh",
+      }}
+    >
       {/* Marquee */}
       <div className="overflow-hidden pt-10">
         <div className="flex whitespace-nowrap animate-marquee">
           {Array.from({ length: 8 }).map((_, i) => (
             <span key={i} className="flex items-center shrink-0">
               <span
-                className="uppercase font-light text-white font-sans -tracking-[0.025em]"
-                style={{ fontSize: "clamp(72px, 12vw, 160px)" }}
+                className="uppercase font-light text-white"
+                style={{
+                  fontSize: "clamp(72px, 12vw, 160px)",
+                  fontFamily: "var(--font-sans)",
+                  letterSpacing: "-0.025em",
+                }}
               >
                 Sanket Chougule
               </span>
               <span
-                className="mx-[0.3em] text-white/30"
-                style={{ fontSize: "clamp(72px, 12vw, 160px)" }}
+                className="mx-[0.3em]"
+                style={{
+                  color: "rgba(255, 255, 255, 0.3)",
+                  fontSize: "clamp(72px, 12vw, 160px)",
+                }}
               >
                 &middot;
               </span>
@@ -74,7 +87,7 @@ export default function Footer() {
       </div>
 
       {/* Photos - draggable */}
-      <div className="relative w-full min-h-[40vh]">
+      <div className="relative w-full" style={{ minHeight: "40vh" }}>
         {photos.map((photo, i) => (
           <div
             key={i}
@@ -101,8 +114,20 @@ export default function Footer() {
       </div>
 
       {/* Footer nav */}
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="flex justify-between items-center border-t border-white/10 pt-5 pb-6">
+      <div
+        style={{
+          maxWidth: "72rem",
+          margin: "0 auto",
+          padding: "0 24px",
+        }}
+      >
+        <div
+          className="flex justify-between items-center"
+          style={{
+            borderTop: "1px solid rgba(255, 255, 255, 0.1)",
+            padding: "20px 0 24px",
+          }}
+        >
           <div className="flex items-center gap-6">
             <a
               href="https://www.linkedin.com/in/sanket-chougule5257"
@@ -112,7 +137,15 @@ export default function Footer() {
               className="text-sm text-white/70 hover:text-white transition-colors flex items-center gap-1"
             >
               LinkedIn
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="opacity-60">
+              <svg
+                width="10"
+                height="10"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="opacity-60"
+              >
                 <path d="M7 17L17 7M17 7H7M17 7V17" />
               </svg>
             </a>
@@ -123,7 +156,15 @@ export default function Footer() {
               className="text-sm text-white/70 hover:text-white transition-colors flex items-center gap-1"
             >
               Dribbble
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="opacity-60">
+              <svg
+                width="10"
+                height="10"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="opacity-60"
+              >
                 <path d="M7 17L17 7M17 7H7M17 7V17" />
               </svg>
             </a>
@@ -134,7 +175,15 @@ export default function Footer() {
               className="text-sm text-white/70 hover:text-white transition-colors flex items-center gap-1"
             >
               GitHub
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="opacity-60">
+              <svg
+                width="10"
+                height="10"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="opacity-60"
+              >
                 <path d="M7 17L17 7M17 7H7M17 7V17" />
               </svg>
             </a>
@@ -145,14 +194,28 @@ export default function Footer() {
               className="text-sm text-white/70 hover:text-white transition-colors flex items-center gap-1"
             >
               Instagram
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="opacity-60">
+              <svg
+                width="10"
+                height="10"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="opacity-60"
+              >
                 <path d="M7 17L17 7M17 7H7M17 7V17" />
               </svg>
             </a>
-            <a href="mailto:sanket.chougule@outlook.com" className="text-sm text-white/70 hover:text-white transition-colors">
+            <a
+              href="mailto:sanket.chougule@outlook.com"
+              className="text-sm text-white/70 hover:text-white transition-colors"
+            >
               Email
             </a>
-            <a href="#contact" className="text-sm text-white/70 hover:text-white transition-colors">
+            <a
+              href="#contact"
+              className="text-sm text-white/70 hover:text-white transition-colors"
+            >
               Contact
             </a>
           </div>
@@ -163,7 +226,14 @@ export default function Footer() {
               className="text-sm text-white/70 hover:text-white transition-colors flex items-center gap-1"
             >
               Back to top
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
                 <path d="M12 19V5M5 12l7-7 7 7" />
               </svg>
             </button>

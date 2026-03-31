@@ -112,11 +112,14 @@ export default function Hero() {
           onTogglePixel={() => togglePixel(key)}
         >
           <h1
-            className="uppercase select-none whitespace-nowrap leading-none"
+            className="uppercase select-none whitespace-nowrap"
             style={{
-              fontFamily: isPixelated ? "var(--font-pixel)" : "var(--font-sans)",
+              fontFamily: isPixelated
+                ? "var(--font-pixel)"
+                : "var(--font-sans)",
               fontWeight: isPixelated ? 400 : 300,
               fontSize: "clamp(48px, 9vw, 128px)",
+              lineHeight: "1",
               letterSpacing: isPixelated ? "normal" : "-0.025em",
               color: isPixelated ? "#f97316" : "#0f172a",
             }}
@@ -130,23 +133,39 @@ export default function Hero() {
 
   return (
     <section
-      className="fixed inset-0 z-[1] overflow-hidden bg-stone-100"
+      className="fixed inset-0 z-[1] overflow-hidden"
+      style={{ background: "#f5f5f4", cursor: "none" }}
       onClick={handleBgClick}
     >
       <GridOverlay />
 
       {/* Top bar - time/weather */}
-      <div className="absolute z-50 flex flex-col gap-0.5 top-4 left-4">
+      <div
+        className="absolute z-50 flex flex-col gap-0.5"
+        style={{ top: 16, left: 16 }}
+      >
         <div className="flex items-center gap-1.5 text-xs">
-          <span className="font-medium text-slate-600">MH, IN</span>
-          <span className="text-slate-500">
+          <span className="font-medium" style={{ color: "#475569" }}>
+            MH, IN
+          </span>
+          <span style={{ color: "#64748b" }}>
             {time} . {date}
           </span>
         </div>
         {weather && (
-          <div className="flex items-center gap-1 text-xs text-slate-500">
+          <div
+            className="flex items-center gap-1 text-xs"
+            style={{ color: "#64748b" }}
+          >
             <span>{weather}</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            >
               <circle cx="12" cy="12" r="5" />
               <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
             </svg>
@@ -160,9 +179,27 @@ export default function Hero() {
           e.stopPropagation();
           setCollabOn(!collabOn);
         }}
-        className="absolute z-50 top-4 right-4 flex items-center gap-1.5 rounded-full border border-slate-400 text-slate-500 bg-transparent px-3 py-1.5 text-xs font-medium leading-4"
+        className="absolute z-50 flex items-center gap-1.5 rounded-full"
+        style={{
+          top: 16,
+          right: 16,
+          border: "1px solid #94a3b8",
+          color: "#64748b",
+          background: "transparent",
+          padding: "6px 12px",
+          fontSize: 12,
+          fontWeight: 500,
+          lineHeight: "16px",
+        }}
       >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        >
           <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
           <circle cx="9" cy="7" r="4" />
           <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
@@ -188,7 +225,10 @@ export default function Hero() {
           onBringToFront={() => bringToFront("bio")}
           showPixelToggle={false}
         >
-          <p className="text-sm leading-relaxed text-slate-600 max-w-xs">
+          <p
+            className="text-sm leading-relaxed"
+            style={{ color: "#475569", maxWidth: 320 }}
+          >
             Creative web developer. I craft immersive, visually captivating
             digital experiences with clean code, smooth animations, and
             pixel-perfect UI.
@@ -197,20 +237,47 @@ export default function Hero() {
       </div>
 
       {/* CTA */}
-      <div className="absolute flex flex-col items-center gap-2 bottom-[10%] left-1/2 -translate-x-1/2 z-[5]">
+      <div
+        className="absolute flex flex-col items-center gap-2"
+        style={{
+          bottom: "10%",
+          left: "50%",
+          transform: "translateX(-50%)",
+          zIndex: 5,
+        }}
+      >
         <button
           onClick={(e) => {
             e.stopPropagation();
             const el = document.getElementById("about");
             el?.scrollIntoView({ behavior: "smooth" });
           }}
-          className="text-white rounded-full shadow-md flex items-center justify-center bg-slate-900 text-sm font-medium px-6 py-2 leading-5 whitespace-nowrap"
+          className="text-white rounded-full shadow-md flex items-center justify-center"
+          style={{
+            background: "#0f172a",
+            fontSize: 14,
+            fontWeight: 500,
+            padding: "8px 24px",
+            lineHeight: "20px",
+            whiteSpace: "nowrap",
+          }}
         >
           Get to know me
         </button>
-        <div className="flex items-center gap-1.5 text-xs text-slate-500">
+        <div
+          className="flex items-center gap-1.5"
+          style={{ fontSize: 12, color: "#64748b" }}
+        >
           <span>Or scroll down</span>
-          <svg className="animate-bounce-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg
+            className="animate-bounce-arrow"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
             <path d="M12 5v14M5 12l7 7 7-7" />
           </svg>
         </div>

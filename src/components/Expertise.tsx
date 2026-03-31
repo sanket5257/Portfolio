@@ -81,42 +81,72 @@ export default function Expertise() {
 
   return (
     <section
-      className="relative overflow-hidden bg-stone-50 py-20"
+      className="relative overflow-hidden"
+      style={{ background: "#fafaf8", padding: "80px 0" }}
       onClick={handleBgClick}
     >
       <GridOverlay />
-      <div className="max-w-6xl mx-auto px-6">
+      <div style={{ maxWidth: "72rem", margin: "0 auto", padding: "0 24px" }}>
         {/* Header row */}
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-x-6 mb-3">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-x-6" style={{ marginBottom: 12 }}>
           <div className="md:col-span-2">
-            <span className="uppercase text-xs font-normal text-slate-500 tracking-[1.2px] leading-4">
+            <span
+              className="uppercase"
+              style={{
+                fontSize: 12,
+                fontWeight: 400,
+                color: "#64748b",
+                letterSpacing: "1.2px",
+                lineHeight: "16px",
+              }}
+            >
               EXPERTISE
             </span>
           </div>
         </div>
 
         {/* Separator line */}
-        <div className="border-t border-slate-400/40 mb-12" />
+        <div
+          style={{
+            borderTop: "1px solid rgba(148, 163, 184, 0.4)",
+            marginBottom: 48,
+          }}
+        />
 
         {/* Content: large intro text + cards */}
         <div className="grid grid-cols-1 md:grid-cols-6 gap-y-8 md:gap-0">
-          {/* Large intro text */}
-          <div className="md:col-span-2 pr-8">
-            <p className="text-[30px] font-normal text-slate-600 leading-[1.625]">
+          {/* Large intro text - cols 1-2 */}
+          <div className="md:col-span-2" style={{ paddingRight: 32 }}>
+            <p
+              style={{
+                fontSize: 30,
+                fontWeight: 400,
+                color: "#475569",
+                lineHeight: 1.625,
+              }}
+            >
               I blend frontend craft, design thinking, creative animation, and
               web performance{" "}
-              <span className="bg-blue-500/[0.18] px-[0.15em] py-[0.05em] rounded-sm box-decoration-clone">
+              <span
+                style={{
+                  backgroundColor: "rgba(59, 130, 246, 0.18)",
+                  padding: "0.05em 0.15em",
+                  borderRadius: 2,
+                  boxDecorationBreak: "clone",
+                  WebkitBoxDecorationBreak: "clone",
+                }}
+              >
                 to ship experiences people love.
               </span>
             </p>
           </div>
 
-          {/* Cards area */}
+          {/* Cards area - cols 3-6, centered */}
           <div
             className="md:col-start-3 md:col-span-4 relative flex justify-center"
             data-cursor-target="interests-card"
           >
-            <div className="relative w-[448px] min-h-[440px]">
+            <div className="relative" style={{ width: 448, minHeight: 440 }}>
               {expertiseCards.map((card) => (
                 <div
                   key={card.id}
@@ -133,12 +163,30 @@ export default function Expertise() {
                     showHandles={true}
                     showPixelToggle={false}
                   >
-                    <div className="flex flex-col items-center justify-center gap-2 w-[200px] p-4">
+                    <div
+                      className="flex flex-col items-center justify-center gap-2"
+                      style={{ width: 200, padding: 16 }}
+                    >
                       {card.icon}
-                      <span className="text-sm font-medium text-slate-800 leading-5">
+                      <span
+                        style={{
+                          fontSize: 14,
+                          fontWeight: 500,
+                          color: "#1e293b",
+                          lineHeight: "20px",
+                        }}
+                      >
                         {card.title}
                       </span>
-                      <p className="text-center text-[11px] font-normal text-slate-500 leading-[15px]">
+                      <p
+                        className="text-center"
+                        style={{
+                          fontSize: 11,
+                          fontWeight: 400,
+                          color: "#64748b",
+                          lineHeight: "15px",
+                        }}
+                      >
                         {card.description}
                       </p>
                     </div>
