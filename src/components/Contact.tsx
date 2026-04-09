@@ -8,40 +8,6 @@ interface Message {
   content: string;
 }
 
-const KNOWLEDGE: Record<string, string> = {
-  default:
-    "I'm Sanket Chougule, a creative web developer based in Maharashtra, India. I specialize in frontend development, UI/UX design, and crafting immersive digital experiences with React.js, Next.js, GSAP, and Tailwind CSS. Ask me anything about my work, skills, or experience!",
-  skills:
-    "My core stack includes HTML, CSS, JavaScript, React.js, Next.js, TypeScript, Tailwind CSS, Bootstrap, GSAP, Framer Motion, and Figma. I also work with Git, GitHub, WordPress, and have foundational knowledge of C, C++, and Java. I'm passionate about creative animations and pixel-perfect UI.",
-  experience:
-    "I'm currently a Frontend Developer at Shivneri Systems (June 2025–Present), working with WordPress, React.js, Tailwind CSS, and UI/UX principles. Before that, I was at RS Soft Tech (March–May 2025) building modern sites with React.js, Next.js, and Tailwind. I started my career as an intern at Stormsofts Technology (June–August 2024) where I learned responsive design fundamentals.",
-  projects:
-    "My key projects include: 1) This portfolio — built with Next.js, TypeScript, and Tailwind CSS with interactive draggable elements and custom cursor systems. 2) My previous portfolio — a cinematic experience using Next.js, GSAP scroll-triggered animations, and Tailwind CSS. 3) A Zentry Clone — a high-fidelity recreation of a motion-heavy homepage using React, Framer Motion, and Tailwind CSS.",
-  work:
-    "I specialize in web design and development for clients who care about details. Building upon my experiences in digital design across various projects, my goal is to create high-end web experiences that make your brand go from a 'meh' to a 'woah'. I design to impress and build to convert.",
-  contact:
-    "You can reach me at sanket.chougule@outlook.com. Find me on LinkedIn (linkedin.com/in/sanket-chougule5257), Dribbble (dribbble.com/sanket-chougule), and Instagram (@ft.leo_o). I'm always open to freelance opportunities and interesting collaborations!",
-  hire:
-    "I'd love to work with you! I bring expertise in React.js, Next.js, creative animations with GSAP, and pixel-perfect UI implementation. I'm currently open to frontend developer roles, freelance projects, and creative collaborations. Let's connect — email me at sanket.chougule@outlook.com or message me on LinkedIn!",
-};
-
-function getResponse(input: string): string {
-  const q = input.toLowerCase();
-  if (q.includes("skill") || q.includes("tech") || q.includes("stack") || q.includes("know") || q.includes("tool"))
-    return KNOWLEDGE.skills;
-  if (q.includes("experience") || q.includes("work at") || q.includes("company") || q.includes("job"))
-    return KNOWLEDGE.experience;
-  if (q.includes("project") || q.includes("portfolio") || q.includes("built") || q.includes("made") || q.includes("build"))
-    return KNOWLEDGE.projects;
-  if (q.includes("do") || q.includes("about") || q.includes("who") || q.includes("what"))
-    return KNOWLEDGE.work;
-  if (q.includes("contact") || q.includes("email") || q.includes("reach") || q.includes("linkedin") || q.includes("social"))
-    return KNOWLEDGE.contact;
-  if (q.includes("hire") || q.includes("freelance") || q.includes("available") || q.includes("open") || q.includes("collaborate"))
-    return KNOWLEDGE.hire;
-  return KNOWLEDGE.default;
-}
-
 export default function Contact() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
@@ -54,7 +20,7 @@ export default function Contact() {
     }
   }, [messages, isTyping]);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const trimmed = input.trim();
     if (!trimmed) return;
 
@@ -62,11 +28,24 @@ export default function Contact() {
     setInput("");
     setIsTyping(true);
 
-    setTimeout(() => {
-      const response = getResponse(trimmed);
-      setMessages((prev) => [...prev, { role: "assistant", content: response }]);
+    const updatedMessages = [...messages, { role: "user" as const, content: trimmed }];
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: updatedMessages }),
+      });
+      const data = await res.json();
+      setMessages((prev) => [...prev, { role: "assistant", content: data.content }]);
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: "Sorry, something went wrong. Feel free to email Sanket at chougulesanket30@gmail.com!" },
+      ]);
+    } finally {
       setIsTyping(false);
-    }, 800 + Math.random() * 700);
+    }
   };
 
   return (

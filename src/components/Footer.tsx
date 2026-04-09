@@ -207,7 +207,7 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              href="mailto:sanket.chougule@outlook.com"
+              href="mailto:chougulesanket30@gmail.com"
               className="text-sm text-white/70 hover:text-white transition-colors"
             >
               Email
