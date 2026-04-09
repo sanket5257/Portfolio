@@ -5,13 +5,38 @@ import GridOverlay from "./GridOverlay";
 const projects = [
   {
     name: "Portfolio v2",
-    description: "Personal portfolio with cinematic GSAP animations — Next.js, GSAP, Tailwind CSS",
+    description: "Personal portfolio with cinematic GSAP animations — Next.js, GSAP, Lenis, Tailwind CSS",
     url: "https://portfolioleo-o.vercel.app/",
   },
   {
+    name: "Kvell Dynamics",
+    description: "AI & automation agency site with premium UI/UX — Next.js, GSAP, Lenis, Tailwind CSS",
+    url: "https://kvelld-beta.vercel.app/",
+  },
+  {
+    name: "Vidya Bharati School",
+    description: "School website with admissions, academics & campus showcase — Next.js, GSAP, Lenis, Tailwind CSS",
+    url: "https://education-kappa-eight.vercel.app/",
+  },
+  {
+    name: "CodeSage",
+    description: "Web design & development agency site with AI solutions focus — Next.js, GSAP, Lenis, Tailwind CSS",
+    url: "https://codesage5.vercel.app/",
+  },
+  {
+    name: "RamScript",
+    description: "Software dev agency site — virtual CTO & tech partner platform — Next.js, GSAP, Lenis, Tailwind CSS",
+    url: "https://ramscript.com/",
+  },
+  {
+    name: "Shivneri Systems",
+    description: "Full-stack engineering agency with on-demand product teams — Next.js, GSAP, Lenis, Tailwind CSS",
+    url: "https://shivneri.vercel.app/",
+  },
+  {
     name: "Zentry Clone",
-    description: "High-fidelity recreation of a cinematic homepage — React, Framer Motion, Tailwind CSS",
-    url: "https://portfolioleo-o.vercel.app/projects/zentry",
+    description: "High-fidelity recreation of a cinematic homepage — React, GSAP, Lenis, Tailwind CSS",
+    url: "https://zentry-clone-indol.vercel.app/",
   },
 ];
 
