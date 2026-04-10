@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import DraggableBlock from "./DraggableBlock";
 import GridOverlay from "./GridOverlay";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface PixelState {
   sanket: boolean;
@@ -10,6 +11,7 @@ interface PixelState {
 }
 
 export default function Hero() {
+  const isMobile = useIsMobile();
   const [pixelated, setPixelated] = useState<PixelState>({
     sanket: true,
     chougule: false,
@@ -134,7 +136,7 @@ export default function Hero() {
   return (
     <section
       className="fixed inset-0 z-[1] overflow-hidden"
-      style={{ background: "#f5f5f4", cursor: "none" }}
+      style={{ background: "#f5f5f4", cursor: isMobile ? "auto" : "none" }}
       onClick={handleBgClick}
     >
       <GridOverlay />
@@ -209,15 +211,19 @@ export default function Hero() {
       </button>
 
       {/* SANKET */}
-      {renderHeading("sanket", "SANKET", "30%", "28%")}
+      {renderHeading("sanket", "SANKET", isMobile ? "25%" : "30%", isMobile ? "5%" : "28%")}
 
       {/* CHOUGULE - indented */}
-      {renderHeading("chougule", "CHOUGULE", "44%", "32%")}
+      {renderHeading("chougule", "CHOUGULE", isMobile ? "35%" : "44%", isMobile ? "5%" : "32%")}
 
       {/* Bio text - draggable */}
       <div
         className="absolute select-none touch-none"
-        style={{ top: "28%", left: "62%", zIndex: zOrder.bio }}
+        style={{
+          top: isMobile ? "48%" : "28%",
+          left: isMobile ? "5%" : "62%",
+          zIndex: zOrder.bio,
+        }}
       >
         <DraggableBlock
           isSelected={selected === "bio"}
@@ -227,7 +233,10 @@ export default function Hero() {
         >
           <p
             className="text-sm leading-relaxed"
-            style={{ color: "#475569", maxWidth: 320 }}
+            style={{
+              color: "#475569",
+              maxWidth: isMobile ? "85vw" : 320,
+            }}
           >
             Creative web developer. I craft immersive, visually captivating
             digital experiences with clean code, smooth animations, and

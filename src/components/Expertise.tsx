@@ -3,6 +3,7 @@
 import { useState, useCallback } from "react";
 import DraggableBlock from "./DraggableBlock";
 import GridOverlay from "./GridOverlay";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const expertiseCards = [
   {
@@ -73,6 +74,7 @@ const expertiseCards = [
 ];
 
 export default function Expertise() {
+  const isMobile = useIsMobile();
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
 
   const handleBgClick = useCallback(() => {
@@ -116,10 +118,10 @@ export default function Expertise() {
         {/* Content: large intro text + cards */}
         <div className="grid grid-cols-1 md:grid-cols-6 gap-y-8 md:gap-0">
           {/* Large intro text - cols 1-2 */}
-          <div className="md:col-span-2" style={{ paddingRight: 32 }}>
+          <div className="md:col-span-2" style={{ paddingRight: isMobile ? 0 : 32 }}>
             <p
               style={{
-                fontSize: 30,
+                fontSize: "clamp(22px, 4vw, 30px)",
                 fontWeight: 400,
                 color: "#475569",
                 lineHeight: 1.625,
@@ -146,54 +148,97 @@ export default function Expertise() {
             className="md:col-start-3 md:col-span-4 relative flex justify-center"
             data-cursor-target="interests-card"
           >
-            <div className="relative" style={{ width: 448, minHeight: 440 }}>
-              {expertiseCards.map((card) => (
-                <div
-                  key={card.id}
-                  className="absolute select-none touch-none"
-                  style={{
-                    top: card.top,
-                    left: card.left,
-                    zIndex: selectedCard === card.id ? 10 : 1,
-                  }}
-                >
-                  <DraggableBlock
-                    isSelected={selectedCard === card.id}
-                    onSelect={() => setSelectedCard(card.id)}
-                    showHandles={true}
-                    showPixelToggle={false}
-                  >
-                    <div
-                      className="flex flex-col items-center justify-center gap-2"
-                      style={{ width: 200, padding: 16 }}
+            {isMobile ? (
+              <div className="grid grid-cols-2 gap-3 w-full">
+                {expertiseCards.map((card) => (
+                  <div key={card.id} className="select-none touch-none">
+                    <DraggableBlock
+                      isSelected={selectedCard === card.id}
+                      onSelect={() => setSelectedCard(card.id)}
+                      showHandles={true}
+                      showPixelToggle={false}
                     >
-                      {card.icon}
-                      <span
-                        style={{
-                          fontSize: 14,
-                          fontWeight: 500,
-                          color: "#1e293b",
-                          lineHeight: "20px",
-                        }}
+                      <div
+                        className="flex flex-col items-center justify-center gap-2"
+                        style={{ padding: 16 }}
                       >
-                        {card.title}
-                      </span>
-                      <p
-                        className="text-center"
-                        style={{
-                          fontSize: 11,
-                          fontWeight: 400,
-                          color: "#64748b",
-                          lineHeight: "15px",
-                        }}
+                        {card.icon}
+                        <span
+                          style={{
+                            fontSize: 14,
+                            fontWeight: 500,
+                            color: "#1e293b",
+                            lineHeight: "20px",
+                          }}
+                        >
+                          {card.title}
+                        </span>
+                        <p
+                          className="text-center"
+                          style={{
+                            fontSize: 11,
+                            fontWeight: 400,
+                            color: "#64748b",
+                            lineHeight: "15px",
+                          }}
+                        >
+                          {card.description}
+                        </p>
+                      </div>
+                    </DraggableBlock>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="relative" style={{ width: 448, minHeight: 440 }}>
+                {expertiseCards.map((card) => (
+                  <div
+                    key={card.id}
+                    className="absolute select-none touch-none"
+                    style={{
+                      top: card.top,
+                      left: card.left,
+                      zIndex: selectedCard === card.id ? 10 : 1,
+                    }}
+                  >
+                    <DraggableBlock
+                      isSelected={selectedCard === card.id}
+                      onSelect={() => setSelectedCard(card.id)}
+                      showHandles={true}
+                      showPixelToggle={false}
+                    >
+                      <div
+                        className="flex flex-col items-center justify-center gap-2"
+                        style={{ width: 200, padding: 16 }}
                       >
-                        {card.description}
-                      </p>
-                    </div>
-                  </DraggableBlock>
-                </div>
-              ))}
-            </div>
+                        {card.icon}
+                        <span
+                          style={{
+                            fontSize: 14,
+                            fontWeight: 500,
+                            color: "#1e293b",
+                            lineHeight: "20px",
+                          }}
+                        >
+                          {card.title}
+                        </span>
+                        <p
+                          className="text-center"
+                          style={{
+                            fontSize: 11,
+                            fontWeight: 400,
+                            color: "#64748b",
+                            lineHeight: "15px",
+                          }}
+                        >
+                          {card.description}
+                        </p>
+                      </div>
+                    </DraggableBlock>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

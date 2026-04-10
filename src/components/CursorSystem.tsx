@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const WAYPOINTS = [
   { x: 0.7, y: 0.3 },
@@ -44,6 +45,7 @@ function CursorArrow({ fill, stroke }: { fill: string; stroke: string }) {
 }
 
 export default function CursorSystem() {
+  const isMobile = useIsMobile();
   const [userPos, setUserPos] = useState({ x: -100, y: -100 });
   const [userVisible, setUserVisible] = useState(false);
   const [davidPos, setDavidPos] = useState({ x: 0, y: 0 });
@@ -153,6 +155,8 @@ export default function CursorSystem() {
     animFrame.current = requestAnimationFrame(animateDavid);
     return () => cancelAnimationFrame(animFrame.current);
   }, [animateDavid]);
+
+  if (isMobile) return null;
 
   return (
     <>

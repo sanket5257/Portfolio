@@ -82,7 +82,7 @@ export default function Talks() {
               <div
                 key={i}
                 data-cursor-target="talks-row"
-                className="grid grid-cols-1 md:grid-cols-4 gap-x-6 items-center rounded-sm transition-colors duration-150 hover:bg-white/60"
+                className="grid grid-cols-1 md:grid-cols-4 gap-x-6 gap-y-1 md:gap-y-0 items-center rounded-sm transition-colors duration-150 hover:bg-white/60"
                 style={{
                   padding: "14px 0",
                   borderBottom:

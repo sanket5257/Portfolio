@@ -210,13 +210,13 @@ export default function Contact() {
           </div>
 
           <div
-            className="flex justify-between items-center"
+            className="flex flex-col-reverse md:flex-row justify-between items-start md:items-center gap-1 md:gap-0"
             style={{ marginTop: 10, padding: "0 10px" }}
           >
             <span style={{ fontSize: 11, color: "#94a3b8" }}>
               AI powered answers, trained on my knowledge base. It can be wrong sometimes.
             </span>
-            <span style={{ fontSize: 11, color: "#94a3b8" }}>
+            <span className="self-end md:self-auto" style={{ fontSize: 11, color: "#94a3b8" }}>
               {input.length}/500
             </span>
           </div>

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import DraggableBlock from "./DraggableBlock";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const photos = [
   // {
@@ -43,6 +44,7 @@ const photos = [
 ];
 
 export default function Footer() {
+  const isMobile = useIsMobile();
   const [selectedPhoto, setSelectedPhoto] = useState<number | null>(null);
 
   const scrollToTop = () => {
@@ -54,7 +56,7 @@ export default function Footer() {
       className="relative"
       style={{
         background: "#0a0a0a",
-        minHeight: "70vh",
+        minHeight: isMobile ? "auto" : "70vh",
       }}
     >
       {/* Marquee */}
@@ -86,32 +88,34 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Photos - draggable */}
-      <div className="relative w-full" style={{ minHeight: "40vh" }}>
-        {photos.map((photo, i) => (
-          <div
-            key={i}
-            className="absolute pointer-events-auto"
-            style={photo.style}
-          >
-            <DraggableBlock
-              isSelected={selectedPhoto === i}
-              onSelect={() => setSelectedPhoto(i)}
-              showHandles={selectedPhoto === i}
+      {/* Photos - draggable (hidden on mobile) */}
+      {!isMobile && (
+        <div className="relative w-full" style={{ minHeight: "40vh" }}>
+          {photos.map((photo, i) => (
+            <div
+              key={i}
+              className="absolute pointer-events-auto"
+              style={photo.style}
             >
-              <Image
-                src={photo.src}
-                alt={photo.alt}
-                width={photo.width}
-                height={photo.height}
-                className="rounded-sm object-cover"
-                style={{ width: photo.width, height: photo.height }}
-                draggable={false}
-              />
-            </DraggableBlock>
-          </div>
-        ))}
-      </div>
+              <DraggableBlock
+                isSelected={selectedPhoto === i}
+                onSelect={() => setSelectedPhoto(i)}
+                showHandles={selectedPhoto === i}
+              >
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  width={photo.width}
+                  height={photo.height}
+                  className="rounded-sm object-cover"
+                  style={{ width: photo.width, height: photo.height }}
+                  draggable={false}
+                />
+              </DraggableBlock>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Footer nav */}
       <div
@@ -122,13 +126,13 @@ export default function Footer() {
         }}
       >
         <div
-          className="flex justify-between items-center"
+          className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-0"
           style={{
             borderTop: "1px solid rgba(255, 255, 255, 0.1)",
             padding: "20px 0 24px",
           }}
         >
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-3 md:gap-6 flex-wrap">
             <a
               href="https://www.linkedin.com/in/sanket-chougule5257"
               target="_blank"
@@ -220,7 +224,7 @@ export default function Footer() {
             </a>
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 md:gap-6">
             <button
               onClick={scrollToTop}
               className="text-sm text-white/70 hover:text-white transition-colors flex items-center gap-1"

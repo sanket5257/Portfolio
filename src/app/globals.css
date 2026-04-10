@@ -64,11 +64,15 @@ body {
   color: var(--color-slate-950);
   background: #fff;
   overflow-x: hidden;
-  cursor: none;
 }
 
-a, button, input, textarea, select {
-  cursor: none;
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  a, button, input, textarea, select {
+    cursor: none;
+  }
 }
 
 ::selection {
