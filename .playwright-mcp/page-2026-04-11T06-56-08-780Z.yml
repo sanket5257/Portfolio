@@ -1,0 +1,186 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e5]: MH, IN
+      - generic [ref=e6]: .
+    - button "Collaboration on" [ref=e7]:
+      - img [ref=e8]
+      - text: Collaboration on
+    - heading "SANKET" [level=1] [ref=e15]
+    - generic [ref=e17]:
+      - heading "CHOUGULE" [level=1] [ref=e18]
+      - generic: Text
+      - generic [ref=e19] [cursor=pointer]:
+        - img [ref=e20]
+        - img [ref=e24]
+    - paragraph [ref=e31]: Creative web developer. I craft immersive, visually captivating digital experiences with clean code, smooth animations, and pixel-perfect UI.
+    - generic [ref=e32]:
+      - button "Get to know me" [ref=e33]
+      - generic [ref=e34]:
+        - generic [ref=e35]: Or scroll down
+        - img [ref=e36]
+  - main [ref=e38]:
+    - generic [ref=e40]:
+      - generic [ref=e41]:
+        - generic [ref=e42]: EXPERIENCE
+        - generic [ref=e43]: Selected roles
+      - generic [ref=e45]:
+        - paragraph [ref=e47]:
+          - text: Hi, I'm Sanket — a creative web developer based in Maharashtra.
+          - strong [ref=e48]: I specialize in frontend development and crafting immersive digital experiences
+          - text: with clean code, smooth animations, and pixel-perfect UI that makes brands go from 'meh' to 'woah'.
+        - generic [ref=e49]:
+          - generic [ref=e50]:
+            - generic [ref=e51]: Shivneri Systems
+            - generic [ref=e52]: Frontend Developer
+            - generic [ref=e53]: Jun 2025–Present
+          - generic [ref=e54]:
+            - generic [ref=e55]: RS Soft Tech
+            - generic [ref=e56]: Frontend Developer
+            - generic [ref=e57]: Mar–May 2025
+          - generic [ref=e58]:
+            - generic [ref=e59]: Stormsofts Technology
+            - generic [ref=e60]: Frontend Developer (Intern)
+            - generic [ref=e61]: Jun–Aug 2024
+    - generic [ref=e63]:
+      - generic [ref=e65]: EXPERTISE
+      - generic [ref=e67]:
+        - paragraph [ref=e69]: I blend frontend craft, design thinking, creative animation, and web performance to ship experiences people love.
+        - generic [ref=e71]:
+          - generic [ref=e74]:
+            - img [ref=e75]
+            - generic [ref=e80]: Frontend Development
+            - paragraph [ref=e81]: I build fast, responsive interfaces with React.js, Next.js, and Tailwind CSS — clean code that scales.
+          - generic [ref=e84]:
+            - img [ref=e85]
+            - generic [ref=e91]: UI/UX Design
+            - paragraph [ref=e92]: I craft pixel-perfect interfaces in Figma, balancing usability, aesthetics, and visual polish.
+          - generic [ref=e95]:
+            - img [ref=e96]
+            - generic [ref=e100]: Creative Animations
+            - paragraph [ref=e101]: I use GSAP and Framer Motion to create cinematic, scroll-driven animations that captivate users.
+          - generic [ref=e104]:
+            - img [ref=e105]
+            - generic [ref=e109]: Web Performance
+            - paragraph [ref=e110]: I optimize for speed and SEO with server-side rendering, code splitting, and modern best practices.
+    - generic [ref=e112]:
+      - generic [ref=e114]: SIDE PROJECTS
+      - generic [ref=e116]:
+        - paragraph [ref=e118]:
+          - text: Things I build on the side to
+          - strong [ref=e119]: explore ideas, learn new tools,
+          - text: and scratch creative itches.
+        - generic [ref=e120]:
+          - link "Portfolio v2 Personal portfolio with cinematic GSAP animations — Next.js, GSAP, Lenis, Tailwind CSS" [ref=e121]:
+            - /url: https://portfolioleo-o.vercel.app/
+            - generic [ref=e122]:
+              - text: Portfolio v2
+              - img [ref=e123]
+            - generic [ref=e126]: Personal portfolio with cinematic GSAP animations — Next.js, GSAP, Lenis, Tailwind CSS
+          - link "Kvell Dynamics AI & automation agency site with premium UI/UX — Next.js, GSAP, Lenis, Tailwind CSS" [ref=e127]:
+            - /url: https://kvelld-beta.vercel.app/
+            - generic [ref=e128]:
+              - text: Kvell Dynamics
+              - img [ref=e129]
+            - generic [ref=e132]: AI & automation agency site with premium UI/UX — Next.js, GSAP, Lenis, Tailwind CSS
+          - link "Vidya Bharati School School website with admissions, academics & campus showcase — Next.js, GSAP, Lenis, Tailwind CSS" [ref=e133]:
+            - /url: https://education-kappa-eight.vercel.app/
+            - generic [ref=e134]:
+              - text: Vidya Bharati School
+              - img [ref=e135]
+            - generic [ref=e138]: School website with admissions, academics & campus showcase — Next.js, GSAP, Lenis, Tailwind CSS
+          - link "CodeSage Web design & development agency site with AI solutions focus — Next.js, GSAP, Lenis, Tailwind CSS" [ref=e139]:
+            - /url: https://codesage5.vercel.app/
+            - generic [ref=e140]:
+              - text: CodeSage
+              - img [ref=e141]
+            - generic [ref=e144]: Web design & development agency site with AI solutions focus — Next.js, GSAP, Lenis, Tailwind CSS
+          - link "RamScript Software dev agency site — virtual CTO & tech partner platform — Next.js, GSAP, Lenis, Tailwind CSS" [ref=e145]:
+            - /url: https://ramscript.com/
+            - generic [ref=e146]:
+              - text: RamScript
+              - img [ref=e147]
+            - generic [ref=e150]: Software dev agency site — virtual CTO & tech partner platform — Next.js, GSAP, Lenis, Tailwind CSS
+          - link "Shivneri Systems Full-stack engineering agency with on-demand product teams — Next.js, GSAP, Lenis, Tailwind CSS" [ref=e151]:
+            - /url: https://shivneri.vercel.app/
+            - generic [ref=e152]:
+              - text: Shivneri Systems
+              - img [ref=e153]
+            - generic [ref=e156]: Full-stack engineering agency with on-demand product teams — Next.js, GSAP, Lenis, Tailwind CSS
+          - link "Zentry Clone High-fidelity recreation of a cinematic homepage — React, GSAP, Lenis, Tailwind CSS" [ref=e157]:
+            - /url: https://zentry-clone-indol.vercel.app/
+            - generic [ref=e158]:
+              - text: Zentry Clone
+              - img [ref=e159]
+            - generic [ref=e162]: High-fidelity recreation of a cinematic homepage — React, GSAP, Lenis, Tailwind CSS
+    - generic [ref=e164]:
+      - generic [ref=e166]: PICK MY BRAIN
+      - generic [ref=e168]:
+        - heading "Pick my brain!" [level=2] [ref=e169]
+        - paragraph [ref=e170]: Ask anything about frontend development, React, UI/UX, or creative coding. You'll get an instant answer based on my notes, projects, and real work.
+        - generic [ref=e171]:
+          - textbox "Ask me about React, animations, UI systems..." [ref=e172]
+          - button [disabled] [ref=e173]:
+            - img [ref=e174]
+        - generic [ref=e176]:
+          - generic [ref=e177]: AI powered answers, trained on my knowledge base. It can be wrong sometimes.
+          - generic [ref=e178]: 0/500
+  - contentinfo [ref=e181]:
+    - generic [ref=e183]:
+      - generic [ref=e184]:
+        - generic [ref=e185]: Sanket Chougule
+        - generic [ref=e186]: ·
+      - generic [ref=e187]:
+        - generic [ref=e188]: Sanket Chougule
+        - generic [ref=e189]: ·
+      - generic [ref=e190]:
+        - generic [ref=e191]: Sanket Chougule
+        - generic [ref=e192]: ·
+      - generic [ref=e193]:
+        - generic [ref=e194]: Sanket Chougule
+        - generic [ref=e195]: ·
+      - generic [ref=e196]:
+        - generic [ref=e197]: Sanket Chougule
+        - generic [ref=e198]: ·
+      - generic [ref=e199]:
+        - generic [ref=e200]: Sanket Chougule
+        - generic [ref=e201]: ·
+      - generic [ref=e202]:
+        - generic [ref=e203]: Sanket Chougule
+        - generic [ref=e204]: ·
+      - generic [ref=e205]:
+        - generic [ref=e206]: Sanket Chougule
+        - generic [ref=e207]: ·
+    - generic [ref=e208]:
+      - img "Teide volcano landscape" [ref=e211]
+      - img "Rocky beach coastline" [ref=e214]
+      - img "Empire State Building at night" [ref=e217]
+    - generic [ref=e219]:
+      - generic [ref=e220]:
+        - link "LinkedIn" [ref=e221]:
+          - /url: https://www.linkedin.com/in/sanket-chougule5257
+          - text: LinkedIn
+          - img [ref=e222]
+        - link "Dribbble" [ref=e224]:
+          - /url: https://dribbble.com/sanket-chougule
+          - text: Dribbble
+          - img [ref=e225]
+        - link "GitHub" [ref=e227]:
+          - /url: https://github.com/sanket5257
+          - text: GitHub
+          - img [ref=e228]
+        - link "Instagram" [ref=e230]:
+          - /url: https://www.instagram.com/ft.leo_o
+          - text: Instagram
+          - img [ref=e231]
+        - link "Email" [ref=e233]:
+          - /url: mailto:chougulesanket30@gmail.com
+        - link "Contact" [ref=e234]:
+          - /url: "#contact"
+      - generic [ref=e235]:
+        - button "Back to top" [ref=e236]:
+          - text: Back to top
+          - img [ref=e237]
+        - generic [ref=e239]: © 2026 Sanket Chougule
+  - button "Open Next.js Dev Tools" [ref=e245] [cursor=pointer]:
+    - img [ref=e246]

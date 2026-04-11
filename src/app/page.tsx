@@ -7,12 +7,15 @@ import Expertise from "@/components/Expertise";
 import SideProjects from "@/components/SideProjects";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const CursorSystem = dynamic(() => import("@/components/CursorSystem"), {
   ssr: false,
 });
 
 export default function Home() {
+  const isMobile = useIsMobile();
+
   return (
     <>
       {/* Dual cursor system */}
@@ -35,12 +38,18 @@ export default function Home() {
         <Contact />
       </main>
 
-      {/* Footer - revealed as main content scrolls past */}
-      <div className="relative z-[5]" style={{ height: "70vh" }}>
-        <div className="sticky bottom-0">
+      {/* Footer - revealed as main content scrolls past (desktop only) */}
+      {isMobile ? (
+        <div className="relative z-10" style={{ background: "#0a0a0a" }}>
           <Footer />
         </div>
-      </div>
+      ) : (
+        <div className="relative z-[5]" style={{ height: "70vh" }}>
+          <div className="sticky bottom-0">
+            <Footer />
+          </div>
+        </div>
+      )}
     </>
   );
 }

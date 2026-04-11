@@ -67,7 +67,9 @@ export default function Footer() {
               <span
                 className="uppercase font-light text-white"
                 style={{
-                  fontSize: "clamp(72px, 12vw, 160px)",
+                  fontSize: isMobile
+                    ? "clamp(40px, 12vw, 72px)"
+                    : "clamp(72px, 12vw, 160px)",
                   fontFamily: "var(--font-sans)",
                   letterSpacing: "-0.025em",
                 }}
@@ -78,7 +80,9 @@ export default function Footer() {
                 className="mx-[0.3em]"
                 style={{
                   color: "rgba(255, 255, 255, 0.3)",
-                  fontSize: "clamp(72px, 12vw, 160px)",
+                  fontSize: isMobile
+                    ? "clamp(40px, 12vw, 72px)"
+                    : "clamp(72px, 12vw, 160px)",
                 }}
               >
                 &middot;
@@ -122,7 +126,8 @@ export default function Footer() {
         style={{
           maxWidth: "72rem",
           margin: "0 auto",
-          padding: "0 24px",
+          padding: isMobile ? "0 20px" : "0 24px",
+          paddingBottom: isMobile ? "24px" : "0",
         }}
       >
         <div
@@ -224,10 +229,10 @@ export default function Footer() {
             </a>
           </div>
 
-          <div className="flex items-center gap-4 md:gap-6">
+          <div className="flex items-center gap-4 md:gap-6 shrink-0">
             <button
               onClick={scrollToTop}
-              className="text-sm text-white/70 hover:text-white transition-colors flex items-center gap-1"
+              className="text-sm text-white/70 hover:text-white transition-colors flex items-center gap-1 whitespace-nowrap"
             >
               Back to top
               <svg
@@ -241,7 +246,7 @@ export default function Footer() {
                 <path d="M12 19V5M5 12l7-7 7 7" />
               </svg>
             </button>
-            <span className="text-xs text-white/40">
+            <span className="text-xs text-white/40 whitespace-nowrap">
               &copy; 2026 Sanket Chougule
             </span>
           </div>
