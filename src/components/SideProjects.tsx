@@ -4,6 +4,11 @@ import GridOverlay from "./GridOverlay";
 
 const projects = [
   {
+    name: "Evoleotion Studio",
+    description: "Creative studio site with immersive motion & bold visual identity — Next.js, GSAP, Lenis, Tailwind CSS",
+    url: "https://evoleotionstudio.com/",
+  },
+  {
     name: "Portfolio v2",
     description: "Personal portfolio with cinematic GSAP animations — Next.js, GSAP, Lenis, Tailwind CSS",
     url: "https://portfolioleo-o.vercel.app/",
