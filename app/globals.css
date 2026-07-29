@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-urbanist: 'Urbanist', system-ui, sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #0c1117;
+  color: #f2f5f8;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Fine, elegant letter-spacing for the growon-style thin display type */
+.tracking-fine {
+  letter-spacing: -0.01em;
+}
+
+/* Subtle grain / vignette so the flat dark bg has depth even before 3D loads */
+.hero-vignette::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    120% 90% at 50% 40%,
+    transparent 55%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
+/* Loader */
+.loader-ring {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid rgba(242, 245, 248, 0.15);
+  border-top-color: rgba(242, 245, 248, 0.9);
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Hero intro ──────────────────────────────────────────────────────────
+   Compositor-driven replacement for the old GSAP timeline. Only opacity and
+   transform are animated, so these run off the main thread and stay smooth
+   while three.js decodes geometry and compiles shaders.
+
+   These start on the first paint — no JS gate — so the headline is already
+   reading while the models are still on the wire. */
+/* Unscoped so /work can use them too — they only apply where the class is
+   explicitly added. Critical chrome (the close button on /work) is animated
+   this way rather than with gsap.from, which can leave an element stuck at
+   autoAlpha 0 forever if its tween never advances. */
+.anim-fade {
+  animation: heroFade 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.anim-rise {
+  animation: heroRise 1.05s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.anim-up {
+  animation: heroUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Promote to their own layers so the first frame doesn't cost a repaint. */
+.anim-rise,
+.anim-up {
+  will-change: transform, opacity;
+}
+.anim-fade {
+  will-change: opacity;
+}
+
+@keyframes heroFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes heroRise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 120%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes heroUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Overlay panel entrance */
+.panel-slide {
+  animation: panelSlide 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.panel-fade {
+  animation: panelFade 0.4s ease both;
+}
+@keyframes panelSlide {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes panelFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
