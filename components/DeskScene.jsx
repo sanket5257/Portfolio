@@ -192,8 +192,16 @@ function GLBModel({ file, musicOn, lampOn }) {
       .filter(Boolean);
     const base = model.getObjectByName('root31');
     if (!arm.length || !base) return;
+    // Box3 measures in *world* space, but the pivot is a child of `model`, so
+    // its position is a *local* offset. Copying the world centre straight in
+    // leaks the desk placement (scale 0.55, y 1.65, yaw 90°) into the local
+    // frame and parks the rotation axis ~1.7 units off to the side — the arm
+    // still lands right on mount (attach preserves world transform) but then
+    // sweeps a wildly wrong arc. Convert to the model's frame first.
+    model.updateWorldMatrix(true, true);
     const c = new THREE.Vector3();
     new THREE.Box3().setFromObject(base).getCenter(c);
+    model.worldToLocal(c);
     const pivot = new THREE.Group();
     pivot.position.copy(c);
     model.add(pivot);
