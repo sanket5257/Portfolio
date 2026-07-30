@@ -124,6 +124,12 @@ export default function Hero() {
         />
       </div>
 
+      {/* Legibility scrim. The headline overlays the tableau at every size, but
+          only below lg is it actually *on top of* the desk rather than clear
+          backdrop — so the gradient is scoped there instead of dulling the
+          desktop composition. */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-[2] h-[48%] bg-gradient-to-b from-black/45 via-black/15 to-transparent lg:hidden" />
+
       {/* sound toggle — top left */}
       <button
         data-anim="corner"
@@ -156,8 +162,12 @@ export default function Hero() {
         </svg>
       </button>
 
-      {/* headline block — upper left */}
-      <div className="pointer-events-none absolute left-6 top-[15%] z-10 max-w-[92%] sm:left-12 sm:max-w-2xl">
+      {/* headline block — upper left.
+          The top offset is `max(5rem, 14%)` rather than a bare percentage: on a
+          landscape phone 14% of 390px is 55px, which put the eyebrow directly
+          underneath the corner buttons (24px inset + 44px tall = 68px). The
+          floor keeps it clear of them at any height. */}
+      <div className="pointer-events-none absolute inset-x-6 top-[max(5rem,14%)] z-10 sm:inset-x-auto sm:left-12 sm:top-[max(5rem,15%)] sm:max-w-2xl">
         {hero.eyebrow ? (
           <span
             data-anim="corner"
@@ -167,7 +177,7 @@ export default function Hero() {
             {hero.eyebrow}
           </span>
         ) : null}
-        <h1 className="tracking-fine text-[28px] font-thin leading-[1.18] text-paper sm:text-4xl md:text-[44px]">
+        <h1 className="tracking-fine text-[26px] font-thin leading-[1.18] text-paper xs:text-[28px] sm:text-4xl md:text-[44px] 2xl:text-[52px]">
           {headlineLines.map((line, i) => (
             <span key={i} className="block overflow-hidden">
               <span
@@ -183,7 +193,7 @@ export default function Hero() {
         <p
           data-anim="sub"
           style={{ animationDelay: '0.7s' }}
-          className="anim-up mt-5 max-w-md text-sm font-extralight leading-relaxed text-paper/75 sm:text-base"
+          className="anim-up mt-4 max-w-[20rem] text-[13px] font-extralight leading-relaxed text-paper/75 xs:text-[14px] sm:mt-5 sm:max-w-md sm:text-base"
         >
           {hero.subheading}
         </p>

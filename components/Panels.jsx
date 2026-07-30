@@ -24,7 +24,9 @@ export default function Panel({ id, onClose }) {
         className="absolute inset-0 bg-black/45 backdrop-blur-[2px] panel-fade"
       />
       {/* drawer */}
-      <aside className="panel-slide relative z-10 flex h-full w-full max-w-md flex-col border-l border-paper/10 bg-ink2/95 px-8 py-10 sm:px-12">
+      {/* Scrolls: the contact panel is six rows plus an intro, which overruns a
+          640px-tall phone. Without this the last links were simply unreachable. */}
+      <aside className="panel-slide relative z-10 flex h-full w-full max-w-md flex-col overflow-y-auto overscroll-contain border-l border-paper/10 bg-ink2/95 px-6 py-8 sm:px-10 sm:py-10 lg:px-12">
         <div className="flex items-start justify-between">
           <span className="text-[11px] font-light uppercase tracking-[0.35em] text-accent/80">
             {data.tag}
@@ -40,19 +42,21 @@ export default function Panel({ id, onClose }) {
           </button>
         </div>
 
-        <h2 className="mt-8 text-3xl font-thin tracking-fine text-paper">{data.title}</h2>
-        <p className="mt-4 max-w-sm text-sm font-extralight leading-relaxed text-paper/70">
+        <h2 className="mt-6 text-2xl font-thin tracking-fine text-paper sm:mt-8 sm:text-3xl">
+          {data.title}
+        </h2>
+        <p className="mt-3 max-w-sm text-[13px] font-extralight leading-relaxed text-paper/70 sm:mt-4 sm:text-sm">
           {data.intro}
         </p>
 
-        <ul className="mt-10 divide-y divide-paper/10 border-t border-paper/10">
+        <ul className="mt-6 divide-y divide-paper/10 border-t border-paper/10 sm:mt-10">
           {data.items.map((it) => {
             const row = (
               <>
-                <span className="text-base font-light text-paper/90 transition group-hover:text-paper">
+                <span className="shrink-0 text-sm font-light text-paper/90 transition group-hover:text-paper sm:text-base">
                   {it.name}
                 </span>
-                <span className="text-right text-xs font-light tracking-wide text-paper/45 transition group-hover:text-paper/70">
+                <span className="min-w-0 break-words text-right text-[11px] font-light tracking-wide text-paper/45 transition group-hover:text-paper/70 sm:text-xs">
                   {it.meta}
                 </span>
               </>
@@ -64,12 +68,12 @@ export default function Panel({ id, onClose }) {
                     href={it.href}
                     target={it.href.startsWith('http') ? '_blank' : undefined}
                     rel={it.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    className="group flex items-center justify-between gap-6 py-4"
+                    className="group flex items-center justify-between gap-4 py-3.5 sm:gap-6 sm:py-4"
                   >
                     {row}
                   </a>
                 ) : (
-                  <div className="group flex items-center justify-between gap-6 py-4">{row}</div>
+                  <div className="group flex items-center justify-between gap-4 py-3.5 sm:gap-6 sm:py-4">{row}</div>
                 )}
               </li>
             );

@@ -6,13 +6,14 @@ import { ContactShadows, AdaptiveDpr, Preload } from '@react-three/drei';
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import DeskScene from './DeskScene';
-import { camera as camCfg, parallax, SCENE_OBJECTS } from '@/lib/models';
+import { camera as camCfg, frameFor, parallax, SCENE_OBJECTS } from '@/lib/models';
 
 const TARGET = new THREE.Vector3(...camCfg.target);
 const DIR = new THREE.Vector3(...camCfg.dir).normalize();
 
 /* Bounding-sphere fit → base camera position + look height, exactly
-   like the reference (distance = radius / sin(minFov/2) · breakpoint). */
+   like the reference (distance = radius / sin(minFov/2) · breakpoint).
+   See `cameraFrames` in lib/models.js for the per-breakpoint numbers. */
 function useFit() {
   const { size } = useThree();
   return useMemo(() => {
@@ -20,11 +21,10 @@ function useFit() {
     const vfov = THREE.MathUtils.degToRad(camCfg.fov);
     const hfov = 2 * Math.atan(Math.tan(vfov / 2) * aspect);
     const a = Math.min(vfov, hfov);
-    const small = size.width < 1536;
-    const mult = size.width < 768 ? 0.62 : small ? 0.72 : 0.98;
-    const c = (camCfg.radius / Math.sin(a / 2)) * mult;
+    const frame = frameFor(size.width, size.height);
+    const c = (camCfg.radius / Math.sin(a / 2)) * frame.mult;
     const pos = TARGET.clone().addScaledVector(DIR, c);
-    const look = new THREE.Vector3(TARGET.x, TARGET.y + c * (small ? -0.04 : 0.03), TARGET.z);
+    const look = new THREE.Vector3(TARGET.x, TARGET.y + c * frame.lookLift, TARGET.z);
     return { pos, look, dist: c };
   }, [size.width, size.height]);
 }

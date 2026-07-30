@@ -17,6 +17,17 @@ body {
   overflow-x: hidden;
 }
 
+/* Panes that scroll only as a fallback on stub-height windows. Nothing else on
+   the site scrolls, so a live scrollbar reads as a rendering fault rather than
+   an affordance — the content stays reachable by wheel/touch either way. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* Fine, elegant letter-spacing for the growon-style thin display type */
 .tracking-fine {
   letter-spacing: -0.01em;
