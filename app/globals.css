@@ -151,3 +151,129 @@ body {
     transition-duration: 0.001ms !important;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════════
+   HUB — /work design system
+   Ported from hubtown.co.in/projects. Type, palette, bevel geometry and the
+   list-row hover are matched to the computed styles taken off that page:
+     dark-blue  rgb(2,10,24)     off-blue  rgb(213,224,255)
+     display    Grotesk Bold     labels    Commit Mono
+   The row hover there is a clip-path wipe (0.3s ease-out) that raises a
+   dark fill from the bottom edge while the title slides 0.5rem right and
+   recolours to off-blue. Reproduced verbatim below.
+   ══════════════════════════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: 'Grotesk';
+  src: url('/fonts/grotesk-light.woff2') format('woff2');
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Grotesk';
+  src: url('/fonts/grotesk-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Grotesk';
+  src: url('/fonts/grotesk-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Commit Mono';
+  src: url('/fonts/commit-mono.otf') format('opentype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+.hub {
+  --dark: #020a18;
+  --off: #d5e0ff;
+  font-family: 'Grotesk', system-ui, sans-serif;
+}
+.font-display { font-family: 'Grotesk', system-ui, sans-serif; }
+.font-mono-hub { font-family: 'Commit Mono', ui-monospace, monospace; }
+
+/* Mono HUD label — every small caption on the reference page uses this. */
+.hub-label {
+  font-family: 'Commit Mono', ui-monospace, monospace;
+  font-size: clamp(8px, 0.66vw, 11px);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+/* ── bevel geometry ──────────────────────────────────────────────────
+   The reference builds these as generated SVG clipPaths. Straight-edged
+   clip-path polygons are visually identical at these sizes and cost no
+   extra DOM, so the chamfers are cut in CSS instead. */
+.bevel-tr {                       /* CLOSE / MENU chips: top-right cut */
+  clip-path: polygon(0 0, calc(100% - 0.85rem) 0, 100% 0.85rem, 100% 100%, 0 100%);
+}
+.bevel-tl {
+  clip-path: polygon(0.85rem 0, 100% 0, 100% 100%, 0 100%, 0 0.85rem);
+}
+.bevel-panel {                    /* listing panel: chamfered TL, big cut BL */
+  clip-path: polygon(
+    0.85rem 0, 100% 0, 100% 100%,
+    5.5rem 100%, 0 calc(100% - 4rem), 0 0.85rem
+  );
+}
+.bevel-sheet {                    /* detail sheet: cut on both right corners */
+  clip-path: polygon(
+    0 0, calc(100% - 3.5rem) 0, 100% 3rem,
+    100% 100%, 3.5rem 100%, 0 calc(100% - 3rem)
+  );
+}
+.bevel-card {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 1.6rem), calc(100% - 1.6rem) 100%, 0 100%);
+}
+
+/* ── list row hover — verbatim from .list-modal-item ────────────────── */
+.hub-row__fill,
+.hub-row__title,
+.hub-row__type { transition: 0.3s ease-out; }
+
+.hub-row__fill { clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%); }
+.hub-row:hover .hub-row__fill { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+.hub-row:hover .hub-row__title,
+.hub-row:hover .hub-row__type {
+  color: var(--off);
+  transform: translateX(0.5rem);
+}
+.hub-row:hover .hub-row__type { opacity: 0.5; }
+.hub-row.is-active .hub-row__fill { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+.hub-row.is-active .hub-row__title,
+.hub-row.is-active .hub-row__type { color: var(--off); }
+
+/* ── HUD backdrop ──────────────────────────────────────────────────── */
+.hub-grid {
+  background-image: url('/hub/minimap-grid.png');
+  background-size: 240px 240px;
+  opacity: 0.13;
+  animation: hubDrift 60s linear infinite;
+}
+@keyframes hubDrift {
+  to { background-position: 240px 240px; }
+}
+.hub-scan {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(213, 224, 255, 0.02) 0 1px,
+    transparent 1px 4px
+  );
+}
+
+/* Reveal used by the intro cards and the sheet contents. */
+.hub-in { animation: hubIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes hubIn {
+  from { opacity: 0; transform: translate3d(0, 18px, 0); }
+  to   { opacity: 1; transform: none; }
+}
+.hub-wipe { animation: hubWipe 0.55s cubic-bezier(0.65, 0, 0.35, 1) both; }
+@keyframes hubWipe {
+  from { clip-path: polygon(0 0, 0 0, 0 100%, 0 100%); }
+  to   { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+}
