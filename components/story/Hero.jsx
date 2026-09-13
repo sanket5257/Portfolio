@@ -7,32 +7,34 @@ import { hero } from './content';
 /* ─────────────────────────────────────────────────────────────────────────
    The opening beat, held over the phoenix on the peak.
 
-   One sentence set in two faces that interlock. The sans lead-in sits in two
-   short lines inset from the left; the payoff word runs underneath it at
-   roughly fourteen times the size, centred, and pulled UP so its ascenders
-   rise between the two small lines rather than starting below them. That
-   overlap is the composition — set the big word below the small ones and the
-   same two elements read as an ordinary heading with a subheading.
+   One sentence, two typefaces, three anchored pieces:
 
-   The whole block is bottom-anchored rather than centred: the bird owns the
-   middle of the frame through this act, and the type is built to sit under
-   it, not across it.
+     · the pill, centred in the frame
+     · the sans lead-in, inset from the left, with its connector word set
+       inline in the display italic
+     · the payoff noun underneath at display size, centred, wider than the
+       screen and bleeding off both edges
 
-   All the metrics live in globals.css (.story-hero-lead / .story-hero-word),
-   because they are ratios that have to hold together and reading them in one
-   place is the only way to keep them that way.
+   That last part is the whole effect and the thing this beat lives or dies
+   on. A display word that fits comfortably inside the viewport reads as a
+   large heading; one that runs off both edges reads as a word you are
+   standing too close to. Its descenders are meant to be cut by the bottom of
+   the frame — that is not an overflow bug, it is the crop.
+
+   The block is anchored to the BOTTOM rather than laid out in normal flow,
+   because the crop is what has to stay put. Whatever height the word takes at
+   a given viewport, it keeps the same distance from the bottom edge and grows
+   upward into the frame.
    ───────────────────────────────────────────────────────────────────────── */
 
 export default function Hero({ onEnter }) {
   const sentence = `${hero.lead.join(' ')} ${hero.word}`;
 
   return (
-    /* No horizontal padding on the section: the two children own their own
-       insets, so the 7.9vw the reference measures from the VIEWPORT edge is
-       not quietly stacked on top of a page gutter. The word is centred and
-       therefore symmetric at any width. */
-    <section className="flex h-full flex-col justify-end pb-[4vh]">
-      <div className="story-hero-inset mb-[5vh]">
+    <section className="relative h-full overflow-hidden">
+      {/* Centred in the frame, the way the reference places it — not tucked
+          into a corner. It is the only thing on the beat you can press. */}
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
         <ExplorePill onClick={onEnter} />
       </div>
 
@@ -40,10 +42,10 @@ export default function Hero({ onEnter }) {
           continuous and only the typesetting is in two parts. The pieces are
           silenced individually and the whole sentence named once, so it
           reaches a screen reader the way it reads on the page. */}
-      <h1 aria-label={sentence}>
+      <h1 aria-label={sentence} className="story-hero-block">
         <span className="story-hero-lead block">
           {hero.lead.map((line) => (
-            <Chars key={line} text={line} entrance silent />
+            <LeadLine key={line} line={line} />
           ))}
         </span>
 
@@ -52,5 +54,35 @@ export default function Hero({ onEnter }) {
         </span>
       </h1>
     </section>
+  );
+}
+
+/* A lead line, sans throughout except for the one connector word that swaps
+   to the display italic. Same size, same colour — only the face changes, so
+   it reads as emphasis inside the sentence rather than as a different
+   element. */
+function LeadLine({ line }) {
+  const words = line.split(' ');
+  return (
+    <span className="block">
+      {words.map((word, i) => (
+        <span key={`${word}-${i}`} className="inline-block">
+          {/* The face swap goes on a wrapper rather than through Chars'
+              className, which already carries a display utility of its own —
+              two display utilities on one element resolve by stylesheet order,
+              which is not something to depend on.
+
+              The wrapper must be inline-block: Chars renders a `block` span,
+              and a block inside a plain inline box splits the line around it,
+              which put every word of the lead on a line of its own. */}
+          <span
+            className={`inline-block ${word === hero.serif ? 'story-display' : ''}`}
+          >
+            <Chars text={word} entrance silent />
+          </span>
+          {i < words.length - 1 && <span className="inline-block w-[0.26em]" />}
+        </span>
+      ))}
+    </span>
   );
 }

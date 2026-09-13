@@ -36,7 +36,12 @@ export default function StoryPage() {
   const actRef = useRef(null);
   const hintRef = useRef(null);
   const rendererRef = useRef(null);
-  const mouse = useRef({ x: 0, y: 0, tx: 0, ty: 0 });
+  /* Two smoothings of the same pointer, on purpose. `x/y` is slow and is
+     what drifts the whole frame — a camera that snapped to the mouse would
+     read as a bug. `sx/sy` is quick and is what positions the refraction
+     lens, which has to feel attached to the cursor rather than towed behind
+     it. */
+  const mouse = useRef({ x: 0, y: 0, sx: 0, sy: 0, tx: 0, ty: 0 });
 
   const [progress, setProgress] = useState(0); // load progress, 0→1
   const [loaded, setLoaded] = useState(false);
@@ -93,6 +98,8 @@ export default function StoryPage() {
     const m = mouse.current;
     m.x += (m.tx - m.x) * 0.06;
     m.y += (m.ty - m.y) * 0.06;
+    m.sx += (m.tx - m.sx) * 0.2;
+    m.sy += (m.ty - m.sy) * 0.2;
 
     // The canvas first: it is the thing a dropped frame is visible in.
     rendererRef.current?.render(p, m);

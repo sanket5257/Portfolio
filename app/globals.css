@@ -399,22 +399,157 @@ body {
   }
 }
 
-/* ── The hero composition ────────────────────────────────────────────────
-   Two typefaces in one sentence, interlocking.
 
-   Every number here is a ratio taken off the reference hero at 1440×860 and
+/* ── The explore pill ────────────────────────────────────────────────────
+   The one object on the hero that is meant to be touched, so it answers the
+   pointer three ways at once: a light that sweeps round the border, letters
+   that lift in a stagger, and a glow that tracks the pointer inside it. Any
+   one of these alone reads as a button; together they read as alive.
+
+   The pointer position arrives as --mx/--my, written by ExplorePill on every
+   pointermove. Everything else is transitions, so leaving the pill unwinds
+   the whole thing in reverse for free. */
+.pill {
+  --mx: 50%;
+  --my: 50%;
+  cursor: pointer;
+  isolation: isolate;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: background 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.pill:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* The border light. Two conic sweeps masked to a 1px ring: one visible at
+   rest, the other taking over on hover, so the light appears to reverse
+   rather than restart. */
+.pill__ring,
+.pill__ring::after {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  padding: 1px;
+  content: '';
+  /* mask-composite cuts the fill out of the middle, leaving only the edge. */
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  transition: opacity 0.4s ease-in-out;
+}
+.pill__ring {
+  background: linear-gradient(90deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.06) 38%, rgba(255,255,255,0.7) 68%, rgba(255,255,255,0.06) 100%);
+}
+.pill__ring::after {
+  background: linear-gradient(270deg, rgba(222,210,255,0.95) 0%, rgba(255,255,255,0.06) 38%, rgba(201,186,245,0.8) 68%, rgba(255,255,255,0.06) 100%);
+  opacity: 0;
+}
+.pill:hover .pill__ring {
+  opacity: 0.25;
+}
+.pill:hover .pill__ring::after {
+  opacity: 1;
+}
+
+/* The pointer ring — the one thing on the pill that tracks the mouse.
+
+   Built to the reference's measurements: a 1.5rem circle, a hairline border,
+   2px of blur, parked at scale(.2) and fully transparent so it costs nothing
+   until the pointer is actually inside the pill. The blur is what stops it
+   reading as a second cursor — it is a soft presence following the real one,
+   not a replacement for it.
+
+   The colour is ours rather than theirs: a coral hairline over violet
+   footage fights the frame, and this page is lit by moonlight. */
+.pill__circle {
+  position: absolute;
+  left: var(--mx);
+  top: var(--my);
+  z-index: 1;
+  height: 1.5rem;
+  width: 1.5rem;
+  border: 1px solid rgba(234, 240, 255, 0.9);
+  border-radius: 50%;
+  filter: blur(2px);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.2);
+  pointer-events: none;
+  will-change: transform, opacity;
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+.pill:hover .pill__circle {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* The letters. A per-letter transition-delay set inline does the stagger. */
+.pill__letter {
+  display: inline-block;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), color 0.45s ease-out;
+  will-change: transform;
+}
+.pill:hover .pill__letter {
+  transform: translateY(-2px);
+  color: #fffcff;
+}
+
+/* The opening beat's entrance. Scoped to `.is-ready`, which StoryPage adds
+   the moment the loader lifts — so the hero types itself in once the visitor
+   can actually see it, not behind the veil.
+
+   `backwards` and not `forwards` on purpose: the fill holds the characters
+   down before their delay elapses, and the instant the animation finishes the
+   render loop's inline transform takes the character back, so scrolling the
+   hero away still works. A running CSS animation outranks an inline style,
+   which is what lets the two share one property at all. */
+.is-ready .story-rise-in {
+  animation: storyRiseIn 1s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+@keyframes storyRiseIn {
+  from {
+    transform: translate3d(0, 110%, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* ── The hero composition ────────────────────────────────────────────────
+   Two typefaces in one sentence, interlocking, with the payoff word wider
+   than the screen.
+
+   The ratios are taken off the reference hero measured at 1440×860 and
    turned back into viewport units, so the composition holds at any width
    rather than only at the one it was measured on:
 
-     sans lead    66px / 1440   = 4.58vw, line-height 60/66 = 0.909
-     left inset  114px / 1440   = 7.9vw
-     display     280.8px / 1440 = 19.5vw, line-height 1, tracking -0.1vw
-     interlock    58px / 1440   = -4vw  (the word rises INTO the sans lines)
+     sans lead     66px / 1440   = 4.58vw, line-height 60/66 = 0.909
+     left inset   114px / 1440   = 7.9vw
+     display       line-height 1, tracking -0.1vw
+     text width  1674px / 1440   = 116% of the viewport
+     block bottom  29px / 860    = 3.4vh
 
-   The interlock is the part that carries the whole thing. Set the display
-   word below the sans lines instead of through them and the hero reads as a
-   heading with a subheading — ordinary. Pulled up so the ascenders run
-   between the two small lines, the same two elements read as one object. */
+   Two of those carry the whole thing.
+
+   The first is the overflow. The display word is set wider than the window
+   and centred, so it runs off BOTH edges and its descenders are cut by the
+   bottom of the frame. A display word that fits inside the viewport reads as
+   a large heading; one that runs past both edges reads as a word you are
+   standing too close to. The clipping is done by the beat's own
+   `overflow-hidden` — it is the crop, not a bug.
+
+   The second is the interlock: the word is pulled UP into the sans lines
+   rather than sitting under them, so the two halves read as one object
+   instead of as a heading with a subheading. */
+.story-hero-block {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 3.4vh;
+}
+
 .story-hero-lead {
   font-family: var(--font-sans), system-ui, sans-serif;
   font-weight: 300;
@@ -422,19 +557,31 @@ body {
   line-height: 0.909;
   letter-spacing: -0.01em;
   margin-left: 5vw;
-  color: rgba(242, 245, 248, 0.92);
+  color: rgba(242, 245, 248, 0.94);
 }
 
 .story-hero-word {
-  /* The vh term is not in the reference — it does not need one, because its
-     hero is the only thing on its first screen. Ours shares the beat with a
-     header, a prompt and the pill, and on a short window 19.5vw alone drives
-     the word straight off the bottom. It binds only where it has to. */
-  font-size: min(19.5vw, 34vh);
+  /* Sized to sit INSIDE the frame. The reference runs its word to 116% of
+     the viewport and lets both ends fall off the screen; that was matched
+     here and read as a word that had been cut off rather than one composed
+     to the edge, so this backs off until the last letter lands on-screen.
+
+     Tuned to the WORD and the FACE, not copied from the reference's own
+     font-size. Its display face is much wider per em than ours, so matching
+     its 19.5vw would leave our word floating in the middle of the frame with
+     air on both sides. What has to match is the ratio of text width to
+     viewport width, and for THIS word in THIS face that lands here.
+     It is tuned per word, not per character count: swapping an equally long
+     word changed the measured ratio from 1.16 to 1.26, because m, v and p
+     are far wider than i, n and r. Change the hero word and re-measure. */
+  font-size: 20vw;
   line-height: 1;
   letter-spacing: -0.1vw;
   text-align: center;
-  margin-top: -3vw;
+  /* Without this the word wraps instead of overflowing, and the whole effect
+     collapses into two tidy lines. */
+  white-space: nowrap;
+  margin-top: -5vw;
 }
 
 @media (min-width: 640px) {
@@ -447,13 +594,78 @@ body {
   }
 }
 
-/* Shared left inset for the two left-aligned pieces of the hero, measured
-   from the viewport edge exactly as the reference measures it. */
-.story-hero-inset {
-  margin-left: 5vw;
+
+/* ── The statement beats ─────────────────────────────────────────────────
+   Proportions taken off the reference and kept as ratios:
+
+     paragraph column   410px / 1440 = 28.5% wide
+     column inset       144px / 1440 = 10% from each edge
+     display phrase     940px / 1440 = 65% of the frame, centred both ways
+
+   The fragments are positioned inline from the data, because their anchors
+   are the content — moving one is an editorial decision, not a styling one. */
+
+.story-fragment {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 300;
+  font-size: clamp(13px, 1.5vw, 22px);
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+  color: rgba(242, 245, 248, 0.86);
+  white-space: nowrap;
 }
-@media (min-width: 640px) {
-  .story-hero-inset {
-    margin-left: 7.9vw;
+
+.story-statement {
+  /* The vh term keeps two words of display italic off the fragments above
+     it on a short window, where vw alone would run them together. */
+  font-size: min(9vw, 17vh);
+  line-height: 1;
+  letter-spacing: -0.1vw;
+  white-space: nowrap;
+}
+
+.story-columns {
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-bottom: 7vh;
+  gap: 2rem;
+}
+
+.story-column {
+  width: 28.5vw;
+  max-width: 410px;
+  font-size: clamp(11px, 0.92vw, 13.5px);
+  line-height: 1.65;
+  font-weight: 300;
+  color: rgba(242, 245, 248, 0.58);
+}
+
+/* Below the fold of a phone the scatter stops being a composition and starts
+   being a collision: three absolutely-placed fragments and a 9vw phrase do
+   not fit beside each other at 390px. The fragments keep their anchors but
+   lose the nowrap so they can break, and the columns stack. */
+@media (max-width: 640px) {
+  .story-fragment {
+    white-space: normal;
+    max-width: 60vw;
+  }
+  .story-statement {
+    font-size: min(13vw, 12vh);
+  }
+  .story-columns {
+    flex-direction: column;
+    padding-left: 7%;
+    padding-right: 7%;
+    padding-bottom: 5vh;
+    gap: 0.75rem;
+  }
+  .story-column {
+    width: 100%;
+    max-width: none;
+  }
+  /* Only the first column survives on a phone — two of them in a stack is
+     more reading than this beat is on screen for. */
+  .story-column:last-child {
+    display: none;
   }
 }

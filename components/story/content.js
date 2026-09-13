@@ -43,29 +43,63 @@ export const beats = [
   { id: 'end', kind: 'footer', from: 0.895, to: 1.0001 },
 ];
 
-/* Short on purpose: at 11vw there is room for about eleven characters a line
-   and no more. */
 export const hero = {
-  /* The hero is two typefaces in one sentence, and the split is the whole
-     idea: a quiet sans lead-in in two short lines, then the payoff noun on
-     its own at fourteen times the size, crashing up into them.
+  /* The hero is two typefaces in one sentence, and the split runs in both
+     directions: the small lead-in is mostly sans but sets its connector word
+     in the display italic, and the payoff noun underneath is display italic
+     throughout. The reference does exactly this — its small line carries one
+     italic serif word inline, in the same colour as the sans around it — and
+     it is what stops the two halves reading as two unrelated elements.
 
-     The metrics are the point of the shape. Two words per sans line keeps
-     both lines close to the same measure; a payoff word of ten to twelve
-     characters is what fills the screen edge to edge at 19.5vw. Change the
-     word count here and the composition stops working — a three-word line
-     runs past the display word above it, and a six-letter payoff leaves the
-     line looking stranded in the middle of the frame. */
+     The `serif` key names the word in the lead that swaps face. It has to be
+     a word that actually appears in `lead`, or nothing swaps. */
   lead: ['Immersive web', 'design and'],
-  word: 'engineering',
+  serif: 'and',
+  word: 'development',
 };
 
-/* The two full-width statements. The leading fragment is set in the mono
-   label face and the line itself in the display serif, which is the whole
-   typographic idea of the page in one beat. */
+/* ─────────────────────────────────────────────────────────────────────────
+   The statement beats.
+
+   Not a centred block of copy. The reference scatters this moment across the
+   whole frame: short sans fragments pinned at hand-placed anchors from the
+   top of the viewport to the bottom, ONE two-word phrase in the display
+   italic through the middle, and a pair of longer paragraphs in narrow
+   columns along the bottom edge, one left and one right.
+
+   The scatter is the point. A centred paragraph is read in one go and then
+   finished with; the same words at four anchors make the eye travel the
+   frame, which is the only way a beat that lasts eight seconds gets looked
+   at for eight seconds.
+
+   Anchors are percentages of the viewport rather than the pixels they were
+   measured as, so the arrangement holds at any size. Each is [left%, top%].
+   ───────────────────────────────────────────────────────────────────────── */
 export const statements = {
-  credo: { label: 'Every build starts still', line: 'before it knows it can fly' },
-  moon: { label: 'The work is the flight', line: 'craft keeps it in the air' },
+  credo: {
+    fragments: [
+      { text: 'Every build starts still', at: [27.6, 13] },
+      { text: 'on a cold peak', at: [48, 22] },
+      { text: 'long before it knows', at: [34, 31] },
+    ],
+    big: 'it flies',
+    columns: [
+      'The first commit is never the thing. It is the ledge you stand on while you work out what the thing wants to be, and how far it can fall.',
+      'Everything after is nerve: shipping the version that is honest about what it is, then going back and making it the one you actually meant.',
+    ],
+  },
+  moon: {
+    fragments: [
+      { text: 'The work is the flight', at: [25, 13] },
+      { text: 'and the craft', at: [53, 22] },
+      { text: 'is what holds it up', at: [36, 31] },
+    ],
+    big: 'stay airborne',
+    columns: [
+      'Anyone can get a page to load. Keeping it fast on a bad connection, legible at every width and maintainable a year later is the actual job.',
+      'That is what the rest of this is: eight projects that had to survive contact with real users, real deadlines and real browsers.',
+    ],
+  },
 };
 
 /* Three columns rather than a paragraph: this beat is on screen for about six

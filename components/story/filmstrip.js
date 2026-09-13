@@ -1,6 +1,7 @@
 'use client';
 
 import { STRIP, WIDTHS, composition, frameSrc } from './sequence';
+import { createGLRenderer } from './glRenderer';
 
 /* ─────────────────────────────────────────────────────────────────────────
    Loading and drawing the filmstrip.
@@ -110,7 +111,7 @@ function nearest(strip, index) {
 
 const BG = '#05040c';
 
-export function createRenderer(canvas, strip) {
+function create2DRenderer(canvas, strip) {
   const ctx = canvas.getContext('2d', { alpha: false });
   let w = 0;
   let h = 0;
@@ -212,4 +213,15 @@ export function createRenderer(canvas, strip) {
   }
 
   return { render, resize };
+}
+
+/* ── Renderer selection ──────────────────────────────────────────────────
+   WebGL is the real path: it is the only one where the pointer can bend the
+   frame rather than just slide it. The 2D renderer stays as the fallback for
+   contexts that cannot give us a GL context at all — an old browser, a
+   blocklisted driver, a machine that has already run out of GL contexts —
+   because a page that shows the flight without the lens is fine, and a page
+   that shows nothing is not. */
+export function createRenderer(canvas, strip) {
+  return createGLRenderer(canvas, strip) || create2DRenderer(canvas, strip);
 }
