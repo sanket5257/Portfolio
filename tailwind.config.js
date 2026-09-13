@@ -38,7 +38,15 @@ export default {
         accent: '#7dd3c0',    // soft teal (swap to taste)
       },
       fontFamily: {
+        // The desk keeps Urbanist; the storytelling page has its own pair.
         sans: ['var(--font-urbanist)', 'system-ui', 'sans-serif'],
+        /* Display: the light italic serif the headlines are set in. Nothing
+           else on the page uses it. */
+        display: ['var(--font-display)', 'Georgia', 'serif'],
+        // Everything functional — nav, labels, body copy.
+        body: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        // Self-hosted from /public/fonts; the HUD labels use it.
+        mono: ['Commit Mono', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       keyframes: {
         floaty: {

@@ -1,5 +1,5 @@
 import './globals.css';
-import { Urbanist } from 'next/font/google';
+import { Urbanist, Manrope, Cormorant_Garamond } from 'next/font/google';
 import { site } from '@/lib/content';
 import { SCENE_OBJECTS } from '@/lib/models';
 
@@ -7,6 +7,31 @@ const urbanist = Urbanist({
   subsets: ['latin'],
   weight: ['100', '200', '300', '400', '500'],
   variable: '--font-urbanist',
+  display: 'swap',
+});
+
+/* ── The storytelling pair ───────────────────────────────────────────────
+   A light, high-contrast italic serif for display, set against a geometric
+   sans for everything functional. That pairing is the whole look: the serif
+   carries the feeling, the sans carries the information, and nothing on the
+   page is set in both.
+
+   Cormorant Garamond at 300 italic is the display face — it has the same
+   thin, wide-aperture, high-contrast quality that big editorial serifs get
+   at 15vw, and it is one of the few free faces that does not fall apart at
+   that size. Manrope is the sans. */
+const display = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['300', '400'],
+  style: ['italic', 'normal'],
+  variable: '--font-display',
+  display: 'swap',
+});
+
+const sans = Manrope({
+  subsets: ['latin'],
+  weight: ['200', '300', '400', '500'],
+  variable: '--font-sans',
   display: 'swap',
 });
 
@@ -30,7 +55,10 @@ const MODEL_PRELOADS = SCENE_OBJECTS.filter((o) => !o.procedural).map(
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={urbanist.variable}>
+    <html
+      lang="en"
+      className={`${urbanist.variable} ${display.variable} ${sans.variable}`}
+    >
       <head>
         {MODEL_PRELOADS.map((href) => (
           /* crossOrigin is required, not optional: three's FileLoader issues

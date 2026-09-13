@@ -1,11 +1,11 @@
-import WorkPage from '@/components/WorkPage';
+import StoryPage from '@/components/story/StoryPage';
 
 export const metadata = {
-  title: 'Work — Sanket Chougule',
+  title: 'Sanket Chougule — Sites that take flight',
   description:
-    'Selected work by Sanket Chougule — creative studio, agency, education and portfolio sites built with Next.js, GSAP, Lenis and Tailwind CSS.',
+    'A scroll-driven storytelling site: one continuous rendered flight, with selected work laid along it.',
 };
 
-export default function Work() {
-  return <WorkPage />;
+export default function Story() {
+  return <StoryPage />;
 }

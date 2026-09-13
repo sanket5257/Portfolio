@@ -152,35 +152,7 @@ body {
   }
 }
 
-/* ══════════════════════════════════════════════════════════════════════
-   HUB — /work design system
-   Ported from hubtown.co.in/projects. Type, palette, bevel geometry and the
-   list-row hover are matched to the computed styles taken off that page:
-     dark-blue  rgb(2,10,24)     off-blue  rgb(213,224,255)
-     display    Grotesk Bold     labels    Commit Mono
-   The row hover there is a clip-path wipe (0.3s ease-out) that raises a
-   dark fill from the bottom edge while the title slides 0.5rem right and
-   recolours to off-blue. Reproduced verbatim below.
-   ══════════════════════════════════════════════════════════════════════ */
-
-@font-face {
-  font-family: 'Grotesk';
-  src: url('/fonts/grotesk-light.woff2') format('woff2');
-  font-weight: 300;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Grotesk';
-  src: url('/fonts/grotesk-regular.woff2') format('woff2');
-  font-weight: 400;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Grotesk';
-  src: url('/fonts/grotesk-bold.woff2') format('woff2');
-  font-weight: 700;
-  font-display: swap;
-}
+/* The HUD labels on the storytelling page are set in this. */
 @font-face {
   font-family: 'Commit Mono';
   src: url('/fonts/commit-mono.otf') format('opentype');
@@ -188,92 +160,300 @@ body {
   font-display: swap;
 }
 
-.hub {
-  --dark: #020a18;
-  --off: #d5e0ff;
-  font-family: 'Grotesk', system-ui, sans-serif;
-}
-.font-display { font-family: 'Grotesk', system-ui, sans-serif; }
-.font-mono-hub { font-family: 'Commit Mono', ui-monospace, monospace; }
+/* ══════════════════════════════════════════════════════════════════════
+   THE WORLD — /work
+   A single rendered take scrubbed on a canvas, with the portfolio laid
+   along it as beats of copy. Everything here is grade and chrome; the
+   motion itself lives in components/world/.
+   ══════════════════════════════════════════════════════════════════════ */
 
-/* Mono HUD label — every small caption on the reference page uses this. */
-.hub-label {
-  font-family: 'Commit Mono', ui-monospace, monospace;
-  font-size: clamp(8px, 0.66vw, 11px);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  line-height: 1.2;
-}
+/* Grade laid over the filmstrip canvas. The flight passes through moonlit
+   snow, where white type on its own would disappear; the scrims hold the top
+   and bottom bands dark enough to read against without dimming the bird in
+   the centre of frame.
 
-/* ── bevel geometry ──────────────────────────────────────────────────
-   The reference builds these as generated SVG clipPaths. Straight-edged
-   clip-path polygons are visually identical at these sizes and cost no
-   extra DOM, so the chamfers are cut in CSS instead. */
-.bevel-tr {                       /* CLOSE / MENU chips: top-right cut */
-  clip-path: polygon(0 0, calc(100% - 0.85rem) 0, 100% 0.85rem, 100% 100%, 0 100%);
-}
-.bevel-tl {
-  clip-path: polygon(0.85rem 0, 100% 0, 100% 100%, 0 100%, 0 0.85rem);
-}
-.bevel-panel {                    /* listing panel: chamfered TL, big cut BL */
-  clip-path: polygon(
-    0.85rem 0, 100% 0, 100% 100%,
-    5.5rem 100%, 0 calc(100% - 4rem), 0 0.85rem
-  );
-}
-.bevel-sheet {                    /* detail sheet: cut on both right corners */
-  clip-path: polygon(
-    0 0, calc(100% - 3.5rem) 0, 100% 3rem,
-    100% 100%, 3.5rem 100%, 0 calc(100% - 3rem)
-  );
-}
-.bevel-card {
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 1.6rem), calc(100% - 1.6rem) 100%, 0 100%);
+   Deliberately gentle at the edges — a heavy vignette is the quickest way to
+   make a sharp 1080p frame look like a cheap filter over it. */
+.world-grade {
+  background:
+    linear-gradient(to bottom, rgba(5, 4, 12, 0.62) 0%, rgba(5, 4, 12, 0) 24%),
+    linear-gradient(to top, rgba(5, 4, 12, 0.74) 0%, rgba(5, 4, 12, 0) 40%),
+    radial-gradient(125% 90% at 50% 45%, transparent 52%, rgba(5, 4, 12, 0.5) 100%);
 }
 
-/* ── list row hover — verbatim from .list-modal-item ────────────────── */
-.hub-row__fill,
-.hub-row__title,
-.hub-row__type { transition: 0.3s ease-out; }
+/* The native cursor stays. An earlier version hid it across the whole page
+   and drew a ring in its place, which is a different thing entirely from what
+   the reference does — there the OS cursor is left alone (html and body are
+   both `cursor: auto`) and the only moving ornament is the ring inside the
+   interactive element itself. Hiding the real pointer costs precision on
+   every link on the page and buys nothing. */
 
-.hub-row__fill { clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%); }
-.hub-row:hover .hub-row__fill { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
-.hub-row:hover .hub-row__title,
-.hub-row:hover .hub-row__type {
-  color: var(--off);
-  transform: translateX(0.5rem);
+/* The scroll hint breathes rather than blinks. */
+.world-hint {
+  animation: worldHint 3.4s ease-in-out infinite;
 }
-.hub-row:hover .hub-row__type { opacity: 0.5; }
-.hub-row.is-active .hub-row__fill { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
-.hub-row.is-active .hub-row__title,
-.hub-row.is-active .hub-row__type { color: var(--off); }
-
-/* ── HUD backdrop ──────────────────────────────────────────────────── */
-.hub-grid {
-  background-image: url('/hub/minimap-grid.png');
-  background-size: 240px 240px;
-  opacity: 0.13;
-  animation: hubDrift 60s linear infinite;
-}
-@keyframes hubDrift {
-  to { background-position: 240px 240px; }
-}
-.hub-scan {
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(213, 224, 255, 0.02) 0 1px,
-    transparent 1px 4px
-  );
+@keyframes worldHint {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
 }
 
-/* Reveal used by the intro cards and the sheet contents. */
-.hub-in { animation: hubIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
-@keyframes hubIn {
-  from { opacity: 0; transform: translate3d(0, 18px, 0); }
-  to   { opacity: 1; transform: none; }
+/* ── Display type ────────────────────────────────────────────────────────
+   The signature: a light italic serif at display size, filled with a cool
+   vertical gradient rather than flat white. The gradient is what keeps a
+   15vw headline from looking like a screenshot of a word processor — it
+   picks up the moonlight in the footage behind it.
+
+   `background-clip: text` needs the text to be its own painting context, so
+   the fill lives on the character spans, not on the heading. */
+.story-display {
+  font-family: var(--font-display), Georgia, serif;
+  font-style: italic;
+  /* 400, not 300. At near-full-bleed size a 300 weight of this face goes
+     wiry — the thin strokes drop below a pixel against the bright passes of
+     the footage and the word starts to disappear into it. */
+  font-weight: 400;
+  /* Fluid rather than em-based, so the tracking tightens as the type grows:
+     a display italic wants less air between letters at 250px than at 60px,
+     and an em value gives it exactly the same at both. */
+  letter-spacing: -0.1vw;
+  /* 0.92 was set by eye against a sans and then kept when the face changed.
+     A light Garamond italic has tall ascenders and long descenders, so at 0.92
+     the f of one line was running into the S of the next. 1 is the tightest
+     this face takes at display size without the lines fouling each other. */
+  line-height: 1;
 }
-.hub-wipe { animation: hubWipe 0.55s cubic-bezier(0.65, 0, 0.35, 1) both; }
-@keyframes hubWipe {
-  from { clip-path: polygon(0 0, 0 0, 0 100%, 0 100%); }
-  to   { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+
+/* The fill. A cool vertical ramp rather than flat white — it picks up the
+   moonlight in the footage and keeps a 250px headline from reading as a
+   screenshot of a word processor. Pale blue at the foot rather than violet:
+   the bird behind it is already violet, and matching it made the type sink
+   into the frame instead of sitting in front of it. */
+.story-char {
+  background: linear-gradient(180deg, #fffcff 0 26%, #eaf1ff 68%, #d7e6ff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── The character mask ──────────────────────────────────────────────────
+   The box each character rises out of, and the fiddliest thing on the page.
+
+   `overflow: hidden` is what hides a character before its turn — but it
+   clips at the PADDING box, and an italic at display size does not stay
+   inside its advance width. The f leans out past its right edge, the
+   descenders of g and y drop well below the line box, and with a tight
+   padding every one of those was being sheared off mid-curve.
+
+   So the box is padded generously on the three sides the glyph can escape
+   from, and every one of those paddings is taken straight back out again as
+   a negative margin. An inline-block contributes its MARGIN box to the line,
+   so the glyph gets its room while the line and the letter-fit stay exactly
+   as tight as they were — the padding is invisible to layout and visible
+   only to the clip. */
+.story-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding: 0.06em 0.34em 0.3em 0.12em;
+  margin: 0 -0.34em -0.3em -0.12em;
+}
+
+/* Underline that draws itself in on hover — used by the footer links and
+   the nav. Drawn with a pseudo-element so it can start from either edge
+   without disturbing the text baseline. */
+.story-link {
+  position: relative;
+}
+.story-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.28em;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.story-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ── The explore pill ────────────────────────────────────────────────────
+   The one object on the hero that is meant to be touched, so it answers the
+   pointer three ways at once: a light that sweeps round the border, letters
+   that lift in a stagger, and a glow that tracks the pointer inside it. Any
+   one of these alone reads as a button; together they read as alive.
+
+   The pointer position arrives as --mx/--my, written by ExplorePill on every
+   pointermove. Everything else is transitions, so leaving the pill unwinds
+   the whole thing in reverse for free. */
+.pill {
+  --mx: 50%;
+  --my: 50%;
+  cursor: pointer;
+  isolation: isolate;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: background 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.pill:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* The border light. Two conic sweeps masked to a 1px ring: one visible at
+   rest, the other taking over on hover, so the light appears to reverse
+   rather than restart. */
+.pill__ring,
+.pill__ring::after {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  padding: 1px;
+  content: '';
+  /* mask-composite cuts the fill out of the middle, leaving only the edge. */
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  transition: opacity 0.4s ease-in-out;
+}
+.pill__ring {
+  background: linear-gradient(90deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.06) 38%, rgba(255,255,255,0.7) 68%, rgba(255,255,255,0.06) 100%);
+}
+.pill__ring::after {
+  background: linear-gradient(270deg, rgba(222,210,255,0.95) 0%, rgba(255,255,255,0.06) 38%, rgba(201,186,245,0.8) 68%, rgba(255,255,255,0.06) 100%);
+  opacity: 0;
+}
+.pill:hover .pill__ring {
+  opacity: 0.25;
+}
+.pill:hover .pill__ring::after {
+  opacity: 1;
+}
+
+/* The pointer ring — the one thing on the pill that tracks the mouse.
+
+   Built to the reference's measurements: a 1.5rem circle, a hairline border,
+   2px of blur, parked at scale(.2) and fully transparent so it costs nothing
+   until the pointer is actually inside the pill. The blur is what stops it
+   reading as a second cursor — it is a soft presence following the real one,
+   not a replacement for it.
+
+   The colour is ours rather than theirs: a coral hairline over violet
+   footage fights the frame, and this page is lit by moonlight. */
+.pill__circle {
+  position: absolute;
+  left: var(--mx);
+  top: var(--my);
+  z-index: 1;
+  height: 1.5rem;
+  width: 1.5rem;
+  border: 1px solid rgba(234, 240, 255, 0.9);
+  border-radius: 50%;
+  filter: blur(2px);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.2);
+  pointer-events: none;
+  will-change: transform, opacity;
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+.pill:hover .pill__circle {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* The letters. A per-letter transition-delay set inline does the stagger. */
+.pill__letter {
+  display: inline-block;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), color 0.45s ease-out;
+  will-change: transform;
+}
+.pill:hover .pill__letter {
+  transform: translateY(-2px);
+  color: #fffcff;
+}
+
+/* The opening beat's entrance. Scoped to `.is-ready`, which StoryPage adds
+   the moment the loader lifts — so the hero types itself in once the visitor
+   can actually see it, not behind the veil.
+
+   `backwards` and not `forwards` on purpose: the fill holds the characters
+   down before their delay elapses, and the instant the animation finishes the
+   render loop's inline transform takes the character back, so scrolling the
+   hero away still works. A running CSS animation outranks an inline style,
+   which is what lets the two share one property at all. */
+.is-ready .story-rise-in {
+  animation: storyRiseIn 1s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+@keyframes storyRiseIn {
+  from {
+    transform: translate3d(0, 110%, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* ── The hero composition ────────────────────────────────────────────────
+   Two typefaces in one sentence, interlocking.
+
+   Every number here is a ratio taken off the reference hero at 1440×860 and
+   turned back into viewport units, so the composition holds at any width
+   rather than only at the one it was measured on:
+
+     sans lead    66px / 1440   = 4.58vw, line-height 60/66 = 0.909
+     left inset  114px / 1440   = 7.9vw
+     display     280.8px / 1440 = 19.5vw, line-height 1, tracking -0.1vw
+     interlock    58px / 1440   = -4vw  (the word rises INTO the sans lines)
+
+   The interlock is the part that carries the whole thing. Set the display
+   word below the sans lines instead of through them and the hero reads as a
+   heading with a subheading — ordinary. Pulled up so the ascenders run
+   between the two small lines, the same two elements read as one object. */
+.story-hero-lead {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 300;
+  font-size: 7vw;
+  line-height: 0.909;
+  letter-spacing: -0.01em;
+  margin-left: 5vw;
+  color: rgba(242, 245, 248, 0.92);
+}
+
+.story-hero-word {
+  /* The vh term is not in the reference — it does not need one, because its
+     hero is the only thing on its first screen. Ours shares the beat with a
+     header, a prompt and the pill, and on a short window 19.5vw alone drives
+     the word straight off the bottom. It binds only where it has to. */
+  font-size: min(19.5vw, 34vh);
+  line-height: 1;
+  letter-spacing: -0.1vw;
+  text-align: center;
+  margin-top: -3vw;
+}
+
+@media (min-width: 640px) {
+  .story-hero-lead {
+    font-size: 4.58vw;
+    margin-left: 7.9vw;
+  }
+  .story-hero-word {
+    margin-top: -4vw;
+  }
+}
+
+/* Shared left inset for the two left-aligned pieces of the hero, measured
+   from the viewport edge exactly as the reference measures it. */
+.story-hero-inset {
+  margin-left: 5vw;
+}
+@media (min-width: 640px) {
+  .story-hero-inset {
+    margin-left: 7.9vw;
+  }
 }

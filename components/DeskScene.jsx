@@ -7,106 +7,115 @@ import * as THREE from 'three';
 import { SCENE_OBJECTS, parallax } from '@/lib/models';
 import { playSample } from '@/lib/audio';
 
-/* A calm code-editor drawn on the monitor screen — the scene's own code,
-   typed out line by line. Muted syntax colours matching the studio theme. */
+/* ─────────────────────────────────────────────────────────────────────────
+   What is playing on the monitor.
+
+   The monitor is the way into the storytelling site, and a monitor showing
+   an idle code editor gives nobody a reason to click it. So it shows the
+   site itself: the phoenix take running as a slow montage with the page's
+   own header, headline and scroll prompt sitting over it. Reading the desk
+   left to right, the screen is the only thing on it that is moving and the
+   only thing on it that is legible — which is the whole invitation.
+
+   Frames come from the same /frames/854 strip the real page uses, so nothing
+   extra is generated for this and the browser cache is already warm by the
+   time the visitor clicks through.
+   ───────────────────────────────────────────────────────────────────────── */
 const SCREEN_W = 512;
 const SCREEN_H = 340;
-const KW = '#7dd3c0'; // keyword (teal accent)
-const STR = '#9bb089'; // string (muted green)
-const FN = '#e0af68'; // function (amber)
-const VAR = '#82aaff'; // variable (soft blue)
-const CM = '#5c6773'; // comment (grey)
-const TAG = '#7aa2f7'; // JSX tag (blue)
-const NUM = '#d19a66'; // number (orange)
-const PL = '#aeb9c4'; // plain
-const CODE = [
-  [['import', KW], [' { Canvas } ', PL], ['from', KW], [" '@react-three/fiber'", STR]],
-  [['import', KW], [' { useRef } ', PL], ['from', KW], [" 'react'", STR]],
-  [],
-  [['export default function ', KW], ['Scene', FN], ['() {', PL]],
-  [['  const ', KW], ['rig', VAR], [' = ', PL], ['useRef', FN], ['()', PL]],
-  [['  // one memorable signature scene', CM]],
-  [['  return (', PL]],
-  [['    <', PL], ['Canvas', TAG], [' camera={{ fov: ', PL], ['30', NUM], [' }}>', PL]],
-  [['      <', PL], ['DeskScene', TAG], [' />', PL]],
-  [['    </', PL], ['Canvas', TAG], ['>', PL]],
-  [['  )', PL]],
-  [['}', PL]],
-];
+
+/* Twelve frames spread across the whole take — the perch, the climb, the
+   glide, the moon, the final spread. Loading the full 300 for a thumbnail
+   three centimetres wide would be absurd; twelve is enough to show what the
+   site is, at about a quarter of a megabyte. */
+const PREVIEW_FRAMES = [10, 34, 58, 82, 106, 130, 158, 186, 214, 242, 268, 292];
+const HOLD = 1.15; // seconds a frame is held
+const FADE = 0.5; //  seconds of crossfade into the next one
+
+/* One shared set of images for every mount of the scene. */
+let previewImages = null;
+function loadPreview() {
+  if (previewImages || typeof window === 'undefined') return previewImages;
+  previewImages = PREVIEW_FRAMES.map((n) => {
+    const img = new Image();
+    img.decoding = 'async';
+    img.src = `/frames/854/${String(n).padStart(3, '0')}.webp`;
+    return img;
+  });
+  return previewImages;
+}
+
+/** Cover-fit draw, so the 16:9 frame fills a 3:2 screen without squashing. */
+function coverDraw(g, img, W, H, alpha) {
+  if (!img || !img.complete || !img.naturalWidth) return false;
+  const scale = Math.max(W / img.naturalWidth, H / img.naturalHeight);
+  const dw = img.naturalWidth * scale;
+  const dh = img.naturalHeight * scale;
+  g.globalAlpha = alpha;
+  g.drawImage(img, (W - dw) / 2, (H - dh) / 2, dw, dh);
+  g.globalAlpha = 1;
+  return true;
+}
 
 function drawScreen(g, t) {
   const W = SCREEN_W;
   const H = SCREEN_H;
+  const imgs = loadPreview();
 
-  // editor background
-  g.fillStyle = '#0c1119';
+  g.fillStyle = '#05040c';
   g.fillRect(0, 0, W, H);
 
-  // title bar
-  g.fillStyle = '#121a26';
-  g.fillRect(0, 0, W, 34);
-  ['#ff5f57', '#febc2e', '#28c840'].forEach((c, i) => {
-    g.fillStyle = c;
-    g.beginPath();
-    g.arc(20 + i * 20, 17, 5, 0, Math.PI * 2);
-    g.fill();
-  });
-  g.fillStyle = 'rgba(174,185,196,0.55)';
-  g.font = '13px system-ui, sans-serif';
-  g.textAlign = 'center';
-  g.fillText('Scene.jsx', W / 2, 22);
+  /* The montage. Each frame holds, then dissolves into the next; the pair is
+     drawn back to front so the screen is never momentarily empty. */
+  if (imgs) {
+    const span = HOLD + FADE;
+    const cycle = imgs.length * span;
+    const at = (t % cycle) / span;
+    const i = Math.floor(at);
+    const into = (at - i) * span; // seconds into this frame's slot
+    const mix = into <= HOLD ? 0 : (into - HOLD) / FADE;
+
+    coverDraw(g, imgs[i % imgs.length], W, H, 1);
+    if (mix > 0) coverDraw(g, imgs[(i + 1) % imgs.length], W, H, mix);
+  }
+
+  // Grade — the same top/bottom scrims the real page lays over the canvas.
+  const top = g.createLinearGradient(0, 0, 0, H * 0.3);
+  top.addColorStop(0, 'rgba(5,4,12,0.72)');
+  top.addColorStop(1, 'rgba(5,4,12,0)');
+  g.fillStyle = top;
+  g.fillRect(0, 0, W, H * 0.3);
+
+  const bottom = g.createLinearGradient(0, H, 0, H * 0.45);
+  bottom.addColorStop(0, 'rgba(5,4,12,0.86)');
+  bottom.addColorStop(1, 'rgba(5,4,12,0)');
+  g.fillStyle = bottom;
+  g.fillRect(0, H * 0.45, W, H * 0.55);
+
+  // Header — wordmark left, nav right, exactly as the page has it.
   g.textAlign = 'left';
+  g.fillStyle = 'rgba(242,245,248,0.92)';
+  g.font = '600 13px system-ui, sans-serif';
+  g.fillText('Sanket Chougule', 18, 28);
 
-  // typing cycle
-  let total = 0;
-  CODE.forEach((l) => l.forEach((s) => (total += s[0].length)));
-  const cps = 22;
-  const cycle = total / cps + 3.2; // type, then hold, then restart
-  let remaining = Math.min(total, Math.floor((t % cycle) * cps));
+  g.textAlign = 'right';
+  g.fillStyle = 'rgba(242,245,248,0.6)';
+  g.font = '12px system-ui, sans-serif';
+  g.fillText('Work     Contact     Menu', W - 18, 28);
 
-  g.font = '15px Menlo, Consolas, monospace';
-  const ch = g.measureText('M').width;
-  const gutterX = 14;
-  const codeX = 44;
-  const y0 = 60;
-  const lh = 20.5;
-  let curX = codeX;
-  let curY = y0;
-  let stop = false;
+  // The hero line, in the page's display face.
+  g.textAlign = 'left';
+  g.fillStyle = 'rgba(255,252,255,0.96)';
+  g.font = 'italic 300 46px "Cormorant Garamond", Georgia, serif';
+  g.fillText('Sites that', 18, H - 78);
+  g.fillText('take flight', 18, H - 38);
 
-  for (let li = 0; li < CODE.length && !stop; li++) {
-    const yy = y0 + li * lh;
-    g.fillStyle = 'rgba(92,103,115,0.45)';
-    g.fillText(String(li + 1).padStart(2, ' '), gutterX, yy);
-    let x = codeX;
-    for (const [text, color] of CODE[li]) {
-      if (remaining <= 0) {
-        stop = true;
-        break;
-      }
-      const take = Math.min(text.length, remaining);
-      g.fillStyle = color;
-      g.fillText(text.slice(0, take), x, yy);
-      remaining -= take;
-      curX = x + take * ch;
-      curY = yy;
-      if (take < text.length) {
-        stop = true;
-        break;
-      }
-      x += text.length * ch;
-    }
-    if (!stop) {
-      curX = x;
-      curY = yy;
-    }
-  }
-
-  // blinking caret
-  if (Math.floor(t * 2) % 2 === 0) {
-    g.fillStyle = 'rgba(125,211,192,0.9)';
-    g.fillRect(curX + 1, curY - 12, 2, 15);
-  }
+  /* The prompt, breathing rather than blinking — the same cue the page shows
+     for its first few seconds. */
+  const pulse = 0.45 + 0.35 * (0.5 + 0.5 * Math.sin(t * 1.8));
+  g.fillStyle = `rgba(242,245,248,${pulse.toFixed(3)})`;
+  g.font = '9px Menlo, Consolas, monospace';
+  g.fillText('SCROLL TO EXPLORE', 19, H - 16);
 }
 
 /* ============================================================
