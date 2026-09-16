@@ -23,15 +23,32 @@ import { clamp01 } from './sequence';
    the same job Lenis does for a real scrollbar.
    ───────────────────────────────────────────────────────────────────────── */
 
-/* One 100px wheel notch moves about 3.3% of the journey — ten unhurried
-   notches from the peak to the sign-off. Tuned against the frame count
+/* One 100px wheel notch moves about 1.1% of the journey — roughly ninety
+   unhurried notches from the peak to the sign-off, which is about three
+   frames of the 300-frame strip per notch. Tuned against the frame count
    rather than by feel: at this scale a normal scroll gesture advances the
    strip at roughly the rate it was rendered at, so the bird flies instead of
    strobing or crawling. */
-const WHEEL_SCALE = 1 / 3000;
-const TOUCH_SCALE = 1 / 1100;
-const KEY_STEP = 0.04;
-const CHASE = 6.5; // higher = tighter follow, lower = more glide
+const WHEEL_SCALE = 1 / 9000;
+const TOUCH_SCALE = 1 / 1400;
+const KEY_STEP = 0.02;
+const CHASE = 5; // higher = tighter follow, lower = more glide
+
+/* Browsers report wheel deltas in three different units, and one Windows
+   notch can arrive as 100 pixels, 3 lines or a whole page depending on the
+   device and the browser. Everything is converted to pixels first, then
+   capped: without the cap a flick of a free-spinning wheel or a coarse mouse
+   driver lands a 400–1000px delta and throws a chunk of the journey away in
+   a single event. */
+const LINE_PX = 16;
+const PAGE_PX = 400;
+const MAX_STEP_PX = 100;
+
+function wheelPixels(e) {
+  const unit = e.deltaMode === 1 ? LINE_PX : e.deltaMode === 2 ? PAGE_PX : 1;
+  const px = e.deltaY * unit;
+  return Math.max(-MAX_STEP_PX, Math.min(MAX_STEP_PX, px));
+}
 
 export function useJourney({ enabled, onFrame }) {
   const state = useRef({
@@ -63,7 +80,7 @@ export function useJourney({ enabled, onFrame }) {
       /* The page itself never scrolls; swallowing the event is what keeps the
          browser from rubber-banding or handing the gesture to a parent. */
       e.preventDefault();
-      nudge(e.deltaY * WHEEL_SCALE);
+      nudge(wheelPixels(e) * WHEEL_SCALE);
     };
 
     let touchY = 0;
