@@ -35,6 +35,12 @@ html.lenis body {
   overflow: hidden;
 }
 
+/* drag-to-switch and the HUD should never select text */
+body {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
 body.locked {
   overflow: hidden;
 }
@@ -47,4 +53,13 @@ body.locked {
 button {
   font: inherit;
   color: inherit;
+}
+
+@keyframes eqbar {
+  from {
+    transform: scaleY(0.3);
+  }
+  to {
+    transform: scaleY(1);
+  }
 }

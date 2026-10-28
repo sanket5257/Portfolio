@@ -1,0 +1,218 @@
+.nav {
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  align-items: center;
+  width: 100%;
+  padding-block: 1.5rem;
+  padding-inline: 2.5vw;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.6s, transform 0.6s, visibility 0s linear 0.6s;
+}
+.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 0.6s 0.9s, transform 0.6s 0.9s, visibility linear;
+}
+
+.logoWrap {
+  pointer-events: auto;
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 1.7578vw;
+  min-width: 22px;
+  padding: 0;
+  display: block;
+}
+.logo {
+  color: #e0e0e099;
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: color 0.3s;
+}
+.logoWrap:hover .logo {
+  color: #4db8ff;
+}
+
+.iconButton {
+  pointer-events: auto;
+  cursor: pointer;
+  opacity: 0.85;
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s;
+}
+.iconButton:hover {
+  opacity: 1;
+}
+.sound {
+  margin-left: auto;
+}
+.soundSvg {
+  width: 1.4063vw;
+  min-width: 18px;
+  height: auto;
+  color: #ebebebcc;
+}
+.availabilityWrap {
+  margin-left: 2.1484vw;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+.availability {
+  pointer-events: auto;
+  cursor: pointer;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  padding: 0;
+  display: inline-flex;
+  align-items: baseline;
+}
+.dot {
+  background: #218e00;
+  border-radius: 50%;
+  width: 7px;
+  height: 7px;
+  margin-right: 0.5rem;
+  align-self: center;
+  flex: none;
+  box-shadow: 0 0 8px #2fbf0080;
+}
+.unavailable {
+  background: #8e0000;
+}
+.availStrong {
+  font-family: var(--font-body);
+  letter-spacing: 0.03em;
+  color: #ebebebf2;
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+.copied {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0.3rem;
+  font-family: var(--font-body);
+  letter-spacing: 0.08em;
+  color: #ebebeb8c;
+  white-space: nowrap;
+  font-size: 0.6rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+.copied[data-show="true"] {
+  opacity: 1;
+}
+
+.menu {
+  margin-left: 3.2422vw;
+  padding-block: 0.9rem;
+}
+.menuSvg {
+  width: 1.4063vw;
+  min-width: 20px;
+  height: auto;
+  color: #ebebeb;
+}
+
+.menuPanel {
+  pointer-events: none;
+  position: absolute;
+  top: 100%;
+  right: 2.5vw;
+  margin-top: -1.5rem;
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.line {
+  background: #ebebebd9;
+  width: 0;
+  height: 0.5px;
+  margin-top: 0.25rem;
+}
+.links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.15rem;
+  margin: 0.85rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.linkItem {
+  clip-path: inset(0 0 0 100%);
+}
+.link {
+  pointer-events: none;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-body);
+  letter-spacing: 0.02em;
+  color: #ebebebeb;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  padding: 0.15rem 0;
+  font-size: 1.02rem;
+  font-weight: 700;
+  line-height: 1.35;
+  transition: color 0.25s;
+}
+.menuPanel[aria-hidden="false"] .link {
+  pointer-events: auto;
+}
+.linkLabel {
+  display: inline-block;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link:hover .linkLabel {
+  transform: translateX(-0.85em);
+}
+.linkHoverDot {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 0.32em;
+  height: 0.32em;
+  color: #ebebeb8c;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-50%) scale(0.4);
+  transition: opacity 0.3s, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link:hover .linkHoverDot {
+  opacity: 0.7;
+  transform: translateY(-50%) scale(1);
+}
+
+@media (orientation: portrait) {
+  .nav {
+    padding-block: 1.1rem;
+    padding-inline: 20px;
+  }
+  .availStrong {
+    font-size: 13px;
+  }
+  .menu {
+    margin-left: 16px;
+  }
+}

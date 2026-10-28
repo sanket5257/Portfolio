@@ -41,3 +41,8 @@ yarn-error.log*
 next-env.d.ts
 
 .playwright-mcp/
+
+# heavy source assets stay local (GitHub 100 MB limit); web-ready models live in public/models
+assets-src/higgsfield/
+*.blend
+*.blend1

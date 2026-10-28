@@ -50,13 +50,17 @@ export default function Loader() {
     let raf;
     let val = 0;
     const start = performance.now();
+    let last = start;
     const tick = () => {
-      const elapsed = (performance.now() - start) / 1000;
+      const now = performance.now();
+      const dt = Math.min((now - last) / 1000, 0.5);
+      last = now;
+      const elapsed = (now - start) / 1000;
       // a floor so the sequence always plays at a readable pace
       const floor = Math.min(elapsed * 22, 90);
       let goal = Math.min(Math.max(target.current, active ? 0 : floor), floor + 8);
-      if (state.loaded && !active) goal = 100;
-      val += (goal - val) * 0.06;
+      if (state.loaded) goal = 100;
+      val += (goal - val) * (1 - Math.exp(-dt * 3.6)); // frame-rate independent
       if (goal === 100 && 100 - val < 0.4) val = 100;
       setShown(val);
       if (val < 100) raf = requestAnimationFrame(tick);
@@ -183,7 +187,7 @@ export default function Loader() {
         </div>
         <span className={s.barcodeLabel}>{site.domain}</span>
         <Logo className={s.cardLogo} />
-        <span className={s.cardYear}>© {new Date().getFullYear()}</span>
+        <span className={s.cardYear}>© {site.year}</span>
       </div>
 
       <button

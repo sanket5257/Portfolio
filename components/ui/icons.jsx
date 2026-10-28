@@ -139,6 +139,21 @@ export function SocialIcon({ name, className }) {
         <path d="M4 4l16 16M20 4L4 20" />
       </svg>
     );
+  if (name === "dribbble")
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.4">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M8.6 3.7c3.4 4.4 5.6 9.6 6.6 16.1M3.2 10.5c5.6.3 10.4-.9 14.2-4.2M5.6 18.4c3.2-4.4 8-5.8 15.2-4.4" />
+      </svg>
+    );
+  if (name === "instagram")
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.4">
+        <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+        <circle cx="12" cy="12" r="3.8" />
+        <circle cx="17.2" cy="6.8" r=".6" fill="currentColor" />
+      </svg>
+    );
   return (
     <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.4">
       <rect x="3" y="3" width="18" height="18" rx="1" />
